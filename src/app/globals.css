@@ -13,48 +13,48 @@
 
 @layer base {
   :root {
-    --background: 0 0% 0%; /* Deep Black */
-    --foreground: 0 0% 98%; /* Light Gray for text */
-    --card: 240 5% 15%; /* Darker card background */
-    --card-foreground: 0 0% 98%;
-    --popover: 240 5% 10%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 45 100% 63%; /* Vibrant Yellow (#FFD740) */
-    --primary-foreground: 0 0% 10%; /* Black for text on primary */
-    --secondary: 275 100% 42%; /* Purple (#9400D3) for accents */
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 5% 25%;
-    --muted-foreground: 240 5% 65%;
-    --accent: 275 100% 42%; /* Purple */
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 72% 51%;
+    --background: 210 40% 98%; /* Light Cool Gray */
+    --foreground: 210 40% 10%; /* Dark Blue-Gray */
+    --card: 210 40% 92%; /* Slightly darker card background */
+    --card-foreground: 210 40% 10%;
+    --popover: 210 40% 98%;
+    --popover-foreground: 210 40% 10%;
+    --primary: 250 70% 75%; /* Soft Lavender */
+    --primary-foreground: 250 70% 15%; /* Darker Lavender for text */
+    --secondary: 340 90% 85%; /* Soft Pink */
+    --secondary-foreground: 340 90% 15%;
+    --muted: 210 40% 88%;
+    --muted-foreground: 210 40% 40%;
+    --accent: 340 90% 85%; /* Soft Pink for accents */
+    --accent-foreground: 340 90% 15%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 4% 20%; /* Translucent white border */
-    --input: 240 4% 20%;
-    --ring: 45 100% 63%; /* Vibrant Yellow for rings */
+    --border: 210 40% 85%;
+    --input: 210 40% 92%;
+    --ring: 250 70% 75%; /* Soft Lavender for rings */
     --radius: 2rem; /* Rounded corners */
   }
 
   .dark {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 4%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 45 100% 63%;
-    --primary-foreground: 0 0% 10%;
-    --secondary: 275 100% 42%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
-    --accent: 275 100% 42%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 63% 31%;
+    --background: 210 40% 98%; /* Light Cool Gray */
+    --foreground: 210 40% 10%; /* Dark Blue-Gray */
+    --card: 210 40% 92%; /* Slightly darker card background */
+    --card-foreground: 210 40% 10%;
+    --popover: 210 40% 98%;
+    --popover-foreground: 210 40% 10%;
+    --primary: 250 70% 75%; /* Soft Lavender */
+    --primary-foreground: 250 70% 15%; /* Darker Lavender for text */
+    --secondary: 340 90% 85%; /* Soft Pink */
+    --secondary-foreground: 340 90% 15%;
+    --muted: 210 40% 88%;
+    --muted-foreground: 210 40% 40%;
+    --accent: 340 90% 85%; /* Soft Pink for accents */
+    --accent-foreground: 340 90% 15%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 45 100% 63%;
+    --border: 210 40% 85%;
+    --input: 210 40% 92%;
+    --ring: 250 70% 75%; /* Soft Lavender for rings */
   }
 }
 

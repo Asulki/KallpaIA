@@ -54,12 +54,12 @@ export default function RegisterForm() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black">
-      <Card className="w-full max-w-md bg-white/5 border-white/10 text-white rounded-2xl">
+    <div className="flex items-center justify-center min-h-screen bg-background">
+      <Card className="w-full max-w-md bg-white/30 backdrop-blur-lg border border-white/40 text-foreground rounded-2xl shadow-lg">
         <CardHeader className="text-center">
             <div className="flex justify-center items-center gap-2 mb-4">
                 <BotIcon className="w-10 h-10 text-primary" />
-                <span className="font-headline text-3xl font-bold text-white">KallpaIA</span>
+                <span className="font-headline text-3xl font-bold">KallpaIA</span>
             </div>
           <CardTitle className="font-headline text-2xl text-primary">Crea tu Cuenta</CardTitle>
         </CardHeader>
@@ -74,8 +74,8 @@ export default function RegisterForm() {
                     <FormLabel>Nombre Completo</FormLabel>
                     <FormControl>
                         <div className="relative">
-                            <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                            <Input className="pl-10" placeholder="Tu nombre completo" {...field} />
+                            <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                            <Input className="pl-10 bg-white/50 border-white/50" placeholder="Tu nombre completo" {...field} />
                         </div>
                     </FormControl>
                     <FormMessage />
@@ -90,8 +90,8 @@ export default function RegisterForm() {
                     <FormLabel>Correo Electrónico</FormLabel>
                     <FormControl>
                         <div className="relative">
-                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                            <Input className="pl-10" placeholder="tu@correo.com" {...field} />
+                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                            <Input className="pl-10 bg-white/50 border-white/50" placeholder="tu@correo.com" {...field} />
                         </div>
                     </FormControl>
                     <FormMessage />
@@ -106,8 +106,8 @@ export default function RegisterForm() {
                     <FormLabel>Contraseña</FormLabel>
                     <FormControl>
                         <div className="relative">
-                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                            <Input className="pl-10" type="password" placeholder="••••••••" {...field} />
+                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                            <Input className="pl-10 bg-white/50 border-white/50" type="password" placeholder="••••••••" {...field} />
                         </div>
                     </FormControl>
                     <FormMessage />
@@ -144,7 +144,7 @@ export default function RegisterForm() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full font-headline bg-primary text-primary-foreground text-lg rounded-full py-3 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">
+              <Button type="submit" className="w-full font-headline text-lg rounded-full py-3 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">
                 Registrarme
               </Button>
             </form>
