@@ -7,7 +7,7 @@
     @apply scroll-smooth;
   }
   body {
-    /* Font family will be set by kcards.css or other specific component styles */
+    font-family: 'Space Grotesk', sans-serif;
   }
 }
 

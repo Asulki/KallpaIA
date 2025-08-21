@@ -21,7 +21,6 @@
 body{ 
     background:#0b0e13; 
     color:var(--text-strong); 
-    font-family: 'Space Grotesk', system-ui, Poppins, Inter, sans-serif; 
 }
 
 /* Grid responsive de cartas */
