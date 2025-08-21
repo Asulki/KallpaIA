@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import Link from "next/link";
 import { BotIcon, User, Lock, Mail } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -20,14 +19,6 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Separator } from "@/components/ui/separator";
-
-const GoogleIcon = () => (
-    <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
-        <path fill="currentColor" d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12.5C5,8.75 8.36,5.73 12.19,5.73C15.19,5.73 17.5,6.7 18.36,8.25L20.25,7.25C18.36,4.75 15.19,3.5 12.19,3.5C6.69,3.5 3,7.5 3,12.5C3,17.5 6.69,21.5 12.19,21.5C17.69,21.5 21.5,17.64 21.5,12.75C21.5,11.89 21.43,11.45 21.35,11.1Z" />
-    </svg>
-);
-
 
 const formSchema = z.object({
   nickname: z.string().min(2, {
@@ -47,7 +38,7 @@ const formSchema = z.object({
 export default function RegisterForm() {
     const { toast } = useToast();
     const router = useRouter();
-  const form = useForm<z.infer<typeof formSchema>>({
+    const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       nickname: "",
@@ -157,10 +148,6 @@ export default function RegisterForm() {
                         )}
                     />
                     <div className="space-y-2 pt-2">
-                        <Button variant="outline" className="w-full font-headline text-lg rounded-full py-3 bg-white/80 hover:bg-white text-gray-800 transition-all border-white/50 shadow-md">
-                            <GoogleIcon />
-                            Iniciar con Google
-                        </Button>
                         <Button type="submit" className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">
                             Iniciar Sesión
                         </Button>
