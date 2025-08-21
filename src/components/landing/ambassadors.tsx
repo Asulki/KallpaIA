@@ -1,35 +1,35 @@
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-const ambassadors = [
-  {
-    name: 'Ada Lovelace',
-    title: 'La Primera Programadora',
-    bio: 'Una matemática visionaria que vio el potencial de las computadoras más allá del simple cálculo.',
-    imageUrl: 'https://placehold.co/400x400.png',
-    aiHint: 'pixel art ada lovelace',
-  },
-  {
-    name: 'Albert Einstein',
-    title: 'El Teórico de la Relatividad',
-    bio: 'Revolucionó nuestra comprensión del espacio, el tiempo, la gravedad y el universo.',
-    imageUrl: 'https://placehold.co/400x400.png',
-    aiHint: 'pixel art albert einstein',
-  },
-  {
-    name: 'Marie Curie',
-    title: 'La Pionera de la Radiactividad',
-    bio: 'La primera mujer en ganar un Premio Nobel y la única persona en ganarlo en dos campos científicos diferentes.',
-    imageUrl: 'https://placehold.co/400x400.png',
-    aiHint: 'pixel art marie curie',
-  },
-  {
-    name: 'Nikola Tesla',
-    title: 'El Maestro de la Corriente Alterna',
-    bio: 'Un inventor cuyo trabajo en electricidad sentó las bases de los sistemas de energía modernos.',
-    imageUrl: 'https://placehold.co/400x400.png',
-    aiHint: 'pixel art nikola tesla',
-  },
+const ambassadors: any[] = [
+  // {
+  //   name: 'Ada Lovelace',
+  //   title: 'La Primera Programadora',
+  //   bio: 'Una matemática visionaria que vio el potencial de las computadoras más allá del simple cálculo.',
+  //   imageUrl: 'https://placehold.co/400x400.png',
+  //   aiHint: 'pixel art ada lovelace',
+  // },
+  // {
+  //   name: 'Albert Einstein',
+  //   title: 'El Teórico de la Relatividad',
+  //   bio: 'Revolucionó nuestra comprensión del espacio, el tiempo, la gravedad y el universo.',
+  //   imageUrl: 'https://placehold.co/400x400.png',
+  //   aiHint: 'pixel art albert einstein',
+  // },
+  // {
+  //   name: 'Marie Curie',
+  //   title: 'La Pionera de la Radiactividad',
+  //   bio: 'La primera mujer en ganar un Premio Nobel y la única persona en ganarlo en dos campos científicos diferentes.',
+  //   imageUrl: 'https://placehold.co/400x400.png',
+  //   aiHint: 'pixel art marie curie',
+  // },
+  // {
+  //   name: 'Nikola Tesla',
+  //   title: 'El Maestro de la Corriente Alterna',
+  //   bio: 'Un inventor cuyo trabajo en electricidad sentó las bases de los sistemas de energía modernos.',
+  //   imageUrl: 'https://placehold.co/400x400.png',
+  //   aiHint: 'pixel art nikola tesla',
+  // },
 ];
 
 export function Ambassadors() {
