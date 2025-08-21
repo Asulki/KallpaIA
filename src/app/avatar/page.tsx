@@ -146,7 +146,7 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
       onMouseLeave={handleMouseLeave}
       onClick={() => onSelect(avatar.id)}
       className={cn(
-        'relative rounded-3xl p-1 transition-all duration-300 ease-out cursor-pointer w-full aspect-[3/4.5] max-w-[300px]',
+        'relative rounded-3xl p-1 transition-all duration-300 ease-out cursor-pointer w-full aspect-[3/4.5] max-w-[320px]',
         'transform-style-preserve-3d',
         isSelected ? 'ring-4 ring-[#F5D57D] ring-offset-4 ring-offset-background' : 'ring-2 ring-transparent',
         'bg-gradient-to-br from-yellow-300 via-[#F5D57D] to-amber-600'
@@ -167,7 +167,7 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
                         {avatar.icon}
                         <span className="ml-1.5">{avatar.type}</span>
                     </Badge>
-                     <Badge variant="secondary" className="text-xs font-bold">100/100 HP</Badge>
+                     <Badge variant="secondary" className="text-sm font-bold">100/100 HP</Badge>
                 </div>
             </div>
             <div className="relative z-10 flex-grow flex items-center justify-center my-2">
@@ -182,14 +182,14 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
                 />
             </div>
             <div className="relative z-10 text-center">
-                 <h3 className="font-headline text-xl md:text-2xl font-bold text-white" style={{ transform: 'translateZ(20px)'}}>{avatar.name}</h3>
-                 <p className="text-xs md:text-sm text-gray-400 -mt-1" style={{ transform: 'translateZ(20px)'}}>{avatar.mentor}</p>
+                 <h3 className="font-headline text-2xl md:text-3xl font-bold text-white" style={{ transform: 'translateZ(20px)'}}>{avatar.name}</h3>
+                 <p className="text-sm md:text-base text-gray-400 -mt-1" style={{ transform: 'translateZ(20px)'}}>{avatar.mentor}</p>
             </div>
-            <div className="relative z-10 mt-4 space-y-2 text-sm">
+            <div className="relative z-10 mt-4 space-y-2 text-base">
                 {avatar.moves.map(move => (
-                    <div key={move.name} className="bg-black/40 p-2 rounded-md text-white flex justify-between items-center text-xs">
+                    <div key={move.name} className="bg-black/40 p-2.5 rounded-md text-white flex justify-between items-center">
                         <span className="font-semibold">{move.name}</span>
-                        <span className={cn('font-bold px-2 py-0.5 rounded-full text-xs', avatar.bgColor)}>{move.type} {move.value}</span>
+                        <span className={cn('font-bold px-2.5 py-1 rounded-full text-sm', avatar.bgColor)}>{move.type} {move.value}</span>
                     </div>
                 ))}
             </div>
@@ -257,5 +257,3 @@ export default function AvatarSelectionPage() {
     </div>
   );
 }
-
-    
