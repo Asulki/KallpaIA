@@ -1,5 +1,7 @@
 import { StellarParticles } from '@/components/landing/stellar-particles';
 import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export function Hero() {
   return (
@@ -25,6 +27,9 @@ export function Hero() {
           Explora las fronteras de la ciencia y la tecnología a través de una aventura épica. Tu viaje hacia STEAM comienza ahora.
         </p>
         <div className="mt-10 flex gap-4">
+            <Button asChild size="lg" className="font-headline bg-primary text-primary-foreground text-lg rounded-full px-8 py-3 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">
+                <Link href="/register">Inicia tu Aventura</Link>
+            </Button>
         </div>
       </div>
     </section>

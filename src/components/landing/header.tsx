@@ -12,13 +12,13 @@ export function Header() {
           <span className="font-headline text-2xl font-bold text-white">KallpaIA</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-lg">
-          <Link href="#about" className="text-gray-300 hover:text-primary transition-colors">Nosotros</Link>
-          <Link href="#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
-          <Link href="#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
+          <Link href="/#about" className="text-gray-300 hover:text-primary transition-colors">Nosotros</Link>
+          <Link href="/#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
+          <Link href="/#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
         </nav>
         <div className="flex items-center gap-4">
-          <Button size="lg" className="font-headline bg-primary text-primary-foreground text-lg rounded-full px-8 py-3 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all hidden sm:flex">
-            Inicia tu Aventura
+          <Button asChild size="lg" className="font-headline bg-primary text-primary-foreground text-lg rounded-full px-8 py-3 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all hidden sm:flex">
+            <Link href="/register">Inicia tu Aventura</Link>
           </Button>
           <Sheet>
             <SheetTrigger asChild>
@@ -29,11 +29,11 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="bg-neutral-900 border-neutral-800">
               <nav className="flex flex-col gap-6 text-lg mt-10">
-                <Link href="#about" className="text-gray-300 hover:text-primary transition-colors">Nosotros</Link>
-                <Link href="#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
-                <Link href="#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
-                 <Button size="lg" className="font-headline bg-primary text-primary-foreground text-lg rounded-full px-8 py-3 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all mt-4">
-                    Inicia tu Aventura
+                <Link href="/#about" className="text-gray-300 hover:text-primary transition-colors">Nosotros</Link>
+                <Link href="/#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
+                <Link href="/#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
+                 <Button asChild size="lg" className="font-headline bg-primary text-primary-foreground text-lg rounded-full px-8 py-3 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all mt-4">
+                    <Link href="/register">Inicia tu Aventura</Link>
                   </Button>
               </nav>
             </SheetContent>
