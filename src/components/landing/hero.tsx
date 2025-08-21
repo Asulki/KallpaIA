@@ -16,10 +16,9 @@ export function Hero() {
           data-ai-hint="pixel art machu picchu"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
       </div>
       <div className="relative z-10 container mx-auto px-4 flex flex-col items-center">
-        <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+        <h1 className="font-headline text-4xl md:text-5xl font-bold leading-tight">
           Desbloquea tu Potencial con <br /> <span className="text-primary">KallpaIA</span>
         </h1>
         <p className="mt-6 max-w-2xl text-lg md:text-xl text-gray-200" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.7)' }}>
