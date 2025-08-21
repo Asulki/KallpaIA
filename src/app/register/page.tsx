@@ -22,7 +22,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Separator } from "@/components/ui/separator";
 
 const GoogleIcon = () => (
-    <svg className="w-5 h-5" viewBox="0 0 24 24">
+    <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
         <path fill="currentColor" d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12.5C5,8.75 8.36,5.73 12.19,5.73C15.19,5.73 17.5,6.7 18.36,8.25L20.25,7.25C18.36,4.75 15.19,3.5 12.19,3.5C6.69,3.5 3,7.5 3,12.5C3,17.5 6.69,21.5 12.19,21.5C17.69,21.5 21.5,17.64 21.5,12.75C21.5,11.89 21.43,11.45 21.35,11.1Z" />
     </svg>
 );
@@ -71,7 +71,7 @@ export default function RegisterForm() {
                     <span className="font-headline text-3xl font-bold">KallpaIA</span>
                 </div>
               <CardHeader className="text-center p-0 mb-6">
-                <CardTitle className="font-headline text-2xl text-primary">Inicia Sesión</CardTitle>
+                <CardTitle className="font-headline text-2xl">Inicia Sesión</CardTitle>
               </CardHeader>
               <CardContent className="p-0">
                 <Form {...form}>
@@ -154,27 +154,27 @@ export default function RegisterForm() {
                         </FormItem>
                         )}
                     />
-                    <Button type="submit" className="w-full font-headline text-lg rounded-full py-3 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">
+                    <Button type="submit" className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">
                         Iniciar Sesión
                     </Button>
                     </form>
                 </Form>
               </CardContent>
             </div>
-            <div className="bg-black/20 p-8 flex flex-col justify-center">
+            <div className="bg-black/10 p-8 flex flex-col justify-center border-l border-white/20">
                  <div className="relative my-6">
-                    <Separator className="absolute inset-y-1/2" />
+                    <Separator className="absolute top-1/2 -translate-y-1/2 w-full bg-white/30" />
                     <div className="relative flex justify-center text-xs uppercase">
-                        <span className="bg-transparent px-2 text-muted-foreground backdrop-blur-sm">O continuar con</span>
+                        <span className="bg-card px-2 text-muted-foreground" style={{backgroundColor: 'hsl(var(--card))'}}>O continuar con</span>
                     </div>
                 </div>
-                <Button variant="outline" className="w-full font-headline text-lg rounded-full py-3 hover:bg-white/70 hover:shadow-lg transition-all border-white/50 bg-white/50">
+                <Button variant="outline" className="w-full font-headline text-lg rounded-full py-3 bg-white/80 hover:bg-white text-gray-800 transition-all border-white/50 shadow-md">
                     <GoogleIcon />
                     Iniciar con Google
                 </Button>
-                <div className="mt-4 text-center text-sm">
+                <div className="mt-6 text-center text-sm">
                     ¿No tienes una cuenta?{" "}
-                    <Link href="#" className="underline text-primary">
+                    <Link href="#" className="underline text-primary font-bold">
                         Regístrate
                     </Link>
                 </div>
