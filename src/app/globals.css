@@ -13,29 +13,29 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%; /* Light Cool Gray */
-    --foreground: 210 40% 10%; /* Dark Blue-Gray */
-    --card: 210 40% 92%; /* Slightly darker card background */
-    --card-foreground: 210 40% 10%;
-    --popover: 210 40% 98%;
-    --popover-foreground: 210 40% 10%;
-    --primary: 250 70% 75%; /* Soft Lavender */
-    --primary-foreground: 250 70% 15%; /* Darker Lavender for text */
-    --secondary: 340 90% 85%; /* Soft Pink */
-    --secondary-foreground: 340 90% 15%;
-    --muted: 210 40% 88%;
-    --muted-foreground: 210 40% 40%;
-    --accent: 340 90% 85%; /* Soft Pink for accents */
-    --accent-foreground: 340 90% 15%;
+    --background: 210 20% 15%; /* Dark Slate Blue */
+    --foreground: 210 20% 95%; /* Light Gray */
+    --card: 210 20% 20%; /* Darker card background */
+    --card-foreground: 210 20% 95%;
+    --popover: 210 20% 12%;
+    --popover-foreground: 210 20% 95%;
+    --primary: 45 100% 60%; /* Vibrant Gold */
+    --primary-foreground: 210 20% 5%; /* Very Dark Blue for text on primary */
+    --secondary: 210 20% 30%; /* Muted Slate */
+    --secondary-foreground: 210 20% 95%;
+    --muted: 210 20% 25%;
+    --muted-foreground: 210 20% 60%;
+    --accent: 45 100% 70%; /* Lighter Gold for accents */
+    --accent-foreground: 210 20% 5%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 210 40% 85%;
-    --input: 210 40% 92%;
-    --ring: 250 70% 75%; /* Soft Lavender for rings */
+    --border: 210 20% 30%;
+    --input: 210 20% 25%;
+    --ring: 45 100% 60%; /* Vibrant Gold for rings */
     --radius: 2rem; /* Rounded corners */
   }
 
-  .dark {
+  .light-theme {
     --background: 210 40% 98%; /* Light Cool Gray */
     --foreground: 210 40% 10%; /* Dark Blue-Gray */
     --card: 210 40% 92%; /* Slightly darker card background */
