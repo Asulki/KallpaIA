@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { BotIcon } from 'lucide-react';
+import { BotIcon, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 export function Header() {
   return (
@@ -16,9 +17,27 @@ export function Header() {
           <Link href="#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
           <Link href="#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
         </nav>
-        <Button className="font-headline bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all rounded-full px-6 py-3">
-          Comienza a Aprender
-        </Button>
+        <div className="flex items-center gap-4">
+          <Button className="font-headline bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all rounded-full px-6 py-3 hidden sm:flex">
+            Inicia tu Aventura
+          </Button>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" className="md:hidden bg-transparent border-primary text-primary">
+                <Menu />
+                <span className="sr-only">Abrir menú</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="bg-neutral-900 border-neutral-800">
+              <nav className="flex flex-col gap-6 text-lg mt-10">
+                <Link href="#about" className="text-gray-300 hover:text-primary transition-colors">Nosotros</Link>
+                <Link href="#ambassadors" className="text-gray-300 hover:text-primary transition-colors">Embajadores</Link>
+                <Link href="#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
+                <Link href="#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   );

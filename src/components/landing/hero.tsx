@@ -29,9 +29,6 @@ export function Hero() {
           <Button size="lg" className="font-headline bg-primary text-primary-foreground text-lg rounded-full px-8 py-6 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">
             Inicia tu Aventura
           </Button>
-          <Button size="lg" variant="outline" className="font-headline text-lg rounded-full px-8 py-6 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all">
-            Explora los Cursos
-          </Button>
         </div>
       </div>
     </section>
