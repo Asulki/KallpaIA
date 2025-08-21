@@ -21,7 +21,7 @@ const avatars = [
     color: 'text-[#BFF3D1]',
     bgColor: 'bg-green-900/50',
     borderColor: 'border-[#BFF3D1]',
-    src: 'https://i.ibb.co/V3F7499/vicuna-bot.png',
+    src: 'https://i.ibb.co/jZ6LNhR/vicuna-matematica.png',
     alt: 'Vicuña Matemática, avatar de Matemática',
     hint: 'mathematician vicuña inspired by Ada Lovelace pixel art',
     moves: [
@@ -257,5 +257,3 @@ export default function AvatarSelectionPage() {
     </div>
   );
 }
-
-    
