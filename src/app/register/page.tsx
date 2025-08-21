@@ -161,7 +161,7 @@ export default function RegisterForm() {
                     </Button>
                     </form>
                 </Form>
-                 <div className="relative my-4">
+                 <div className="relative my-2">
                     <Separator className="w-full bg-white/30" />
                 </div>
                 <Button variant="outline" className="w-full font-headline text-lg rounded-full py-3 bg-white/80 hover:bg-white text-gray-800 transition-all border-white/50 shadow-md">
