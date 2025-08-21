@@ -181,7 +181,7 @@ export default function AvatarSelectionPage() {
         </div>
         <div className="relative z-20 text-center mb-10">
             <h1 className="font-headline text-4xl font-bold text-primary">Elige tu Kallpa Card</h1>
-            <p className="text-lg text-gray-300 mt-2">Selecciona tu compañera de aventura STEM.</p>
+            <p className="text-lg text-gray-300 mt-2">Selecciona tu compañero de aventura STEM.</p>
         </div>
 
         <div className="relative z-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 place-items-center w-full max-w-6xl">
