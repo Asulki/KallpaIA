@@ -12,11 +12,11 @@ export function Hero() {
           alt="Pixel art de Machu Picchu"
           layout="fill"
           objectFit="cover"
-          className="opacity-20"
+          className="opacity-40"
           data-ai-hint="pixel art machu picchu"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
       </div>
       <div className="relative z-10 container mx-auto px-4 flex flex-col items-center">
         <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
