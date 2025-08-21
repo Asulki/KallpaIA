@@ -7,24 +7,24 @@ import {
 
 const faqs = [
   {
-    question: 'What is KallpaIA?',
-    answer: 'KallpaIA is an innovative online platform dedicated to making Science, Technology, Engineering, and Mathematics (STEM) education exciting and accessible for learners of all ages. We use interactive lessons, pixel art storytelling, and gamified challenges to foster a love for discovery.',
+    question: '¿Qué es KallpaIA?',
+    answer: 'KallpaIA es una innovadora plataforma en línea dedicada a hacer que la educación en Ciencia, Tecnología, Ingeniería y Matemáticas (STEM) sea emocionante y accesible para estudiantes de todas las edades. Usamos lecciones interactivas, narrativas en pixel art y desafíos gamificados para fomentar el amor por el descubrimiento.',
   },
   {
-    question: 'Who is KallpaIA for?',
-    answer: 'Our platform is designed for anyone with a curious mind! While we focus on students from middle school to early college, our content is valuable for lifelong learners, educators looking for classroom resources, and parents wanting to supplement their children\'s education.',
+    question: '¿Para quién es KallpaIA?',
+    answer: '¡Nuestra plataforma está diseñada para cualquier persona con una mente curiosa! Aunque nos enfocamos en estudiantes desde secundaria hasta los primeros años de universidad, nuestro contenido es valioso para aprendices de por vida, educadores que buscan recursos para el aula y padres que desean complementar la educación de sus hijos.',
   },
   {
-    question: 'What kind of topics do you cover?',
-    answer: 'We cover a wide range of STEM fields, including computer science, physics, biology, chemistry, engineering principles, and advanced mathematics. Our curriculum is constantly expanding to include the latest breakthroughs and technologies.',
+    question: '¿Qué tipo de temas cubren?',
+    answer: 'Cubrimos una amplia gama de campos STEM, incluyendo ciencias de la computación, física, biología, química, principios de ingeniería y matemáticas avanzadas. Nuestro plan de estudios se expande constantemente para incluir los últimos avances y tecnologías.',
   },
   {
-    question: 'Is there a cost to use KallpaIA?',
-    answer: 'We offer a mix of free and premium content. Many of our introductory courses and resources are available for free to ensure everyone has a chance to start their STEM journey. Our premium subscription unlocks advanced courses, personalized learning paths, and one-on-one mentorship opportunities.',
+    question: '¿Tiene algún costo usar KallpaIA?',
+    answer: 'Ofrecemos una mezcla de contenido gratuito y premium. Muchos de nuestros cursos introductorios y recursos están disponibles de forma gratuita para asegurar que todos tengan la oportunidad de comenzar su viaje en STEM. Nuestra suscripción premium desbloquea cursos avanzados, rutas de aprendizaje personalizadas y oportunidades de mentoría uno a uno.',
   },
   {
-    question: 'How does KallpaIA make learning fun?',
-    answer: 'We believe learning should be an adventure! We integrate storytelling with beautiful pixel art, interactive simulations you can play with, and a points system that rewards your progress. It’s less like a textbook and more like a video game for your brain.',
+    question: '¿Cómo hace KallpaIA que el aprendizaje sea divertido?',
+    answer: '¡Creemos que aprender debe ser una aventura! Integramos la narración con un hermoso pixel art, simulaciones interactivas con las que puedes jugar y un sistema de puntos que recompensa tu progreso. Es menos como un libro de texto y más como un videojuego para tu cerebro.',
   },
 ];
 
@@ -33,9 +33,9 @@ export function Faq() {
     <section id="faq" className="py-20 sm:py-32">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
-          <h2 className="font-headline text-4xl font-bold text-primary sm:text-5xl">Frequently Asked Questions</h2>
+          <h2 className="font-headline text-4xl font-bold text-primary sm:text-5xl">Preguntas Frecuentes</h2>
           <p className="mt-6 text-lg leading-8 text-gray-300">
-            Have questions? We have answers. Here are some of the most common inquiries we receive.
+            ¿Tienes preguntas? Tenemos respuestas. Aquí están algunas de las consultas más comunes que recibimos.
           </p>
         </div>
         <div className="mt-16 max-w-4xl mx-auto">

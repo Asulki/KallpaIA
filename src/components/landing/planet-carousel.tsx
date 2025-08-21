@@ -13,11 +13,11 @@ import {
 } from "@/components/ui/carousel";
 
 const planetArt = [
-  { src: "https://placehold.co/800x600.png", alt: "Pixel art of a fiery lava planet", hint: "pixel art lava planet" },
-  { src: "https://placehold.co/800x600.png", alt: "Pixel art of a lush jungle planet", hint: "pixel art jungle planet" },
-  { src: "https://placehold.co/800x600.png", alt: "Pixel art of a crystalline ice planet", hint: "pixel art ice planet" },
-  { src: "https://placehold.co/800x600.png", alt: "Pixel art of a futuristic city planet", hint: "pixel art city planet" },
-  { src: "https://placehold.co/800x600.png", alt: "Pixel art of a swirling gas giant", hint: "pixel art gas giant" },
+  { src: "https://placehold.co/800x600.png", alt: "Pixel art de un planeta de lava ardiente", hint: "pixel art lava planet" },
+  { src: "https://placehold.co/800x600.png", alt: "Pixel art de un exuberante planeta selvático", hint: "pixel art jungle planet" },
+  { src: "https://placehold.co/800x600.png", alt: "Pixel art de un planeta de hielo cristalino", hint: "pixel art ice planet" },
+  { src: "https://placehold.co/800x600.png", alt: "Pixel art de un planeta ciudad futurista", hint: "pixel art city planet" },
+  { src: "https://placehold.co/800x600.png", alt: "Pixel art de un gigante gaseoso arremolinado", hint: "pixel art gas giant" },
 ];
 
 export function PlanetCarousel() {
@@ -42,9 +42,9 @@ export function PlanetCarousel() {
     <section id="carousel" className="py-20 sm:py-32">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
-          <h2 className="font-headline text-4xl font-bold text-primary sm:text-5xl">Worlds of Wonder</h2>
+          <h2 className="font-headline text-4xl font-bold text-primary sm:text-5xl">Mundos Asombrosos</h2>
           <p className="mt-6 text-lg leading-8 text-gray-300">
-            Journey through our gallery of pixel art planets, each a potential setting for your next great discovery.
+            Viaja a través de nuestra galería de planetas en pixel art, cada uno un escenario potencial para tu próximo gran descubrimiento.
           </p>
         </div>
         <div className="mt-16">
@@ -78,7 +78,7 @@ export function PlanetCarousel() {
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   current === index ? 'bg-primary scale-125' : 'bg-gray-600'
                 }`}
-                aria-label={`Go to slide ${index + 1}`}
+                aria-label={`Ir a la diapositiva ${index + 1}`}
               />
             ))}
           </div>

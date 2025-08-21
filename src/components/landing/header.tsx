@@ -11,13 +11,13 @@ export function Header() {
           <span className="font-headline text-2xl font-bold text-white">KallpaIA</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-lg">
-          <Link href="#about" className="text-gray-300 hover:text-primary transition-colors">About</Link>
-          <Link href="#ambassadors" className="text-gray-300 hover:text-primary transition-colors">Ambassadors</Link>
-          <Link href="#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonials</Link>
+          <Link href="#about" className="text-gray-300 hover:text-primary transition-colors">Nosotros</Link>
+          <Link href="#ambassadors" className="text-gray-300 hover:text-primary transition-colors">Embajadores</Link>
+          <Link href="#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
           <Link href="#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
         </nav>
         <Button className="font-headline bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all rounded-full px-6 py-3">
-          Start Learning
+          Comienza a Aprender
         </Button>
       </div>
     </header>

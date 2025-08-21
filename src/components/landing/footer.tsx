@@ -10,9 +10,9 @@ export function Footer() {
           <BotIcon className="w-6 h-6 text-primary" />
           <p className="font-headline text-xl font-bold text-white">KallpaIA</p>
         </div>
-        <p className="mb-4">Join our community and start your journey of discovery today.</p>
+        <p className="mb-4">Únete a nuestra comunidad y comienza tu viaje de descubrimiento hoy.</p>
         <p className="text-sm">
-          &copy; {currentYear} KallpaIA. All rights reserved. The future is built by you.
+          &copy; {currentYear} KallpaIA. Todos los derechos reservados. El futuro lo construyes tú.
         </p>
       </div>
     </footer>

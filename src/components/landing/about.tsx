@@ -4,23 +4,23 @@ import { ScienceIcon, TechIcon, EngineeringIcon, MathIcon } from '@/components/l
 const stemTopics = [
   {
     icon: <ScienceIcon className="w-16 h-16 mx-auto mb-4 text-primary" />,
-    title: 'Science',
-    description: 'Explore the universe, from the smallest particles to the largest galaxies. Unravel the mysteries of life and matter.',
+    title: 'Ciencia',
+    description: 'Explora el universo, desde las partículas más pequeñas hasta las galaxias más grandes. Desvela los misterios de la vida y la materia.',
   },
   {
     icon: <TechIcon className="w-16 h-16 mx-auto mb-4 text-primary" />,
-    title: 'Technology',
-    description: 'Shape the future with code. Build innovative apps, design intelligent systems, and power the digital revolution.',
+    title: 'Tecnología',
+    description: 'Moldea el futuro con código. Construye aplicaciones innovadoras, diseña sistemas inteligentes e impulsa la revolución digital.',
   },
   {
     icon: <EngineeringIcon className="w-16 h-16 mx-auto mb-4 text-primary" />,
-    title: 'Engineering',
-    description: 'Design and create solutions to real-world problems. From sustainable energy to next-gen robotics, build a better world.',
+    title: 'Ingeniería',
+    description: 'Diseña y crea soluciones a problemas del mundo real. Desde energía sostenible hasta robótica de próxima generación, construye un mundo mejor.',
   },
   {
     icon: <MathIcon className="w-16 h-16 mx-auto mb-4 text-primary" />,
-    title: 'Mathematics',
-    description: 'Discover the language of the universe. Unlock patterns, solve complex problems, and lay the foundation for all of STEM.',
+    title: 'Matemáticas',
+    description: 'Descubre el lenguaje del universo. Desbloquea patrones, resuelve problemas complejos y sienta las bases para todo en STEM.',
   },
 ];
 
@@ -30,10 +30,10 @@ export function About() {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
           <h2 className="font-headline text-4xl font-bold text-primary sm:text-5xl">
-            Our Mission: Powering Future Innovators
+            Nuestra Misión: Impulsando a los Futuros Innovadores
           </h2>
           <p className="mt-6 text-lg leading-8 text-gray-300">
-            KallpaIA is dedicated to making STEM education accessible, engaging, and inspiring for everyone. We believe that by providing the right tools and fostering a community of curiosity, we can empower the next generation of scientists, engineers, and creators to solve the world's greatest challenges.
+            KallpaIA se dedica a hacer que la educación STEM sea accesible, atractiva e inspiradora para todos. Creemos que al proporcionar las herramientas adecuadas y fomentar una comunidad de curiosidad, podemos empoderar a la próxima generación de científicos, ingenieros y creadores para resolver los mayores desafíos del mundo.
           </p>
         </div>
         <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
