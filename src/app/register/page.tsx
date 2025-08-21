@@ -83,7 +83,7 @@ export default function RegisterForm() {
                         name="nickname"
                         render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Apodo</FormLabel>
+                            <FormLabel>Nickname</FormLabel>
                             <FormControl>
                                 <div className="relative">
                                     <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
@@ -156,7 +156,7 @@ export default function RegisterForm() {
                         </FormItem>
                         )}
                     />
-                    <div className="space-y-2">
+                    <div className="space-y-2 pt-2">
                         <Button variant="outline" className="w-full font-headline text-lg rounded-full py-3 bg-white/80 hover:bg-white text-gray-800 transition-all border-white/50 shadow-md">
                             <GoogleIcon />
                             Iniciar con Google
