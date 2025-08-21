@@ -163,11 +163,11 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
             ></div>
             <div className="relative z-10">
                 <div className="flex justify-between items-center mb-2">
-                     <Badge variant="outline" className={cn("border-2 font-bold", avatar.borderColor, avatar.color, avatar.bgColor)}>
+                     <Badge variant="outline" className={cn("border-2 font-bold text-base", avatar.borderColor, avatar.color, avatar.bgColor)}>
                         {avatar.icon}
                         <span className="ml-1.5">{avatar.type}</span>
                     </Badge>
-                     <Badge variant="secondary" className="text-sm font-bold">100/100 HP</Badge>
+                     <Badge variant="secondary" className="text-base font-bold">100/100 HP</Badge>
                 </div>
             </div>
             <div className="relative z-10 flex-grow flex items-center justify-center my-2">
@@ -182,14 +182,14 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
                 />
             </div>
             <div className="relative z-10 text-center">
-                 <h3 className="font-headline text-2xl md:text-3xl font-bold text-white" style={{ transform: 'translateZ(20px)'}}>{avatar.name}</h3>
-                 <p className="text-sm md:text-base text-gray-400 -mt-1" style={{ transform: 'translateZ(20px)'}}>{avatar.mentor}</p>
+                 <h3 className="font-headline text-3xl md:text-4xl font-bold text-white" style={{ transform: 'translateZ(20px)'}}>{avatar.name}</h3>
+                 <p className="text-lg md:text-xl text-gray-400 -mt-1" style={{ transform: 'translateZ(20px)'}}>{avatar.mentor}</p>
             </div>
-            <div className="relative z-10 mt-4 space-y-2 text-base">
+            <div className="relative z-10 mt-4 space-y-2 text-lg">
                 {avatar.moves.map(move => (
-                    <div key={move.name} className="bg-black/40 p-2.5 rounded-md text-white flex justify-between items-center">
+                    <div key={move.name} className="bg-black/40 p-3 rounded-md text-white flex justify-between items-center">
                         <span className="font-semibold">{move.name}</span>
-                        <span className={cn('font-bold px-2.5 py-1 rounded-full text-sm', avatar.bgColor)}>{move.type} {move.value}</span>
+                        <span className={cn('font-bold px-3 py-1 rounded-full text-base', avatar.bgColor)}>{move.type} {move.value}</span>
                     </div>
                 ))}
             </div>
