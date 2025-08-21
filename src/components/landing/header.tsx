@@ -18,9 +18,6 @@ export function Header() {
           <Link href="#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
         </nav>
         <div className="flex items-center gap-4">
-          <Button className="font-headline bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all rounded-full px-6 py-3 hidden sm:flex">
-            Inicia tu Aventura
-          </Button>
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="md:hidden bg-transparent border-primary text-primary">
