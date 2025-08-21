@@ -77,7 +77,7 @@ export default function RegisterForm() {
               </CardHeader>
               <CardContent className="p-0">
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                     <FormField
                         control={form.control}
                         name="nickname"
@@ -159,21 +159,13 @@ export default function RegisterForm() {
                     <Button type="submit" className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">
                         Iniciar Sesión
                     </Button>
+                     <Separator className="w-full bg-white/30" />
+                     <Button variant="outline" className="w-full font-headline text-lg rounded-full py-3 bg-white/80 hover:bg-white text-gray-800 transition-all border-white/50 shadow-md">
+                        <GoogleIcon />
+                        Iniciar con Google
+                    </Button>
                     </form>
                 </Form>
-                 <div className="relative my-2">
-                    <Separator className="w-full bg-white/30" />
-                </div>
-                <Button variant="outline" className="w-full font-headline text-lg rounded-full py-3 bg-white/80 hover:bg-white text-gray-800 transition-all border-white/50 shadow-md">
-                    <GoogleIcon />
-                    Iniciar con Google
-                </Button>
-                <div className="mt-6 text-center text-sm">
-                    ¿No tienes una cuenta?{" "}
-                    <Link href="#" className="underline text-primary font-bold">
-                        Regístrate
-                    </Link>
-                </div>
               </CardContent>
             </div>
       </Card>
