@@ -45,11 +45,13 @@ export default function RegisterForm() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    // Primero redirige
+    router.push('/avatar');
+    // Luego muestra el toast
     toast({
         title: "¡Registro exitoso!",
         description: `¡Bienvenida, ${values.nickname}! Comienza tu aventura.`,
     });
-    router.push('/avatar');
   }
 
   return (
