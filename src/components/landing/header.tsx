@@ -13,7 +13,6 @@ export function Header() {
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-lg">
           <Link href="#about" className="text-gray-300 hover:text-primary transition-colors">Nosotros</Link>
-          <Link href="#ambassadors" className="text-gray-300 hover:text-primary transition-colors">Embajadores</Link>
           <Link href="#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
           <Link href="#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
         </nav>
@@ -28,7 +27,6 @@ export function Header() {
             <SheetContent side="right" className="bg-neutral-900 border-neutral-800">
               <nav className="flex flex-col gap-6 text-lg mt-10">
                 <Link href="#about" className="text-gray-300 hover:text-primary transition-colors">Nosotros</Link>
-                <Link href="#ambassadors" className="text-gray-300 hover:text-primary transition-colors">Embajadores</Link>
                 <Link href="#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
                 <Link href="#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
               </nav>
