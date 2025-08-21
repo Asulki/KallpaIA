@@ -25,8 +25,8 @@ const avatars = [
     alt: 'Vicuña Matemática, avatar de Matemática',
     hint: 'mathematician vicuña inspired by Ada Lovelace pixel art',
     moves: [
-      { name: 'Algoritmo Infinito', type: 'Lógica', value: 40 },
-      { name: 'Cálculo Musical', type: 'Creatividad', value: 30 },
+      { name: 'Tejido Lógico', type: 'Lógica', value: 40 },
+      { name: 'Secuencia Infinita', type: 'Creatividad', value: 30 },
     ],
   },
   {
@@ -42,8 +42,8 @@ const avatars = [
     alt: 'Cóndor del Conocimiento, avatar de Ciencia',
     hint: 'knowledge condor inspired by Marie Curie pixel art',
     moves: [
-      { name: 'Rayos del Saber', type: 'Investigación', value: 50 },
-      { name: 'Laboratorio Seguro', type: 'Defensa', value: 25 },
+      { name: 'Alas de la Curie', type: 'Investigación', value: 40 },
+      { name: 'Explosión Atómica', type: 'Poder', value: 30 },
     ],
   },
   {
@@ -59,8 +59,8 @@ const avatars = [
     alt: 'Jaguar Ingeniero, avatar de Ingeniería',
     hint: 'engineer jaguar inspired by Katherine Johnson pixel art',
     moves: [
-      { name: 'Puente del Futuro', type: 'Construcción', value: 45 },
-      { name: 'Cálculo Espacial', type: 'Precisión', value: 35 },
+      { name: 'Circuito Salvaje', type: 'Construcción', value: 50 },
+      { name: 'Cálculo Estelar', type: 'Precisión', value: 30 },
     ],
   },
   {
@@ -76,8 +76,8 @@ const avatars = [
     alt: 'Colibrí Creativo, avatar de Arte',
     hint: 'creative hummingbird inspired by Hypatia pixel art',
     moves: [
-      { name: 'Inspiración Ancestral', type: 'Arte', value: 30 },
-      { name: 'Vuelo Lógico', type: 'Estrategia', value: 40 },
+      { name: 'Vuelo Inspirador', type: 'Arte', value: 40 },
+      { name: 'Paleta Cósmica', type: 'Estrategia', value: 25 },
     ],
   },
   {
@@ -163,14 +163,11 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
             ></div>
             <div className="relative z-10">
                 <div className="flex justify-between items-center mb-2">
-                    <Badge variant="secondary" className="text-xs font-bold">⭐ Rookie</Badge>
-                     <Badge variant="secondary" className="text-xs font-bold">70/100 HP</Badge>
-                </div>
-                <div className="flex justify-between items-center">
-                    <Badge variant="outline" className={cn("border-2 font-bold", avatar.borderColor, avatar.color, avatar.bgColor)}>
+                     <Badge variant="outline" className={cn("border-2 font-bold", avatar.borderColor, avatar.color, avatar.bgColor)}>
                         {avatar.icon}
                         <span className="ml-1.5">{avatar.type}</span>
                     </Badge>
+                     <Badge variant="secondary" className="text-xs font-bold">100/100 HP</Badge>
                 </div>
             </div>
             <div className="relative z-10 flex-grow flex items-center justify-center my-2">
