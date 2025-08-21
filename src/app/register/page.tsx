@@ -156,14 +156,15 @@ export default function RegisterForm() {
                         </FormItem>
                         )}
                     />
-                    <Button type="submit" className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">
-                        Iniciar Sesión
-                    </Button>
-                     <Separator className="w-full bg-white/30" />
-                     <Button variant="outline" className="w-full font-headline text-lg rounded-full py-3 bg-white/80 hover:bg-white text-gray-800 transition-all border-white/50 shadow-md">
-                        <GoogleIcon />
-                        Iniciar con Google
-                    </Button>
+                    <div className="space-y-2">
+                        <Button variant="outline" className="w-full font-headline text-lg rounded-full py-3 bg-white/80 hover:bg-white text-gray-800 transition-all border-white/50 shadow-md">
+                            <GoogleIcon />
+                            Iniciar con Google
+                        </Button>
+                        <Button type="submit" className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">
+                            Iniciar Sesión
+                        </Button>
+                    </div>
                     </form>
                 </Form>
               </CardContent>
