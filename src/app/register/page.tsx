@@ -61,7 +61,7 @@ export default function RegisterForm() {
         title: "¡Inicio de sesión exitoso!",
         description: `Bienvenido, ${values.nickname}.`,
     });
-    router.push('/dashboard');
+    router.push('/quiz');
   }
 
   return (
