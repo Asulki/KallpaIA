@@ -27,9 +27,7 @@ const formSchema = z.object({
   parentEmail: z.string().email({
     message: "Por favor, introduce una dirección de correo electrónico válida.",
   }),
-  password: z.string().min(8, {
-    message: "La contraseña debe tener al menos 8 caracteres.",
-  }),
+  password: z.string(),
   profile: z.enum(["student", "teacher"], {
     required_error: "Debes seleccionar un tipo de perfil.",
   }),
@@ -43,6 +41,7 @@ export default function RegisterForm() {
     defaultValues: {
       nickname: "",
       parentEmail: "",
+      password: "",
     },
   });
 
