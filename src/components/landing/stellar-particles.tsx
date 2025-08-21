@@ -27,18 +27,35 @@ export function StellarParticles() {
     // Particles
     const particlesCount = 5000;
     const positions = new Float32Array(particlesCount * 3);
+    const colors = new Float32Array(particlesCount * 3);
+    const pastelColors = [
+      new THREE.Color('#AEE6FF'), // Celeste
+      new THREE.Color('#FFB3C6'), // Rosado
+      new THREE.Color('#FFE08C'), // Amarillo
+    ];
 
-    for (let i = 0; i < particlesCount * 3; i++) {
-      positions[i] = (Math.random() - 0.5) * 10;
+    for (let i = 0; i < particlesCount; i++) {
+      const i3 = i * 3;
+      positions[i3] = (Math.random() - 0.5) * 10;
+      positions[i3 + 1] = (Math.random() - 0.5) * 10;
+      positions[i3 + 2] = (Math.random() - 0.5) * 10;
+
+      const randomColor = pastelColors[Math.floor(Math.random() * pastelColors.length)];
+      colors[i3] = randomColor.r;
+      colors[i3 + 1] = randomColor.g;
+      colors[i3 + 2] = randomColor.b;
     }
 
     const particlesGeometry = new THREE.BufferGeometry();
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
+    particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    
     const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.01,
-      color: '#AEE6FF', // Pastel Blue/Celeste
+      size: 0.02,
+      vertexColors: true,
       blending: THREE.AdditiveBlending,
+      transparent: true,
+      opacity: 0.8,
     });
 
     const particles = new THREE.Points(particlesGeometry, particlesMaterial);
