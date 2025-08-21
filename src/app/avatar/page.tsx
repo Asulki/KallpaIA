@@ -8,7 +8,7 @@ import { useState, useRef, MouseEvent } from 'react';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { Bot, Telescope, Wrench, Palette } from 'lucide-react';
-import { BubbleParticles } from '@/components/avatar/bubble-particles';
+import { StellarParticles } from '@/components/landing/stellar-particles';
 
 
 const avatars = [
@@ -165,14 +165,26 @@ export default function AvatarSelectionPage() {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen bg-[#0F1115] p-4 text-white overflow-hidden">
-        <BubbleParticles />
-        <div className="relative z-10 text-center mb-10">
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-black p-4 text-white overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-40">
+            <Image
+            src="https://i.ibb.co/d0PvKQQ6/fondo-final.png"
+            alt="Pixel art de Machu Picchu"
+            fill
+            style={{ objectFit: 'cover' }}
+            data-ai-hint="pixel art machu picchu"
+            priority
+            />
+        </div>
+        <div className="absolute inset-0 z-10">
+             <StellarParticles />
+        </div>
+        <div className="relative z-20 text-center mb-10">
             <h1 className="font-headline text-4xl font-bold text-primary">Elige tu Kallpa Card</h1>
             <p className="text-lg text-gray-300 mt-2">Selecciona tu compañera de aventura STEM.</p>
         </div>
 
-        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 place-items-center w-full max-w-6xl">
+        <div className="relative z-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 place-items-center w-full max-w-6xl">
         {avatars.map((avatar) => (
             <AvatarCard
                 key={avatar.id}
@@ -183,7 +195,7 @@ export default function AvatarSelectionPage() {
         ))}
         </div>
         
-        <div className="relative z-10 mt-12">
+        <div className="relative z-20 mt-12">
         <Button
             onClick={handleContinue}
             disabled={!selectedAvatar}
