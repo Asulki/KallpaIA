@@ -1,0 +1,198 @@
+/* ===== Tokens / Paleta ===== */
+:root{
+  --bg: #0F1115;
+  --gold: #F5D57D;
+
+  --chip-math:  #BFF3D1;
+  --chip-sci:   #B9A6FF;
+  --chip-eng:   #FFE08C;
+  --chip-art:   #FFB3C6;
+  --chip-tech:  #AEE6FF;
+
+  --text-strong:#FFFFFF;
+  --text-soft:  #D9DCE2;
+
+  --card-w: clamp(240px, 28vw, 320px);
+  --card-r: 22px;                 /* border-radius */
+  --blur: 32px;
+}
+
+/* Lienzo */
+body{ 
+    background:#0b0e13; 
+    color:var(--text-strong); 
+    font-family: 'Space Grotesk', system-ui, Poppins, Inter, sans-serif; 
+}
+
+/* Grid responsive de cartas */
+.kcards{
+  display:grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-w), 1fr));
+  padding: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ===== Carta base ===== */
+.kcard{
+  position: relative;
+  cursor: pointer;
+  border-radius: var(--card-r);
+  background: radial-gradient(120% 90% at 50% 20%, #1A212C 0%, #141922 55%, #11161d 100%);
+  padding: 14px 14px 12px;
+  overflow: hidden;
+  /* Marco dorado doble */
+  box-shadow:
+    0 0 0 2px var(--gold) inset,
+    0 0 0 5px rgba(255,255,255,.07) inset,
+    0 12px 30px rgba(0,0,0,.45);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+/* Brillo holográfico diagonal */
+.kcard::before{
+  content:"";
+  position:absolute; inset:-40% -20%;
+  background: conic-gradient(from 180deg,
+    #ffffff00 0%,
+    #ffffff30 12%,
+    #ffffff00 25%,
+    #ffffff00 60%,
+    #ffffff38 70%,
+    #ffffff00 100%);
+  mix-blend-mode: screen;
+  opacity:.25;
+  animation: holo 8s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes holo{
+  from{ transform: rotate(0deg) translateY(0); }
+  to  { transform: rotate(360deg) translateY(0); }
+}
+
+/* Hover / enfoque */
+.kcard:hover{ 
+    transform: translateY(-4px) scale(1.02); 
+    box-shadow:0 0 0 2px var(--gold) inset, 0 0 0 5px rgba(255,255,255,.1) inset, 0 16px 40px rgba(0,0,0,.55); 
+}
+.kcard:focus-within{ 
+    outline: 2px solid #fff3; 
+    outline-offset: 2px; 
+}
+.kcard.kcard--selected {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 0 0 3px hsl(var(--background)), 0 0 0 6px var(--gold);
+}
+
+
+/* ===== Header (chip + HP) ===== */
+.kcard__header{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:.5rem; margin-bottom:.35rem;
+}
+
+.kcard__chip{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.35rem .7rem;
+  border-radius:999px;
+  font-weight:700; font-size:.9rem;
+  color:#0B0F16;
+  background:#fff;
+  box-shadow: inset 0 0 0 1px #0002, 0 2px 8px rgba(0,0,0,.2);
+}
+
+.kcard__hp{
+  display:inline-flex; align-items:center; gap:.35rem;
+  padding:.35rem .65rem;
+  border-radius: 999px;
+  font-weight:800; font-size:.9rem;
+  color:#DCE3EE; background: #222a35;
+  box-shadow: inset 0 0 0 1px #0003;
+}
+.kcard__hp b{ font-weight:900; letter-spacing:.5px; }
+
+/* Variantes por planeta (color del chip + aura) */
+.kcard--math .kcard__chip{ background: var(--chip-math); }
+.kcard--science .kcard__chip{ background: var(--chip-sci); }
+.kcard--eng .kcard__chip{ background: var(--chip-eng); }
+.kcard--art .kcard__chip{ background: var(--chip-art); }
+.kcard--tech .kcard__chip{ background: var(--chip-tech); }
+
+
+/* ===== Arte central (óvalo con aura) ===== */
+.kcard__art{
+  position:relative; display:grid; place-items:center;
+  margin: .35rem 0 0.35rem;
+  aspect-ratio: 4 / 3.5; /* Ajustado para que no se corte la imagen */
+  border-radius: 18px;
+  overflow:hidden;
+}
+.kcard__art::after{
+  content:""; position:absolute; inset:-20%;
+  background: radial-gradient(60% 60% at 50% 35%, rgba(255,255,255,.08), rgba(0,0,0,0) 70%);
+  pointer-events:none;
+}
+.kcard__art img{
+  width: 100%;
+  height: 100%;
+  max-width: 90%; max-height: 90%; object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+  transition: transform .3s ease;
+}
+.kcard:hover .kcard__art img{ transform: scale(1.04); }
+
+/* ===== Títulos ===== */
+.kcard__name{
+  margin-top:.15rem;
+  font-weight: 900;
+  font-size: clamp(1.15rem, 2.6vw, 1.8rem);
+  letter-spacing: .3px;
+  text-shadow: 0 1px 0 #0009;
+}
+.kcard__mentor{
+  color: var(--text-soft);
+  opacity:.9;
+  font-weight:600;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  margin-top:.1rem;
+}
+
+/* ===== Footer (movimientos + acciones) ===== */
+.kcard__footer{ margin-top: .5rem; display:grid; gap:.6rem; }
+.kcard__moves{
+  display:flex; flex-direction:column; gap:.35rem;
+  font-size: .9rem; color:#E8EDF6;
+}
+.kcard__moves span{
+  display:inline-flex; align-items:center; gap:.45rem;
+  padding:.4rem .6rem; border-radius: 12px;
+  background: #0f1420; box-shadow: inset 0 0 0 1px #ffffff12;
+}
+
+.kcard__actions{ display:flex; gap:.45rem; justify-content:flex-end; }
+.kcard__btn{
+  border: none; cursor: pointer;
+  padding:.45rem .65rem; border-radius: 10px;
+  background:#1b2330; color:#E9F0FA; font-weight:800; font-size:1rem;
+  box-shadow: inset 0 0 0 1px #ffffff15;
+  transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
+}
+.kcard__btn:hover{ transform: translateY(-2px); background:#222d3d; }
+.kcard__btn--primary{ background:#253247; box-shadow: 0 0 0 2px var(--gold) inset; }
+.kcard__btn--primary:hover{ background:#2d3b53; }
+
+/* ===== Responsive refinements ===== */
+@media (max-width: 720px){
+  .kcard{ padding: 12px; border-radius: 18px; }
+  .kcard__chip, .kcard__hp{ font-size:.85rem; }
+  .kcard__moves span{ font-size:.85rem; }
+}
+
+/* Motion-safe */
+@media (prefers-reduced-motion: reduce){
+  .kcard, .kcard__art img{ transition: none !important; }
+  .kcard::before{ animation: none; }
+}

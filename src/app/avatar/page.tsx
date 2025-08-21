@@ -3,199 +3,123 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useState, useRef, MouseEvent } from 'react';
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Badge } from '@/components/ui/badge';
-import { Bot, Telescope, Wrench, Palette, Sigma, Heart, Droplet, Star } from 'lucide-react';
 import { StellarParticles } from '@/components/landing/stellar-particles';
-
+import './kallpa-cards.css';
 
 const avatars = [
     {
     id: 1,
-    name: 'Vicuña Matemática',
+    name: 'Vicuña',
     mentor: 'Ada Lovelace',
-    type: 'Matemática',
-    icon: <Sigma className="w-4 h-4" />,
-    color: 'text-[#BFF3D1]',
-    bgColor: 'bg-green-900/50',
-    borderColor: 'border-[#BFF3D1]',
+    type: 'Matemáticas',
+    theme: 'math',
+    icon: '∑',
     src: 'https://i.ibb.co/jZ6LNhR/vicuna-matematica.png',
-    alt: 'Vicuña Matemática, avatar de Matemática',
+    alt: 'Vicuña, avatar de Matemáticas',
     hint: 'mathematician vicuña inspired by Ada Lovelace pixel art',
     moves: [
-      { name: 'Tejido Lógico', type: 'Lógica', value: 40 },
-      { name: 'Secuencia Infinita', type: 'Creatividad', value: 30 },
+      { name: 'Tejido Lógico', value: 40 },
+      { name: 'Secuencia Infinita', value: 30 },
     ],
   },
   {
     id: 2,
-    name: 'Cóndor del Conocimiento',
+    name: 'Cóndor',
     mentor: 'Marie Curie',
     type: 'Ciencia',
-    icon: <Telescope className="w-4 h-4" />,
-    color: 'text-[#B9A6FF]',
-    bgColor: 'bg-purple-900/50',
-    borderColor: 'border-[#B9A6FF]',
-    src: 'https://i.ibb.co/V3F7499/vicuna-bot.png',
-    alt: 'Cóndor del Conocimiento, avatar de Ciencia',
+    theme: 'science',
+    icon: '🔭',
+    src: 'https://i.ibb.co/V3F7499/vicuna-bot.png', // Placeholder
+    alt: 'Cóndor, avatar de Ciencia',
     hint: 'knowledge condor inspired by Marie Curie pixel art',
     moves: [
-      { name: 'Alas de la Curie', type: 'Investigación', value: 40 },
-      { name: 'Explosión Atómica', type: 'Poder', value: 30 },
+      { name: 'Alas de la Curie', value: 40 },
+      { name: 'Rayo Gamma', value: 25 },
     ],
   },
   {
     id: 3,
-    name: 'Jaguar Ingeniero',
+    name: 'Jaguar',
     mentor: 'Katherine Johnson',
     type: 'Ingeniería',
-    icon: <Wrench className="w-4 h-4" />,
-    color: 'text-[#FFE08C]',
-    bgColor: 'bg-yellow-900/50',
-    borderColor: 'border-[#FFE08C]',
-    src: 'https://i.ibb.co/V3F7499/vicuna-bot.png',
-    alt: 'Jaguar Ingeniero, avatar de Ingeniería',
+    theme: 'eng',
+    icon: '🔧',
+    src: 'https://i.ibb.co/V3F7499/vicuna-bot.png', // Placeholder
+    alt: 'Jaguar, avatar de Ingeniería',
     hint: 'engineer jaguar inspired by Katherine Johnson pixel art',
     moves: [
-      { name: 'Circuito Salvaje', type: 'Construcción', value: 50 },
-      { name: 'Cálculo Estelar', type: 'Precisión', value: 30 },
+      { name: 'Circuito Salvaje', value: 50 },
+      { name: 'Cálculo Estelar', value: 30 },
     ],
   },
   {
     id: 4,
-    name: 'Colibrí Creativo',
+    name: 'Colibrí',
     mentor: 'Hipatia de Alejandría',
     type: 'Arte',
-    icon: <Palette className="w-4 h-4" />,
-    color: 'text-[#FFB3C6]',
-    bgColor: 'bg-pink-900/50',
-    borderColor: 'border-[#FFB3C6]',
-    src: 'https://i.ibb.co/V3F7499/vicuna-bot.png',
-    alt: 'Colibrí Creativo, avatar de Arte',
+    theme: 'art',
+    icon: '🎨',
+    src: 'https://i.ibb.co/V3F7499/vicuna-bot.png', // Placeholder
+    alt: 'Colibrí, avatar de Arte',
     hint: 'creative hummingbird inspired by Hypatia pixel art',
     moves: [
-      { name: 'Vuelo Inspirador', type: 'Arte', value: 40 },
-      { name: 'Paleta Cósmica', type: 'Estrategia', value: 25 },
+      { name: 'Vuelo Inspirador', value: 40 },
+      { name: 'Paleta Cósmica', value: 25 },
     ],
   },
   {
     id: 5,
-    name: 'Astrónoma Inti-Bot',
+    name: 'Inti-Bot',
     mentor: 'Caroline Herschel',
     type: 'Tecnología',
-    icon: <Bot className="w-4 h-4" />,
-    color: 'text-[#AEE6FF]',
-    bgColor: 'bg-sky-900/50',
-    borderColor: 'border-[#AEE6FF]',
-    src: 'https://i.ibb.co/V3F7499/vicuna-bot.png',
-    alt: 'Astrónoma Inti-Bot, avatar de Tecnología',
+    theme: 'tech',
+    icon: '💻',
+    src: 'https://i.ibb.co/V3F7499/vicuna-bot.png', // Placeholder
+    alt: 'Inti-Bot, avatar de Tecnología',
     hint: 'astronomer robot inspired by Caroline Herschel pixel art',
     moves: [
-      { name: 'Mapa de Estrellas', type: 'Observación', value: 35 },
-      { name: 'Órbita Segura', type: 'Colaboración', value: 30 },
+      { name: 'Mapa de Estrellas', value: 35 },
+      { name: 'Órbita Segura', value: 30 },
     ],
   },
 ];
 
 const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0], isSelected: boolean, onSelect: (id: number) => void }) => {
-    const cardRef = useRef<HTMLDivElement>(null);
-
-    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-        const card = cardRef.current;
-        if (!card) return;
-
-        const { left, top, width, height } = card.getBoundingClientRect();
-        const x = e.clientX - left;
-        const y = e.clientY - top;
-        
-        const mouseX = x / width;
-        const mouseY = y / height;
-
-        const rotateX = (mouseY - 0.5) * -35;
-        const rotateY = (mouseX - 0.5) * 35;
-        
-        const bgX = mouseX * 100;
-        const bgY = mouseY * 100;
-
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-        const holo = card.querySelector('.holo-effect') as HTMLDivElement;
-        if (holo) {
-            holo.style.backgroundPosition = `${bgX}% ${bgY}%`;
-            holo.style.opacity = '0.3';
-        }
-    };
-
-    const handleMouseLeave = () => {
-        const card = cardRef.current;
-        if (card) {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-            const holo = card.querySelector('.holo-effect') as HTMLDivElement;
-            if (holo) {
-                holo.style.backgroundPosition = `50% 50%`;
-                holo.style.opacity = '0.2';
-            }
-        }
-    };
-
   return (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onClick={() => onSelect(avatar.id)}
-      className={cn(
-        'relative rounded-3xl p-1 transition-all duration-300 ease-out cursor-pointer w-full aspect-[3/4.5] max-w-[320px]',
-        'transform-style-preserve-3d',
-        isSelected ? 'ring-4 ring-[#F5D57D] ring-offset-4 ring-offset-background' : 'ring-2 ring-transparent',
-        'bg-gradient-to-br from-yellow-300 via-[#F5D57D] to-amber-600'
-      )}
+    <article 
+        className={cn('kcard', `kcard--${avatar.theme}`, { 'kcard--selected': isSelected })}
+        onClick={() => onSelect(avatar.id)}
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onSelect(avatar.id)}}
     >
-        <div className="relative w-full h-full bg-background rounded-[22px] p-4 flex flex-col justify-between overflow-hidden border border-white/20">
-            <div 
-                className="holo-effect absolute inset-0 opacity-20 transition-opacity duration-300" 
-                style={{
-                    background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 60%)',
-                    backgroundSize: '200% 200%',
-                    mixBlendMode: 'screen',
-                }}
-            ></div>
-            <div className="relative z-10">
-                <div className="flex justify-between items-center mb-2">
-                     <Badge variant="outline" className={cn("border-2 font-bold text-base", avatar.borderColor, avatar.color, avatar.bgColor)}>
-                        {avatar.icon}
-                        <span className="ml-1.5">{avatar.type}</span>
-                    </Badge>
-                     <Badge variant="secondary" className="text-base font-bold">100/100 HP</Badge>
-                </div>
-            </div>
-            <div className="relative z-10 flex-grow flex items-center justify-center my-2">
-                 <Image
-                    src={avatar.src}
-                    alt={avatar.alt}
-                    width={220}
-                    height={220}
-                    data-ai-hint={avatar.hint}
-                    className="object-contain w-full h-auto max-h-[240px] drop-shadow-[0_8px_15px_rgba(0,0,0,0.5)]"
-                    style={{ transform: 'translateZ(40px)'}}
-                />
-            </div>
-            <div className="relative z-10 text-center">
-                 <h3 className="font-headline text-2xl md:text-3xl font-bold text-white" style={{ transform: 'translateZ(20px)'}}>{avatar.name}</h3>
-                 <p className="text-md md:text-lg text-gray-400 -mt-1" style={{ transform: 'translateZ(20px)'}}>{avatar.mentor}</p>
-            </div>
-            <div className="relative z-10 mt-4 space-y-2 text-sm md:text-base">
-                {avatar.moves.map(move => (
-                    <div key={move.name} className="bg-black/40 p-2 md:p-3 rounded-md text-white flex justify-between items-center">
-                        <span className="font-semibold">{move.name}</span>
-                        <span className={cn('font-bold px-2 py-1 md:px-3 rounded-full text-xs md:text-base', avatar.bgColor)}>{move.type} {move.value}</span>
-                    </div>
-                ))}
-            </div>
+      <header className="kcard__header">
+        <span className="kcard__chip" aria-label={`Planeta ${avatar.type}`}>{avatar.icon} {avatar.type}</span>
+        <span className="kcard__hp" aria-label="Energía">100/100 <b>HP</b></span>
+      </header>
+
+      <div className="kcard__art">
+        <Image src={avatar.src} alt={avatar.alt} width={300} height={400} data-ai-hint={avatar.hint} />
+      </div>
+
+      <div className="kcard__name">{avatar.name}</div>
+      <div className="kcard__mentor">{avatar.mentor}</div>
+
+      <footer className="kcard__footer">
+        <div className="kcard__moves">
+          {avatar.moves.map(move => (
+            <span key={move.name}>{move.name} ({move.value})</span>
+          ))}
         </div>
-    </div>
-  )
+        <div className="kcard__actions" aria-hidden="true">
+          <button title="Pasar" className="kcard__btn">⟵</button>
+          <button title="Elegir" className="kcard__btn kcard__btn--primary">⟶</button>
+          <button title="Info" className="kcard__btn">⤴</button>
+        </div>
+      </footer>
+    </article>
+  );
 }
 
 
@@ -228,31 +152,31 @@ export default function AvatarSelectionPage() {
         <div className="absolute inset-0 z-10">
              <StellarParticles />
         </div>
-        <div className="relative z-20 text-center mb-10">
+        <div className="relative z-20 text-center mb-10 mt-20">
             <h1 className="font-headline text-4xl font-bold text-primary">Elige tu Kallpa Card</h1>
             <p className="text-lg text-gray-300 mt-2">Selecciona tu avatar STEAM.</p>
         </div>
 
-        <div className="relative z-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 place-items-center w-full max-w-screen-2xl px-4">
-        {avatars.map((avatar) => (
-            <AvatarCard
-                key={avatar.id}
-                avatar={avatar}
-                isSelected={selectedAvatar === avatar.id}
-                onSelect={handleSelectAvatar}
-            />
-        ))}
-        </div>
+        <section className="kcards w-full max-w-screen-2xl">
+            {avatars.map((avatar) => (
+                <AvatarCard
+                    key={avatar.id}
+                    avatar={avatar}
+                    isSelected={selectedAvatar === avatar.id}
+                    onSelect={handleSelectAvatar}
+                />
+            ))}
+        </section>
         
-        <div className="relative z-20 mt-12">
-        <Button
-            onClick={handleContinue}
-            disabled={!selectedAvatar}
-            size="lg"
-            className="font-headline text-lg rounded-full px-10 py-4"
-        >
-            Continuar con mi Aventura
-        </Button>
+        <div className="relative z-20 my-12">
+            <Button
+                onClick={handleContinue}
+                disabled={!selectedAvatar}
+                size="lg"
+                className="font-headline text-lg rounded-full px-10 py-4"
+            >
+                Continuar con mi Aventura
+            </Button>
         </div>
     </div>
   );
