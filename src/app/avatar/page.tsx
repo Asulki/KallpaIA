@@ -182,14 +182,14 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
                 />
             </div>
             <div className="relative z-10 text-center">
-                 <h3 className="font-headline text-3xl md:text-4xl font-bold text-white" style={{ transform: 'translateZ(20px)'}}>{avatar.name}</h3>
-                 <p className="text-lg md:text-xl text-gray-400 -mt-1" style={{ transform: 'translateZ(20px)'}}>{avatar.mentor}</p>
+                 <h3 className="font-headline text-2xl md:text-3xl font-bold text-white" style={{ transform: 'translateZ(20px)'}}>{avatar.name}</h3>
+                 <p className="text-md md:text-lg text-gray-400 -mt-1" style={{ transform: 'translateZ(20px)'}}>{avatar.mentor}</p>
             </div>
-            <div className="relative z-10 mt-4 space-y-2 text-lg">
+            <div className="relative z-10 mt-4 space-y-2 text-sm md:text-base">
                 {avatar.moves.map(move => (
-                    <div key={move.name} className="bg-black/40 p-3 rounded-md text-white flex justify-between items-center">
+                    <div key={move.name} className="bg-black/40 p-2 md:p-3 rounded-md text-white flex justify-between items-center">
                         <span className="font-semibold">{move.name}</span>
-                        <span className={cn('font-bold px-3 py-1 rounded-full text-base', avatar.bgColor)}>{move.type} {move.value}</span>
+                        <span className={cn('font-bold px-2 py-1 md:px-3 rounded-full text-xs md:text-base', avatar.bgColor)}>{move.type} {move.value}</span>
                     </div>
                 ))}
             </div>
@@ -217,7 +217,7 @@ export default function AvatarSelectionPage() {
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-black p-4 text-white overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-40">
             <Image
-            src="https://i.ibb.co/hFLg8BJk/avatarkar.png"
+            src="https://i.ibb.co/hFLg8BJ/avatarkar.png"
             alt="Pixel art de una diosa de la sabiduría en una biblioteca"
             fill
             style={{ objectFit: 'cover' }}
@@ -233,7 +233,7 @@ export default function AvatarSelectionPage() {
             <p className="text-lg text-gray-300 mt-2">Selecciona tu avatar STEAM.</p>
         </div>
 
-        <div className="relative z-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 place-items-center w-full max-w-7xl">
+        <div className="relative z-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 place-items-center w-full max-w-screen-2xl px-4">
         {avatars.map((avatar) => (
             <AvatarCard
                 key={avatar.id}
@@ -257,3 +257,5 @@ export default function AvatarSelectionPage() {
     </div>
   );
 }
+
+    
