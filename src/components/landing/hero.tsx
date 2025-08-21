@@ -20,10 +20,10 @@ export function Hero() {
       </div>
       <div className="relative z-10 container mx-auto px-4 flex flex-col items-center">
         <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
-          Desbloquea el Universo con <br /> <span className="text-primary">KallpaIA</span>
+          Desbloquea tu Potencial con <br /> <span className="text-primary">KallpaIA</span>
         </h1>
         <p className="mt-6 max-w-2xl text-lg md:text-xl text-gray-300">
-          Explora las fronteras de la ciencia y la tecnología a través de una aventura épica. Tu viaje hacia STEM comienza ahora.
+          Explora las fronteras de la ciencia y la tecnología a través de una aventura épica. Tu viaje hacia STEAM comienza ahora.
         </p>
         <div className="mt-10 flex gap-4">
           <Button size="lg" className="font-headline bg-primary text-primary-foreground text-lg rounded-full px-8 py-6 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">

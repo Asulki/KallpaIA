@@ -6,21 +6,21 @@ import { Card, CardContent } from '@/components/ui/card';
 
 const testimonials = [
   {
-    quote: "KallpaIA cambió por completo mi forma de ver la programación. Las historias en pixel art hicieron que los temas complejos fueran mucho más fáciles de entender. ¡Se siente como jugar, no como estudiar!",
+    quote: "KallpaIA cambió por completo mi forma de ver la programación. Las historias hicieron que los temas complejos fueran mucho más fáciles de entender. ¡Como mujer en tecnología, me sentí vista e inspirada!",
     name: 'Jasmine K.',
     title: 'Estudiante de Secundaria',
     avatar: 'https://placehold.co/100x100.png',
     aiHint: 'student portrait',
   },
   {
-    quote: "Como educador, siempre estoy buscando recursos atractivos. KallpaIA es una mina de oro. Mis estudiantes están más motivados que nunca y su comprensión de los conceptos STEM se ha disparado.",
+    quote: "Como educadora, siempre busco recursos que empoderen a mis estudiantes. KallpaIA es una mina de oro para inspirar a las jóvenes a seguir carreras en STEAM. ¡Mis alumnas están más motivadas que nunca!",
     name: 'David L.',
-    title: 'Profesor de Física',
+    title: 'Profesora de Física',
     avatar: 'https://placehold.co/100x100.png',
     aiHint: 'teacher portrait',
   },
   {
-    quote: "Soy una desarrolladora autodidacta y ojalá hubiera tenido esto cuando empecé. La plataforma llena los vacíos que muchos tutoriales omiten, y todo de una manera increíblemente divertida.",
+    quote: "Soy una desarrolladora autodidacta y ojalá hubiera tenido esto cuando empecé. La plataforma no solo enseña, sino que construye una comunidad donde las mujeres en STEAM podemos prosperar juntas.",
     name: 'Maria S.',
     title: 'Ingeniera de Software',
     avatar: 'https://placehold.co/100x100.png',
@@ -61,7 +61,7 @@ export function Testimonials() {
         <div className="text-center max-w-4xl mx-auto">
           <h2 className="font-headline text-4xl font-bold text-primary sm:text-5xl">Voces de Nuestra Comunidad</h2>
           <p className="mt-6 text-lg leading-8 text-gray-300">
-            Descubre lo que nuestros aprendices, educadores y creadores dicen sobre su viaje con KallpaIA.
+            Descubre lo que nuestras aprendices, educadoras y creadoras dicen sobre su viaje con KallpaIA.
           </p>
         </div>
         <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

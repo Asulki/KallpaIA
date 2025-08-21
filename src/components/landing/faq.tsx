@@ -8,19 +8,19 @@ import {
 const faqs = [
   {
     question: '¿Qué es KallpaIA?',
-    answer: 'KallpaIA es una innovadora plataforma en línea dedicada a hacer que la educación en Ciencia, Tecnología, Ingeniería y Matemáticas (STEM) sea emocionante y accesible para estudiantes de todas las edades. Usamos lecciones interactivas, narrativas en pixel art y desafíos gamificados para fomentar el amor por el descubrimiento.',
+    answer: 'KallpaIA es una innovadora plataforma en línea dedicada a hacer que la educación en Ciencia, Tecnología, Ingeniería, Arte y Matemáticas (STEAM) sea emocionante y accesible para todas, especialmente para las mujeres jóvenes. Usamos lecciones interactivas y desafíos gamificados para fomentar el amor por el descubrimiento.',
   },
   {
     question: '¿Para quién es KallpaIA?',
-    answer: '¡Nuestra plataforma está diseñada para cualquier persona con una mente curiosa! Aunque nos enfocamos en estudiantes desde secundaria hasta los primeros años de universidad, nuestro contenido es valioso para aprendices de por vida, educadores que buscan recursos para el aula y padres que desean complementar la educación de sus hijos.',
+    answer: '¡Nuestra plataforma está diseñada para cualquier persona con una mente curiosa! Nuestro objetivo es inspirar a la próxima generación de mujeres líderes en STEAM, desde la secundaria hasta los primeros años de universidad, y también para educadores y padres que buscan recursos innovadores.',
   },
   {
     question: '¿Qué tipo de temas cubren?',
-    answer: 'Cubrimos una amplia gama de campos STEM, incluyendo ciencias de la computación, física, biología, química, principios de ingeniería y matemáticas avanzadas. Nuestro plan de estudios se expande constantemente para incluir los últimos avances y tecnologías.',
+    answer: 'Cubrimos una amplia gama de campos STEAM, incluyendo ciencias de la computación, física, biología, química, principios de ingeniería, arte digital y matemáticas avanzadas. Nuestro plan de estudios se expande constantemente para incluir los últimos avances y tecnologías.',
   },
   {
     question: '¿Tiene algún costo usar KallpaIA?',
-    answer: 'Ofrecemos una mezcla de contenido gratuito y premium. Muchos de nuestros cursos introductorios y recursos están disponibles de forma gratuita para asegurar que todos tengan la oportunidad de comenzar su viaje en STEM. Nuestra suscripción premium desbloquea cursos avanzados, rutas de aprendizaje personalizadas y oportunidades de mentoría uno a uno.',
+    answer: 'Ofrecemos una mezcla de contenido gratuito y premium. Muchos de nuestros cursos introductorios están disponibles de forma gratuita para asegurar que todas tengan la oportunidad de comenzar su viaje en STEAM. Nuestra suscripción premium desbloquea cursos avanzados y rutas de aprendizaje personalizadas.',
   },
   {
     question: '¿Cómo hace KallpaIA que el aprendizaje sea divertido?',

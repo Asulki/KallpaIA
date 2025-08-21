@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'KallpaIA Landing',
-  description: 'El futuro de la educación STEM, hoy.',
+  title: 'KallpaIA - Inspiring Women in STEAM',
+  description: 'El futuro de la educación STEAM para mujeres, hoy.',
 };
 
 export default function RootLayout({

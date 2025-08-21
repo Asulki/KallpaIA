@@ -31,3 +31,11 @@ export const MathIcon = (props: SVGProps<SVGSVGElement>) => (
     <path d="M16 40H48V48H16V40Z" fill="currentColor"/>
   </svg>
 );
+
+export const ArtIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg {...props} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ imageRendering: 'pixelated' }}>
+    <path d="M32 4L12 24L22 28L18 36L32 50L46 36L42 28L52 24L32 4Z" fill="currentColor" />
+    <path d="M32 52V60" stroke="currentColor" strokeWidth="4" />
+    <path d="M24 58H40" stroke="currentColor" strokeWidth="4" />
+  </svg>
+);
