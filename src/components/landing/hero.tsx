@@ -5,7 +5,9 @@ import Image from 'next/image';
 export function Hero() {
   return (
     <section className="relative h-[90vh] min-h-[600px] flex items-center justify-center text-center text-white overflow-hidden">
-      <StellarParticles />
+      <div className="absolute inset-0 z-10">
+        <StellarParticles />
+      </div>
       <div className="absolute inset-0 z-0">
         <Image
           src="https://i.ibb.co/d0PvKQQ6/fondo-final.png"
@@ -17,7 +19,7 @@ export function Hero() {
           priority
         />
       </div>
-      <div className="relative z-10 container mx-auto px-4 flex flex-col items-center">
+      <div className="relative z-20 container mx-auto px-4 flex flex-col items-center">
         <h1 className="font-headline text-4xl md:text-5xl font-bold leading-tight">
           Desbloquea tu Potencial con <br /> <span className="text-primary">KallpaIA</span>
         </h1>
