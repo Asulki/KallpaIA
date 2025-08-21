@@ -7,10 +7,15 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full bg-black/50 backdrop-blur-lg border-b border-neutral-800">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <BotIcon className="w-8 h-8 text-primary" />
-          <span className="font-headline text-2xl font-bold text-white">KallpaIA</span>
-        </Link>
+        <div className="flex items-center gap-4">
+          <Button size="lg" className="font-headline bg-primary text-primary-foreground text-lg rounded-full px-8 py-3 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all hidden sm:flex">
+            Inicia tu Aventura
+          </Button>
+          <Link href="/" className="flex items-center gap-2">
+            <BotIcon className="w-8 h-8 text-primary" />
+            <span className="font-headline text-2xl font-bold text-white">KallpaIA</span>
+          </Link>
+        </div>
         <nav className="hidden md:flex items-center gap-6 text-lg">
           <Link href="#about" className="text-gray-300 hover:text-primary transition-colors">Nosotros</Link>
           <Link href="#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
@@ -29,6 +34,9 @@ export function Header() {
                 <Link href="#about" className="text-gray-300 hover:text-primary transition-colors">Nosotros</Link>
                 <Link href="#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
                 <Link href="#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
+                 <Button size="lg" className="font-headline bg-primary text-primary-foreground text-lg rounded-full px-8 py-3 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all sm:hidden">
+                    Inicia tu Aventura
+                  </Button>
               </nav>
             </SheetContent>
           </Sheet>
