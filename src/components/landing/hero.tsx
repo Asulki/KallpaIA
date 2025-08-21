@@ -1,0 +1,39 @@
+import { Button } from '@/components/ui/button';
+import { StellarParticles } from '@/components/landing/stellar-particles';
+import Image from 'next/image';
+
+export function Hero() {
+  return (
+    <section className="relative h-[90vh] min-h-[600px] flex items-center justify-center text-center text-white overflow-hidden">
+      <StellarParticles />
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="https://placehold.co/1920x1080.png"
+          alt="Pixel art of Machu Picchu"
+          layout="fill"
+          objectFit="cover"
+          className="opacity-20"
+          data-ai-hint="pixel art machu picchu"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+      </div>
+      <div className="relative z-10 container mx-auto px-4 flex flex-col items-center">
+        <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
+          Unlock the Universe with <br /> <span className="text-primary">KallpaIA</span>
+        </h1>
+        <p className="mt-6 max-w-2xl text-lg md:text-xl text-gray-300">
+          Explore the frontiers of science and technology through an epic adventure. Your journey into STEM starts now.
+        </p>
+        <div className="mt-10 flex gap-4">
+          <Button size="lg" className="font-headline bg-primary text-primary-foreground text-lg rounded-full px-8 py-6 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">
+            Begin Your Quest
+          </Button>
+          <Button size="lg" variant="outline" className="font-headline text-lg rounded-full px-8 py-6 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all">
+            Explore Courses
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+}
