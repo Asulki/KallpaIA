@@ -68,7 +68,7 @@ export function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <Card
               key={testimonial.name}
-              className={`bg-white/5 border-white/10 rounded-2xl p-6 transition-all duration-700 ease-out ${
+              className={`bg-transparent border-white/10 rounded-2xl p-6 transition-all duration-700 ease-out ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ transitionDelay: `${index * 150}ms` }}
