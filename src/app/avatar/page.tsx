@@ -168,11 +168,11 @@ export default function AvatarSelectionPage() {
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-black p-4 text-white overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-40">
             <Image
-            src="https://i.ibb.co/0jCLJff/fondo-2.png"
-            alt="Pixel art de Machu Picchu"
+            src="https://i.ibb.co/hFLg8BJk/avatarkar.png"
+            alt="Pixel art de una diosa de la sabiduría en una biblioteca"
             fill
             style={{ objectFit: 'cover' }}
-            data-ai-hint="pixel art machu picchu"
+            data-ai-hint="pixel art goddess library"
             priority
             />
         </div>
