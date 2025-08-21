@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import Link from "next/link";
 import { BotIcon, User, Lock, Mail } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import { Button } from "@/components/ui/button";
 import {
@@ -45,6 +46,7 @@ const formSchema = z.object({
 
 export default function RegisterForm() {
     const { toast } = useToast();
+    const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -59,10 +61,11 @@ export default function RegisterForm() {
         title: "¡Inicio de sesión exitoso!",
         description: `Bienvenido, ${values.nickname}.`,
     });
+    router.push('/dashboard');
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-background light-theme">
+    <div className="flex items-center justify-center min-h-screen gradient-background dashboard-theme">
       <Card className="w-full max-w-4xl bg-white/30 backdrop-blur-lg border border-white/40 text-foreground rounded-2xl shadow-lg overflow-hidden">
         <div className="grid md:grid-cols-2">
             <div className="p-8">
