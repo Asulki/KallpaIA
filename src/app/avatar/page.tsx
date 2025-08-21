@@ -202,7 +202,7 @@ export default function AvatarSelectionPage() {
             size="lg"
             className="font-headline text-lg rounded-full px-10 py-4"
         >
-            Continuar a mi Aventura
+            Continuar con mi Aventura
         </Button>
         </div>
     </div>
