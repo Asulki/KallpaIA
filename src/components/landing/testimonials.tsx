@@ -56,7 +56,7 @@ export function Testimonials() {
   }, []);
 
   return (
-    <section id="testimonials" className="py-20 sm:py-32 bg-white/5" ref={sectionRef}>
+    <section id="testimonials" className="py-20 sm:py-32" ref={sectionRef}>
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
           <h2 className="font-headline text-4xl font-bold text-primary sm:text-5xl">Voces de Nuestra Comunidad</h2>
