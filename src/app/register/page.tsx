@@ -48,8 +48,8 @@ export default function RegisterForm() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
     toast({
-        title: "¡Inicio de sesión exitoso!",
-        description: `Bienvenido, ${values.nickname}.`,
+        title: "¡Registro exitoso!",
+        description: `¡Bienvenida, ${values.nickname}! Comienza tu aventura.`,
     });
     router.push('/avatar');
   }
@@ -63,7 +63,7 @@ export default function RegisterForm() {
                     <span className="font-headline text-3xl font-bold">KallpaIA</span>
                 </div>
               <CardHeader className="text-center p-0 mb-6">
-                <CardTitle className="font-headline text-2xl">Inicia Sesión</CardTitle>
+                <CardTitle className="font-headline text-2xl">Crea tu Cuenta</CardTitle>
               </CardHeader>
               <CardContent className="p-0">
                 <Form {...form}>
@@ -121,7 +121,7 @@ export default function RegisterForm() {
                         name="profile"
                         render={({ field }) => (
                         <FormItem className="space-y-3">
-                            <FormLabel>Soy un...</FormLabel>
+                            <FormLabel>Soy...</FormLabel>
                             <FormControl>
                             <RadioGroup
                                 onValueChange={field.onChange}
@@ -148,7 +148,7 @@ export default function RegisterForm() {
                     />
                     <div className="space-y-2 pt-2">
                         <Button type="submit" className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">
-                            Iniciar Sesión
+                            Crear Cuenta
                         </Button>
                     </div>
                     </form>
