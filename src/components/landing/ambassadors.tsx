@@ -39,7 +39,7 @@ export function Ambassadors() {
         <div className="text-center max-w-4xl mx-auto">
           <h2 className="font-headline text-4xl font-bold text-primary sm:text-5xl">Nuestros Embajadores Atemporales</h2>
           <p className="mt-6 text-lg leading-8 text-gray-300">
-            Nos apoyamos en hombros de gigantes. Estos pioneros históricos de STEM encarnan el espíritu de innovación y curiosidad que nos esforzamos por inculcar en nuestra comunidad.
+            Nos apoyamos en hombros de gigantes. Estos pioneros históricos de STEAM encarnan el espíritu de innovación y curiosidad que nos esforzamos por inculcar en nuestra comunidad.
           </p>
         </div>
         <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">

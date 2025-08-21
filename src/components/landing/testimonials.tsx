@@ -59,9 +59,9 @@ export function Testimonials() {
     <section id="testimonials" className="py-20 sm:py-32 bg-white/5" ref={sectionRef}>
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
-          <h2 className="font-headline text-4xl font-bold text-primary sm:text-5xl">Voces de Nuestra Comunidad</h2>
+          <h2 className="font-headline text-4xl font-bold text-primary sm:text-5xl">Nuestros Embajadores Atemporales</h2>
           <p className="mt-6 text-lg leading-8 text-gray-300">
-            Descubre lo que nuestras aprendices, educadoras y creadoras dicen sobre su viaje con KallpaIA.
+            Descubre lo que nuestras aprendices, educadoras y embajadoras dicen sobre su viaje con KallpaIA.
           </p>
         </div>
         <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
