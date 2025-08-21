@@ -10,8 +10,8 @@ export function Hero() {
         <Image
           src="https://i.ibb.co/d0PvKQQ6/fondo-final.png"
           alt="Pixel art de Machu Picchu"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: 'cover' }}
           className="opacity-100"
           data-ai-hint="pixel art machu picchu"
           priority
