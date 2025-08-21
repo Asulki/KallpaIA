@@ -8,7 +8,7 @@ export function Hero() {
       <StellarParticles />
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://placehold.co/1920x1080.png"
+          src="https://i.ibb.co/d0PvKQQ6/fondo-final.png"
           alt="Pixel art of Machu Picchu"
           layout="fill"
           objectFit="cover"
