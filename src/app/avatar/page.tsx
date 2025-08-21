@@ -182,14 +182,14 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
                 />
             </div>
             <div className="relative z-10 text-center">
-                 <h3 className="font-headline text-2xl font-bold text-white" style={{ transform: 'translateZ(20px)'}}>{avatar.name}</h3>
-                 <p className="text-sm text-gray-400 -mt-1" style={{ transform: 'translateZ(20px)'}}>{avatar.mentor}</p>
+                 <h3 className="font-headline text-xl md:text-2xl font-bold text-white" style={{ transform: 'translateZ(20px)'}}>{avatar.name}</h3>
+                 <p className="text-xs md:text-sm text-gray-400 -mt-1" style={{ transform: 'translateZ(20px)'}}>{avatar.mentor}</p>
             </div>
             <div className="relative z-10 mt-4 space-y-2 text-sm">
                 {avatar.moves.map(move => (
                     <div key={move.name} className="bg-black/40 p-2 rounded-md text-white flex justify-between items-center text-xs">
                         <span className="font-semibold">{move.name}</span>
-                        <span className={cn('font-bold px-2 py-0.5 rounded-full', avatar.bgColor)}>{move.type} {move.value}</span>
+                        <span className={cn('font-bold px-2 py-0.5 rounded-full text-xs', avatar.bgColor)}>{move.type} {move.value}</span>
                     </div>
                 ))}
             </div>
@@ -257,3 +257,5 @@ export default function AvatarSelectionPage() {
     </div>
   );
 }
+
+    
