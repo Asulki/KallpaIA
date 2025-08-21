@@ -162,10 +162,7 @@ export default function RegisterForm() {
                     </form>
                 </Form>
                  <div className="relative my-6">
-                    <Separator className="absolute top-1/2 -translate-y-1/2 w-full bg-white/30" />
-                    <div className="relative flex justify-center text-xs uppercase">
-                        <span className="bg-card px-2 text-muted-foreground" style={{backgroundColor: 'hsl(var(--card))'}}>O continuar con</span>
-                    </div>
+                    <Separator className="w-full bg-white/30" />
                 </div>
                 <Button variant="outline" className="w-full font-headline text-lg rounded-full py-3 bg-white/80 hover:bg-white text-gray-800 transition-all border-white/50 shadow-md">
                     <GoogleIcon />
