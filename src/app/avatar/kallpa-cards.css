@@ -68,8 +68,8 @@ body{
 }
 
 @keyframes holo{
-  from{ transform: rotate(0deg) translateY(0); }
-  to  { transform: rotate(360deg) translateY(0); }
+  from{ transform: rotate(0deg); }
+  to  { transform: rotate(360deg); }
 }
 
 /* Hover / enfoque */
