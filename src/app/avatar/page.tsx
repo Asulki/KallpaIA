@@ -6,18 +6,18 @@ import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { StellarParticles } from '@/components/landing/stellar-particles';
-import './kallpa-cards.css';
+import './avatar-cards.css';
 
 const avatars = [
     {
     id: 1,
     name: 'Vicuña',
     mentor: 'Ada Lovelace',
-    type: 'Matemáticas',
+    type: 'Matemática',
     theme: 'math',
     icon: '∑',
     src: 'https://i.ibb.co/jZ6LNhR/vicuna-matematica.png',
-    alt: 'Vicuña, avatar de Matemáticas',
+    alt: 'Vicuña — avatar de Matemáticas',
     hint: 'mathematician vicuña inspired by Ada Lovelace pixel art',
     moves: [
       { name: 'Tejido Lógico', value: 40 },
@@ -32,7 +32,7 @@ const avatars = [
     theme: 'science',
     icon: '🔭',
     src: 'https://i.ibb.co/V3F7499/vicuna-bot.png', // Placeholder
-    alt: 'Cóndor, avatar de Ciencia',
+    alt: 'Cóndor — avatar de Ciencia',
     hint: 'knowledge condor inspired by Marie Curie pixel art',
     moves: [
       { name: 'Alas de la Curie', value: 40 },
@@ -47,7 +47,7 @@ const avatars = [
     theme: 'eng',
     icon: '🔧',
     src: 'https://i.ibb.co/V3F7499/vicuna-bot.png', // Placeholder
-    alt: 'Jaguar, avatar de Ingeniería',
+    alt: 'Jaguar — avatar de Ingeniería',
     hint: 'engineer jaguar inspired by Katherine Johnson pixel art',
     moves: [
       { name: 'Circuito Salvaje', value: 50 },
@@ -62,7 +62,7 @@ const avatars = [
     theme: 'art',
     icon: '🎨',
     src: 'https://i.ibb.co/V3F7499/vicuna-bot.png', // Placeholder
-    alt: 'Colibrí, avatar de Arte',
+    alt: 'Colibrí — avatar de Arte',
     hint: 'creative hummingbird inspired by Hypatia pixel art',
     moves: [
       { name: 'Vuelo Inspirador', value: 40 },
@@ -71,17 +71,17 @@ const avatars = [
   },
   {
     id: 5,
-    name: 'Inti-Bot',
-    mentor: 'Caroline Herschel',
+    name: 'Zorro',
+    mentor: 'Hedy Lamarr',
     type: 'Tecnología',
     theme: 'tech',
     icon: '💻',
     src: 'https://i.ibb.co/V3F7499/vicuna-bot.png', // Placeholder
-    alt: 'Inti-Bot, avatar de Tecnología',
-    hint: 'astronomer robot inspired by Caroline Herschel pixel art',
+    alt: 'Zorro — avatar de Tecnología',
+    hint: 'tech fox inspired by Hedy Lamarr pixel art',
     moves: [
-      { name: 'Mapa de Estrellas', value: 35 },
-      { name: 'Órbita Segura', value: 30 },
+        { name: 'Hackeo Ágil', value: 45 },
+        { name: 'Señal Secreta', value: 35 },
     ],
   },
 ];
@@ -103,9 +103,11 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
         <Image src={avatar.src} alt={avatar.alt} width={300} height={400} data-ai-hint={avatar.hint} />
       </div>
 
-      <div className="kcard__name">{avatar.name}</div>
-      <div className="kcard__mentor">{avatar.mentor}</div>
-
+      <div className="kcard__title">
+        <div className="kcard__name">{avatar.name}</div>
+        <div className="kcard__mentor">{avatar.mentor}</div>
+      </div>
+      
       <footer className="kcard__footer">
         <div className="kcard__moves">
           {avatar.moves.map(move => (
