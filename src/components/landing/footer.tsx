@@ -1,7 +1,15 @@
+"use client";
+
 import { BotIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
+
 
   return (
     <footer className="bg-neutral-900 border-t border-neutral-800 py-8">
