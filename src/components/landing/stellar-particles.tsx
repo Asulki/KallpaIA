@@ -37,7 +37,7 @@ export function StellarParticles() {
 
     const particlesMaterial = new THREE.PointsMaterial({
       size: 0.01,
-      color: '#FFD740',
+      color: '#FFD740', // Color dorado
       blending: THREE.AdditiveBlending,
     });
 
@@ -68,9 +68,11 @@ export function StellarParticles() {
 
     // Resize handler
     const handleResize = () => {
-      camera.aspect = currentMount.clientWidth / currentMount.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
+      if (currentMount) {
+        camera.aspect = currentMount.clientWidth / currentMount.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
+      }
     };
     window.addEventListener('resize', handleResize);
 
