@@ -20,7 +20,6 @@ export const TechIcon = (props: SVGProps<SVGSVGElement>) => (
 export const EngineeringIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg {...props} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ imageRendering: 'pixelated' }}>
     <path fillRule="evenodd" clipRule="evenodd" d="M32 4L38 10H34V18L44 24V28H20V24L30 18V10H26L32 4ZM44 34V42L36 46V54L42 60H22L28 54V46L20 42V34H44ZM32 32C28.6863 32 26 34.6863 26 38C26 41.3137 28.6863 44 32 44C35.3137 44 38 41.3137 38 38C38 34.6863 35.3137 32 32 32Z" fill="currentColor"/>
-  </g>
   </svg>
 );
 
