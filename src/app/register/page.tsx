@@ -66,8 +66,7 @@ export default function RegisterForm() {
 
   return (
     <div className="flex items-center justify-center min-h-screen gradient-background dashboard-theme">
-      <Card className="w-full max-w-4xl bg-white/30 backdrop-blur-lg border border-white/40 text-foreground rounded-2xl shadow-lg overflow-hidden">
-        <div className="grid md:grid-cols-2">
+      <Card className="w-full max-w-md bg-white/30 backdrop-blur-lg border border-white/40 text-foreground rounded-2xl shadow-lg overflow-hidden">
             <div className="p-8">
                  <div className="flex justify-center items-center gap-2 mb-4">
                     <BotIcon className="w-10 h-10 text-primary" />
@@ -162,9 +161,6 @@ export default function RegisterForm() {
                     </Button>
                     </form>
                 </Form>
-              </CardContent>
-            </div>
-            <div className="bg-black/10 p-8 flex flex-col justify-center border-l border-white/20">
                  <div className="relative my-6">
                     <Separator className="absolute top-1/2 -translate-y-1/2 w-full bg-white/30" />
                     <div className="relative flex justify-center text-xs uppercase">
@@ -181,8 +177,8 @@ export default function RegisterForm() {
                         Regístrate
                     </Link>
                 </div>
+              </CardContent>
             </div>
-        </div>
       </Card>
     </div>
   );
