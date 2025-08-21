@@ -37,7 +37,7 @@ export function StellarParticles() {
 
     const particlesMaterial = new THREE.PointsMaterial({
       size: 0.01,
-      color: '#FFD740', // Color dorado
+      color: '#AEE6FF', // Pastel Blue/Celeste
       blending: THREE.AdditiveBlending,
     });
 
