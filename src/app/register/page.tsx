@@ -28,9 +28,7 @@ const formSchema = z.object({
     message: "Por favor, introduce una dirección de correo electrónico válida.",
   }),
   password: z.string(),
-  profile: z.enum(["student", "teacher"], {
-    required_error: "Debes seleccionar un tipo de perfil.",
-  }),
+  profile: z.enum(["student", "teacher"]).optional(),
 });
 
 export default function RegisterForm() {
@@ -56,7 +54,7 @@ export default function RegisterForm() {
 
   return (
     <div className="flex items-center justify-center min-h-screen gradient-background dashboard-theme">
-      <Card className="w-full max-w-md bg-white/30 backdrop-blur-lg border border-white/40 text-foreground rounded-2xl shadow-lg overflow-hidden">
+      <Card className="w-full max-w-md bg-white/30 backdrop-blur-lg border-white/40 text-foreground rounded-2xl shadow-lg overflow-hidden">
             <div className="p-8">
                  <div className="flex justify-center items-center gap-2 mb-4">
                     <BotIcon className="w-10 h-10 text-primary" />
@@ -146,11 +144,9 @@ export default function RegisterForm() {
                         </FormItem>
                         )}
                     />
-                    <div className="space-y-2 pt-2">
-                        <Button type="submit" className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">
+                     <Button type="submit" className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all !mt-6">
                             Crear Cuenta
                         </Button>
-                    </div>
                     </form>
                 </Form>
               </CardContent>
