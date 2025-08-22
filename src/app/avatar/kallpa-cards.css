@@ -9,7 +9,6 @@
   --chip-eng: #FFE08C; /* Amarillo Suave */
   --chip-art: #FFB3C6; /* Rosa Coral */
   --chip-tech: #AEE6FF; /* Celeste */
-  --hp-badge-bg: #2C3240;
 
   --text-strong: #FFFFFF;
   --text-soft: #D9DCE2;
@@ -92,11 +91,11 @@
   z-index: 2;
 }
 
-/* ===== Header (chip + HP) ===== */
+/* ===== Header (chip) ===== */
 .kcard__header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: .5rem;
   margin-bottom: .35rem;
   height: 36px;
@@ -113,24 +112,6 @@
   color: #0B0F16;
   background: #fff;
   box-shadow: inset 0 0 0 1px #0002, 0 2px 8px rgba(0, 0, 0, .2);
-}
-
-.kcard__hp {
-  display: inline-flex;
-  align-items: center;
-  gap: .35rem;
-  padding: 4px 10px;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 12px;
-  color: #DCE3EE;
-  background: var(--hp-badge-bg);
-  box-shadow: inset 0 0 0 1px #0003;
-}
-
-.kcard__hp b {
-  font-weight: 900;
-  letter-spacing: .5px;
 }
 
 /* Variantes por planeta (color del chip) */
@@ -210,7 +191,7 @@
     --card-w: clamp(120px, 25vw, 140px);
     --card-r: 16px;
   }
-   .kcard__chip, .kcard__hp { font-size: 11px; padding: 3px 8px; }
+   .kcard__chip { font-size: 11px; padding: 3px 8px; }
    .kcard__name { font-size: 13px; }
    .kcard__mentor { font-size: 10px; }
    .kcard { padding: 10px; }

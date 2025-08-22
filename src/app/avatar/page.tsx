@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { StellarParticles } from '@/components/landing/stellar-particles';
-import { Signal, Star, Palette, Beaker, Wrench, Sigma, Cpu } from 'lucide-react';
+import { Star, Palette, Beaker, Wrench, Sigma, Cpu } from 'lucide-react';
 import './kallpa-cards.css';
 
 const avatars = [
@@ -82,7 +82,6 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
             {avatar.icon}
             {avatar.type}
         </span>
-        <span className="kcard__hp">100/100 <b>HP</b></span>
       </header>
 
       <div className="kcard__art">
