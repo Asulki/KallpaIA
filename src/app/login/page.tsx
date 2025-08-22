@@ -42,11 +42,10 @@ export default function LoginForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Mantén tu lógica existente. Ejemplo:
     router.push("/avatar");
     toast({
-      title: "¡Registro exitoso!",
-      description: `¡Bienvenida, ${values.nickname}! Comienza tu aventura.`,
+      title: "¡Inicio de sesión exitoso!",
+      description: `¡Bienvenida de vuelta, ${values.nickname}!`,
     });
   }
 
@@ -68,7 +67,6 @@ export default function LoginForm() {
           <CardContent className="p-0">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                {/* Label del formulario para el campo Nickname */}
                 <FormField
                   control={form.control}
                   name="nickname"
@@ -91,7 +89,6 @@ export default function LoginForm() {
                   )}
                 />
 
-                {/* Label del formulario para el campo Contraseña */}
                 <FormField
                   control={form.control}
                   name="password"
@@ -127,7 +124,6 @@ export default function LoginForm() {
                   )}
                 />
 
-                {/* Botones de acción */}
                 <div className="space-y-3 pt-2">
                   <Button
                     type="submit"
@@ -145,7 +141,6 @@ export default function LoginForm() {
                     Olvidé mi contraseña
                   </Button>
 
-                  {/* Opcional: si quieres mostrar la opción de crear cuenta sin tocar textos clave */}
                   <p className="text-center text-xs text-muted-foreground">
                     ¿No tienes cuenta?{" "}
                     <Link href="/register" className="underline underline-offset-2">

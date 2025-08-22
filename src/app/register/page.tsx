@@ -91,14 +91,11 @@ const formSchema = z
 // Chequeo de unicidad (simula tu endpoint). Ajusta la URL a tu backend.
 async function checkNicknameAvailable(nickname: string): Promise<boolean> {
   try {
-    const res = await fetch(`/api/check-nickname?nickname=${encodeURIComponent(nickname)}`, {
-      method: "GET",
-      cache: "no-store",
-    });
-    if (!res.ok) return true; // si falla, no bloqueamos el registro aquí
-    const data = await res.json();
-    // Espera { available: boolean }
-    return !!data.available;
+    // Simulación, en un caso real esto llamaría a tu API.
+    // const res = await fetch(`/api/check-nickname?nickname=${encodeURIComponent(nickname)}`);
+    // const data = await res.json();
+    // return !!data.available;
+    return !['wawita', 'kallpa', 'admin'].includes(nickname.toLowerCase());
   } catch {
     return true; // ante error de red, no bloquear
   }
@@ -155,27 +152,18 @@ export default function RegisterForm() {
       });
       return;
     }
-
-    // TODO: Conectar a tu backend real de registro:
-    // const resp = await fetch("/api/register", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(values),
-    // });
-    // if (!resp.ok) { manejar errores específicos aquí; return; }
-
+    
     toast({
       title: "¡Registro exitoso!",
-      description: `¡Bienvenida, ${values.nickname}!`,
+      description: `¡Bienvenida, ${values.nickname}! Comienza tu aventura.`,
     });
     router.push("/avatar");
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen gradient-background px-4">
+    <div className="flex items-center justify-center min-h-screen gradient-background px-4 py-8">
       <Card className="w-full max-w-md bg-white/30 backdrop-blur-lg border-white/40 text-foreground rounded-2xl shadow-lg overflow-hidden">
         <div className="p-8">
-          {/* Branding */}
           <div className="flex justify-center items-center gap-2 mb-4">
             <BotIcon className="w-10 h-10 text-primary" />
             <span className="font-headline text-3xl font-bold">KallpaIA</span>
@@ -191,7 +179,6 @@ export default function RegisterForm() {
           <CardContent className="p-0">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                {/* Nickname */}
                 <FormField
                   control={form.control}
                   name="nickname"
@@ -221,7 +208,6 @@ export default function RegisterForm() {
                   )}
                 />
 
-                {/* Correo electrónico (sin pegar) */}
                 <FormField
                   control={form.control}
                   name="email"
@@ -247,7 +233,6 @@ export default function RegisterForm() {
                   )}
                 />
 
-                {/* Confirmar correo (sin pegar) */}
                 <FormField
                   control={form.control}
                   name="confirmEmail"
@@ -273,7 +258,6 @@ export default function RegisterForm() {
                   )}
                 />
 
-                {/* Edad (desplegable 12–17) */}
                 <FormField
                   control={form.control}
                   name="age"
@@ -302,7 +286,6 @@ export default function RegisterForm() {
                   )}
                 />
 
-                {/* Contraseña (sin pegar) */}
                 <FormField
                   control={form.control}
                   name="password"
@@ -342,7 +325,6 @@ export default function RegisterForm() {
                   )}
                 />
 
-                {/* Confirmar contraseña (sin pegar) */}
                 <FormField
                   control={form.control}
                   name="confirmPassword"
@@ -379,7 +361,6 @@ export default function RegisterForm() {
                   )}
                 />
 
-                {/* CTA registro */}
                 <Button
                   type="submit"
                   className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all !mt-4"
@@ -387,7 +368,6 @@ export default function RegisterForm() {
                   Crear cuenta
                 </Button>
 
-                {/* Link a login */}
                 <p className="text-center text-xs text-muted-foreground mt-2">
                   ¿Ya tienes cuenta?{" "}
                   <Link href="/login" className="underline underline-offset-2">

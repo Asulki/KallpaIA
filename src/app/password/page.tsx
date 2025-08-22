@@ -71,14 +71,14 @@ export default function ForgotPasswordPage() {
   });
 
   async function onSubmitEmail(values: z.infer<typeof emailSchema>) {
-    // TODO: Conectar a tu backend real:
-    // await fetch("/api/auth/forgot-password", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(values) })
+    // Simulación, en un caso real esto llamaría a tu API.
+    console.log("Solicitando reseteo para:", values.email);
     toast({
       title: "Revisa tu correo",
       description: "Te enviamos un enlace para restablecer tu contraseña.",
     });
-    // Opcional: redirigir a una pantalla de “verifica tu correo”
-    // router.push("/check-your-email");
+    // En un caso real, podrías redirigir a una página de "Verifica tu correo"
+    // router.push(`/password?token=fake-token-for-testing`); // Para pruebas
   }
 
   // ========== PASO 2: Nueva contraseña ==========
@@ -92,12 +92,8 @@ export default function ForgotPasswordPage() {
   });
 
   async function onSubmitReset(values: z.infer<typeof resetSchema>) {
-    // TODO: Conectar a tu backend real:
-    // await fetch(`/api/auth/reset-password?token=${encodeURIComponent(token || "")}`, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ password: values.password }),
-    // })
+    // Simulación, en un caso real esto llamaría a tu API.
+    console.log("Contraseña actualizada para el token:", token);
     toast({
       title: "Contraseña actualizada",
       description: "Ya puedes iniciar sesión con tu nueva contraseña.",
@@ -110,13 +106,11 @@ export default function ForgotPasswordPage() {
     <div className="flex items-center justify-center min-h-screen gradient-background px-4">
       <Card className="w-full max-w-md bg-white/30 backdrop-blur-lg border-white/40 text-foreground rounded-2xl shadow-lg overflow-hidden">
         <div className="p-8">
-          {/* Marca */}
           <div className="flex justify-center items-center gap-2 mb-4">
             <BotIcon className="w-10 h-10 text-primary" />
             <span className="font-headline text-3xl font-bold">KallpaIA</span>
           </div>
 
-          {/* Si NO hay token -> Paso 1 (correo). Si hay token -> Paso 2 (nueva contraseña) */}
           {!token ? (
             <>
               <CardHeader className="text-center p-0 mb-6">
@@ -156,12 +150,12 @@ export default function ForgotPasswordPage() {
 
                     <Button
                       type="submit"
-                      className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all !mt-2"
+                      className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all !mt-6"
                     >
                       Enviar enlace
                     </Button>
 
-                    <p className="text-center text-xs text-muted-foreground mt-2">
+                    <p className="text-center text-xs text-muted-foreground !mt-4">
                       ¿Ya la recordaste?{" "}
                       <Link href="/login" className="underline underline-offset-2">
                         Inicia sesión
@@ -183,7 +177,6 @@ export default function ForgotPasswordPage() {
               <CardContent className="p-0">
                 <Form {...resetForm}>
                   <form onSubmit={resetForm.handleSubmit(onSubmitReset)} className="space-y-4">
-                    {/* Nueva contraseña */}
                     <FormField
                       control={resetForm.control}
                       name="password"
@@ -223,7 +216,6 @@ export default function ForgotPasswordPage() {
                       )}
                     />
 
-                    {/* Confirmar contraseña */}
                     <FormField
                       control={resetForm.control}
                       name="confirmPassword"
@@ -262,12 +254,12 @@ export default function ForgotPasswordPage() {
 
                     <Button
                       type="submit"
-                      className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all !mt-2"
+                      className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all !mt-6"
                     >
                       Restablecer contraseña
                     </Button>
 
-                    <p className="text-center text-xs text-muted-foreground mt-2">
+                    <p className="text-center text-xs text-muted-foreground !mt-4">
                       ¿Recordaste tu contraseña?{" "}
                       <Link href="/login" className="underline underline-offset-2">Inicia sesión</Link>
                     </p>
