@@ -29,7 +29,7 @@ export type ChatOutput = z.infer<typeof ChatOutputSchema>;
 
 // Initialize the Poe client
 const poeClient = new OpenAI({
-  apiKey: process.env.POE_API_KEY,
+  apiKey: process.env.POE_API_KEY || "YOUR_POE_API_KEY",
   baseURL: 'https://api.poe.com/v1',
 });
 
