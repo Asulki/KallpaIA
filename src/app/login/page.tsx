@@ -50,8 +50,8 @@ export default function RegisterForm() {
     });
   }
 
-  function onForgotPassword() {
-    router.push("/forgot-password");
+  function onPassword() {
+    router.push("/password");
   }
 
   return (
@@ -140,7 +140,7 @@ export default function RegisterForm() {
                     type="button"
                     variant="outline"
                     className="w-full font-headline text-lg rounded-full py-3"
-                    onClick={onForgotPassword}
+                    onClick={onPassword}
                   >
                     Olvidé mi contraseña
                   </Button>

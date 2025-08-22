@@ -40,6 +40,7 @@
     --input: 220 20% 25%;
     --ring: 45 100% 60%; /* Vibrant Gold for rings */
     --radius: 2rem; /* Rounded corners */
+    --space: #0B0F19;
   }
 
   .dashboard-theme {
@@ -83,4 +84,63 @@
   .transform-style-preserve-3d {
       transform-style: preserve-3d;
   }
+}
+
+/* contenedor del fondo */
+.bg-space{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background: radial-gradient(1200px circle at 70% 85%, rgba(124,58,237,.12), transparent 60%), var(--space);
+  overflow:hidden;
+}
+
+/* estrellas: 3 capas con parallax y twinkle */
+.stars{ position:absolute; inset:0; opacity:.7;
+  background-repeat:repeat;
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,.9) 40%, transparent 41%),
+    radial-gradient(1px 1px at 50px 120px, rgba(255,255,255,.7) 40%, transparent 41%),
+    radial-gradient(1.5px 1.5px at 90px 80px, rgba(255,255,255,.8) 40%, transparent 41%),
+    radial-gradient(1px 1px at 130px 10px, rgba(255,255,255,.6) 40%, transparent 41%);
+  background-size:200px 200px;
+  animation: drift 140s linear infinite, twinkle 3.8s ease-in-out infinite alternate;
+}
+.stars.layer2{ background-size:300px 300px; opacity:.5; animation-duration:220s, 4.8s; }
+.stars.layer3{ background-size:450px 450px; opacity:.35; animation-duration:320s, 6.2s; }
+
+@keyframes drift{
+  from{ background-position:0 0,0 0,0 0,0 0; }
+  to  { background-position:-1000px -600px,-800px -500px,-1200px -900px,-600px -700px; }
+}
+@keyframes twinkle{ 0%{filter:brightness(.8)} 50%{filter:brightness(1.25)} 100%{filter:brightness(1)} }
+
+/* halo respirando */
+.halo{
+  position:absolute; left:50%; top:55%; width:1200px; height:1200px; transform:translate(-50%,-50%);
+  background: radial-gradient(closest-side, rgba(124,58,237,.15), rgba(59,130,246,.06), transparent 65%);
+  animation: breathe 16s ease-in-out infinite;
+}
+@keyframes breathe{ 0%,100%{transform:translate(-50%,-50%) scale(1)} 50%{transform:translate(-50%,-50%) scale(1.08)} }
+
+/* constelaciones */
+.constellation{ position:absolute; inset:0; }
+.constellation .node{
+  position:absolute; left:var(--x); top:var(--y); width:6px; height:6px; border-radius:50%;
+  background: radial-gradient(circle, #fff, rgba(255,255,255,.4) 40%, transparent 60%);
+  box-shadow:0 0 12px var(--c), 0 0 24px color-mix(in oklab, var(--c) 60%, transparent);
+  animation: glow 4.5s ease-in-out infinite;
+}
+@keyframes glow{
+  0%,100%{opacity:.9; box-shadow:0 0 8px var(--c), 0 0 20px var(--c);}
+  50%    {opacity:1;  box-shadow:0 0 14px var(--c), 0 0 36px var(--c);}
+}
+.constellation .link{
+  position:absolute; left:var(--x); top:var(--y); height:2px; width:var(--len);
+  transform-origin:left center; transform:rotate(var(--rot));
+  background: linear-gradient(90deg, color-mix(in oklab, var(--c) 30%, transparent), var(--c));
+  opacity:.75; filter:drop-shadow(0 0 6px var(--c));
+}
+
+/* accesibilidad */
+@media (prefers-reduced-motion:reduce){
+  .stars,.halo,.constellation .node{ animation:none }
 }

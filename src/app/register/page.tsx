@@ -29,26 +29,80 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 
-// Validación Zod
+// ---------- Políticas de seguridad ----------
+const nicknameSchema = z
+  .string()
+  .min(4, { message: "El apodo debe tener al menos 4 caracteres." })
+  .max(20, { message: "Máximo 20 caracteres." })
+  .regex(/^[A-Za-z0-9_]+$/, {
+    message: "Solo letras, números y guion bajo (_), sin espacios.",
+  });
+
 const passwordSchema = z
   .string()
-  .min(8, { message: "Mínimo 8 caracteres." })
-  .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, {
-    message: "Usa letras y números.",
-  });
+  .min(10, { message: "Mínimo 10 caracteres." })
+  .regex(/[a-z]/, { message: "Incluye al menos una letra minúscula." })
+  .regex(/[A-Z]/, { message: "Incluye al menos una letra mayúscula." })
+  .regex(/\d/, { message: "Incluye al menos un número." })
+  .regex(/[^A-Za-z0-9]/, { message: "Incluye al menos un carácter especial." })
+  .refine((v) => !/\s/.test(v), { message: "La contraseña no puede contener espacios." });
 
 const formSchema = z
   .object({
-    nickname: z.string().min(2, { message: "El apodo debe tener al menos 2 caracteres." }),
+    nickname: nicknameSchema,
     email: z.string().email({ message: "Correo electrónico inválido." }),
-    age: z.enum(["12", "13", "14", "15", "16", "17"], { required_error: "Selecciona tu edad." }),
+    confirmEmail: z.string().email({ message: "Correo electrónico inválido." }),
+    age: z.enum(["12", "13", "14", "15", "16", "17"], {
+      required_error: "Selecciona tu edad.",
+    }),
     password: passwordSchema,
     confirmPassword: z.string(),
   })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Las contraseñas no coinciden.",
-    path: ["confirmPassword"],
+  .refine((data) => data.email === data.confirmEmail, {
+    message: "Los correos no coinciden.",
+    path: ["confirmEmail"],
+  })
+  .superRefine((data, ctx) => {
+    const local = data.email.split("@")[0]?.toLowerCase?.() ?? "";
+    const pw = data.password.toLowerCase();
+    if (pw.includes(data.nickname.toLowerCase())) {
+      ctx.addIssue({
+        path: ["password"],
+        code: z.ZodIssueCode.custom,
+        message: "La contraseña no debe contener tu apodo.",
+      });
+    }
+    if (local && pw.includes(local)) {
+      ctx.addIssue({
+        path: ["password"],
+        code: z.ZodIssueCode.custom,
+        message: "La contraseña no debe contener tu correo.",
+      });
+    }
+    if (data.password !== data.confirmPassword) {
+      ctx.addIssue({
+        path: ["confirmPassword"],
+        code: z.ZodIssueCode.custom,
+        message: "Las contraseñas no coinciden.",
+      });
+    }
   });
+
+// Chequeo de unicidad (simula tu endpoint). Ajusta la URL a tu backend.
+async function checkNicknameAvailable(nickname: string): Promise<boolean> {
+  try {
+    const res = await fetch(`/api/check-nickname?nickname=${encodeURIComponent(nickname)}`, {
+      method: "GET",
+      cache: "no-store",
+    });
+    if (!res.ok) return true; // si falla, no bloqueamos el registro aquí
+    const data = await res.json();
+    // Espera { available: boolean }
+    return !!data.available;
+  } catch {
+    return true; // ante error de red, no bloquear
+  }
+}
 
 export default function RegisterForm() {
   const { toast } = useToast();
@@ -56,12 +110,14 @@ export default function RegisterForm() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [checkingNick, setCheckingNick] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       nickname: "",
       email: "",
+      confirmEmail: "",
       age: undefined,
       password: "",
       confirmPassword: "",
@@ -69,21 +125,51 @@ export default function RegisterForm() {
     mode: "onTouched",
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // TODO: Conectar a tu backend real:
-    // await fetch("/api/register", { method: "POST", body: JSON.stringify(values) })
+  // Bloqueo de pegado para Email/ConfirmEmail y Password/ConfirmPassword
+  const blockPasteHandlers = {
+    onPaste: (e: React.ClipboardEvent<HTMLInputElement>) => e.preventDefault(),
+    onDrop: (e: React.DragEvent<HTMLInputElement>) => e.preventDefault(),
+  };
+
+  // Verifica unicidad en blur
+  async function validateNicknameUnique(nick: string) {
+    if (!nick) return;
+    setCheckingNick(true);
+    const available = await checkNicknameAvailable(nick);
+    setCheckingNick(false);
+    if (!available) {
+      form.setError("nickname", {
+        type: "manual",
+        message: "Ese apodo ya está en uso. Elige otro.",
+      });
+    }
+  }
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    // Verificar unicidad ANTES de enviar
+    const available = await checkNicknameAvailable(values.nickname);
+    if (!available) {
+      form.setError("nickname", {
+        type: "manual",
+        message: "Ese apodo ya está en uso. Elige otro.",
+      });
+      return;
+    }
+
+    // TODO: Conectar a tu backend real de registro:
+    // const resp = await fetch("/api/register", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(values),
+    // });
+    // if (!resp.ok) { manejar errores específicos aquí; return; }
+
     toast({
       title: "¡Registro exitoso!",
       description: `¡Bienvenida, ${values.nickname}!`,
     });
     router.push("/avatar");
   }
-
-  // Bloqueo de pegado para Email y Nueva contraseña
-  const blockPasteHandlers = {
-    onPaste: (e: React.ClipboardEvent<HTMLInputElement>) => e.preventDefault(),
-    onDrop: (e: React.DragEvent<HTMLInputElement>) => e.preventDefault(),
-  };
 
   return (
     <div className="flex items-center justify-center min-h-screen gradient-background dashboard-theme px-4">
@@ -120,10 +206,17 @@ export default function RegisterForm() {
                             placeholder="Tu apodo"
                             autoComplete="username"
                             {...field}
+                            onBlur={async (e) => {
+                              field.onBlur();
+                              await validateNicknameUnique(e.target.value.trim());
+                            }}
                           />
                         </div>
                       </FormControl>
                       <FormMessage />
+                      {checkingNick && (
+                        <p className="text-xs text-muted-foreground">Verificando disponibilidad…</p>
+                      )}
                     </FormItem>
                   )}
                 />
@@ -143,6 +236,32 @@ export default function RegisterForm() {
                             type="email"
                             placeholder="tucorreo@ejemplo.com"
                             autoComplete="email"
+                            inputMode="email"
+                            {...blockPasteHandlers}
+                            {...field}
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Confirmar correo (sin pegar) */}
+                <FormField
+                  control={form.control}
+                  name="confirmEmail"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Confirmar correo</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                          <Input
+                            className="pl-10 bg-white/50 border-white/50"
+                            type="email"
+                            placeholder="Repite tu correo"
+                            autoComplete="off"
                             inputMode="email"
                             {...blockPasteHandlers}
                             {...field}
@@ -196,7 +315,7 @@ export default function RegisterForm() {
                           <Input
                             className="pl-10 pr-12 bg-white/50 border-white/50"
                             type={showPassword ? "text" : "password"}
-                            placeholder="Mín. 8 con letras y números"
+                            placeholder="Mín. 10 con Aa, 0-9 y símbolo"
                             autoComplete="new-password"
                             {...blockPasteHandlers}
                             {...field}
@@ -217,13 +336,13 @@ export default function RegisterForm() {
                       </FormControl>
                       <FormMessage />
                       <p className="text-xs text-muted-foreground">
-                        Debe incluir letras y números (mínimo 8 caracteres).
+                        Debe incluir mayúsculas, minúsculas, números y un carácter especial, sin espacios.
                       </p>
                     </FormItem>
                   )}
                 />
 
-                {/* Confirmar contraseña */}
+                {/* Confirmar contraseña (sin pegar) */}
                 <FormField
                   control={form.control}
                   name="confirmPassword"
@@ -238,6 +357,7 @@ export default function RegisterForm() {
                             type={showConfirm ? "text" : "password"}
                             placeholder="Vuelve a escribir tu contraseña"
                             autoComplete="new-password"
+                            {...blockPasteHandlers}
                             {...field}
                           />
                           <button
