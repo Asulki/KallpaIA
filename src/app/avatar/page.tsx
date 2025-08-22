@@ -4,7 +4,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useState, cloneElement, ReactElement } from 'react';
 import { cn } from '@/lib/utils';
 import { StellarParticles } from '@/components/landing/stellar-particles';
 import { Palette, Beaker, Wrench, Sigma, Cpu } from 'lucide-react';
@@ -17,9 +17,6 @@ const avatars = [
     mentor: 'Ada Lovelace',
     type: 'Matemática',
     theme: 'math',
-    src: 'https://i.ibb.co/1ft9N3Q/300-300ada.png',
-    alt: 'Vicuña — avatar de Matemáticas',
-    hint: 'mathematician vicuña inspired by Ada Lovelace pixel art',
     icon: <Sigma size={14} />
   },
   {
@@ -28,9 +25,6 @@ const avatars = [
     mentor: 'Marie Curie',
     type: 'Ciencia',
     theme: 'science',
-    src: 'https://i.ibb.co/CbfcCvP/condor-ciencia.png', 
-    alt: 'Cóndor — avatar de Ciencia',
-    hint: 'knowledge condor inspired by Marie Curie pixel art',
     icon: <Beaker size={14} />
   },
   {
@@ -39,9 +33,6 @@ const avatars = [
     mentor: 'Katherine Johnson',
     type: 'Ingeniería',
     theme: 'eng',
-    src: 'https://i.ibb.co/yQxG4Tj/jaguar-ingenieria.png',
-    alt: 'Jaguar — avatar de Ingeniería',
-    hint: 'engineer jaguar inspired by Katherine Johnson pixel art',
     icon: <Wrench size={14} />
   },
   {
@@ -50,9 +41,6 @@ const avatars = [
     mentor: 'Hipatia de Alejandría',
     type: 'Arte',
     theme: 'art',
-    src: 'https://i.ibb.co/8mrL2Dk/colibri-arte.png',
-    alt: 'Colibrí — avatar de Arte',
-    hint: 'creative hummingbird inspired by Hypatia pixel art',
     icon: <Palette size={14} />
   },
   {
@@ -61,12 +49,18 @@ const avatars = [
     mentor: 'Hedy Lamarr',
     type: 'Tecnología',
     theme: 'tech',
-    src: 'https://i.ibb.co/f22my0B/zorro-tecnologia.png',
-    alt: 'Zorro — avatar de Tecnología',
-    hint: 'tech fox inspired by Hedy Lamarr pixel art',
     icon: <Cpu size={14} />
   },
 ];
+
+const themeColors: { [key: string]: string } = {
+  math: 'text-[#9FE3C4]',
+  science: 'text-[#B8A8FF]',
+  eng: 'text-[#FFD36B]',
+  art: 'text-[#FFB0C8]',
+  tech: 'text-[#97D9FF]',
+};
+
 
 const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0], isSelected: boolean, onSelect: (id: number) => void }) => {
   return (
@@ -86,7 +80,10 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
       </header>
 
       <div className="kcard__art">
-        <Image src={avatar.src} alt={avatar.alt} width={300} height={300} data-ai-hint={avatar.hint} />
+        {cloneElement(avatar.icon as ReactElement, { 
+            size: 96, 
+            className: cn('drop-shadow-lg', themeColors[avatar.theme]) 
+        })}
       </div>
 
       <div className="kcard__title">
