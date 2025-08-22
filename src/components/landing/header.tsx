@@ -15,11 +15,9 @@ export function Header() {
           <Link href="/#about" className="text-gray-300 hover:text-primary transition-colors">Nosotros</Link>
           <Link href="/#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
           <Link href="/#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
+           <Link href="/register" className="text-gray-300 hover:text-primary transition-colors">Inicia tu Aventura</Link>
         </nav>
         <div className="flex items-center gap-4">
-          <Button asChild size="lg" className="hidden md:flex font-headline bg-primary text-primary-foreground text-lg rounded-full px-8 py-3 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">
-            <Link href="/register">Inicia tu Aventura</Link>
-          </Button>
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="md:hidden bg-transparent border-primary text-primary">
