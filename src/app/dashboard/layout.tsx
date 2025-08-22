@@ -1,5 +1,8 @@
-import './dashboard.css';
 import Link from 'next/link';
+import { Bot, Bell, Home, Rocket, Library, Settings, UserCircle, Search, Star, MessageSquare } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export default function DashboardLayout({
   children,
@@ -7,49 +10,83 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="kallpa-dashboard">
-        <div className="kd-space" aria-hidden="true">
-            <svg className="kd-constellations" viewBox="0 0 1920 1080">
-                <g stroke="rgba(156,163,175,.35)" strokeWidth="1.2" fill="none">
-                    <polyline points="180,220 240,280 320,250 400,320" />
-                    <polyline points="1200,180 1260,240 1320,220 1380,300 1460,280" />
-                </g>
-                <g fill="#fff">
-                    <circle cx="180" cy="220" r="1.6"/><circle cx="240" cy="280" r="1.4"/>
-                    <circle cx="320" cy="250" r="1.8"/><circle cx="400" cy="320" r="1.3"/>
-                    <circle cx="1200" cy="180" r="1.5"/><circle cx="1260" cy="240" r="1.2"/>
-                    <circle cx="1320" cy="220" r="1.6"/><circle cx="1380" cy="300" r="1.2"/><circle cx="1460" cy="280" r="1.4"/>
-                </g>
-            </svg>
+    <div className="flex min-h-screen w-full flex-col bg-background text-foreground">
+      <aside className="fixed inset-y-0 left-0 z-10 hidden w-60 flex-col border-r bg-card sm:flex">
+        <nav className="flex flex-col items-start gap-4 px-4 py-5">
+          <Link href="/dashboard" className="flex items-center gap-3 rounded-lg px-3 py-2 text-primary transition-all hover:text-primary-foreground">
+            <Bot className="h-6 w-6" />
+            <span className="text-lg font-bold">KallpaIA</span>
+          </Link>
+          <Link
+            href="/dashboard"
+            className="flex w-full items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
+          >
+            <Home className="h-4 w-4" />
+            Inicio
+          </Link>
+          <Link
+            href="#"
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+          >
+            <Rocket className="h-4 w-4" />
+            Retos
+          </Link>
+          <Link
+            href="#"
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+          >
+            <Library className="h-4 w-4" />
+            Progreso
+          </Link>
+          <Link
+            href="#"
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+          >
+            <MessageSquare className="h-4 w-4" />
+            Mentoría
+          </Link>
+          <Link
+            href="#"
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+          >
+            <Star className="h-4 w-4" />
+            Oportunidades
+          </Link>
+        </nav>
+        <div className="mt-auto p-4">
+           <Link
+            href="#"
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+          >
+            <Settings className="h-4 w-4" />
+            Ajustes
+          </Link>
         </div>
-
-      <header className="kd-header">
-        <div className="brand">
-          <span className="logo">🤖</span>
-          <strong>KallpaIA</strong>
-        </div>
-        <div className="hello">
-          <h2>Hola, Wawa <span className="wave">🔥</span></h2>
-          <small>SUBTÍTULO INFORMATIVO</small>
-        </div>
-      </header>
-      
-      <div className="kd-layout">
-        <aside className="kd-sidebar">
-            <nav>
-                <Link className="active nav-item" href="/inicio">🏠 Inicio</Link>
-                <Link className="nav-item" href="/retos">🎯 Retos</Link>
-                <Link className="nav-item" href="/info-vocacional">🧭 Info vocacional</Link>
-                <Link className="nav-item" href="/chat-ia">🤖 Chat IA</Link>
-                <Link className="nav-item" href="/oportunidades">✨ Oportunidades</Link>
-            </nav>
-            <Link href="/comics-digitales" className="extra">🗯️ comics digitales</Link>
-        </aside>
-        
-        <main className="kd-main">
+      </aside>
+      <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-60">
+        <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+           <div className="relative flex-1 md:grow-0">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              type="search"
+              placeholder="Buscar..."
+              className="w-full rounded-lg bg-muted pl-8 md:w-[200px] lg:w-[320px]"
+            />
+          </div>
+          <div className="flex-1" />
+          <Button variant="outline" size="icon" className="h-8 w-8">
+            <Bell className="h-4 w-4" />
+            <span className="sr-only">Notificaciones</span>
+          </Button>
+          <Avatar>
+            <AvatarImage src="https://placehold.co/32x32.png" alt="@wawa" />
+            <AvatarFallback>W</AvatarFallback>
+          </Avatar>
+        </header>
+        <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
           {children}
         </main>
       </div>
-    </section>
+    </div>
   );
 }
