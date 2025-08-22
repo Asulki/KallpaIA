@@ -26,11 +26,6 @@ export function Hero() {
         <p className="mt-6 max-w-2xl text-lg md:text-xl text-gray-200" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.7)' }}>
           Explora las fronteras de la ciencia y la tecnología a través de una aventura épica. Tu viaje hacia STEAM comienza ahora.
         </p>
-        <div className="mt-10 flex gap-4">
-           <Button asChild size="lg" className="font-headline text-lg rounded-full px-10 py-3">
-              <Link href="/login">Inicia tu Aventura</Link>
-          </Button>
-        </div>
       </div>
     </section>
   );
