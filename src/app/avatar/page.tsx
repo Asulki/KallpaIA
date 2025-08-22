@@ -8,6 +8,7 @@ import { useState, cloneElement, ReactElement } from 'react';
 import { cn } from '@/lib/utils';
 import { StellarParticles } from '@/components/landing/stellar-particles';
 import { Palette, Beaker, Wrench, Sigma, Cpu } from 'lucide-react';
+import { VicunaIcon, CondorIcon, JaguarIcon, HummingbirdIcon, FoxIcon } from '@/components/avatar/animal-icons';
 import './kallpa-cards.css';
 
 const avatars = [
@@ -17,7 +18,8 @@ const avatars = [
     mentor: 'Ada Lovelace',
     type: 'Matemática',
     theme: 'math',
-    icon: <Sigma size={14} />
+    icon: <Sigma size={14} />,
+    animalIcon: <VicunaIcon />
   },
   {
     id: 2,
@@ -25,7 +27,8 @@ const avatars = [
     mentor: 'Marie Curie',
     type: 'Ciencia',
     theme: 'science',
-    icon: <Beaker size={14} />
+    icon: <Beaker size={14} />,
+    animalIcon: <CondorIcon />
   },
   {
     id: 3,
@@ -33,7 +36,8 @@ const avatars = [
     mentor: 'Katherine Johnson',
     type: 'Ingeniería',
     theme: 'eng',
-    icon: <Wrench size={14} />
+    icon: <Wrench size={14} />,
+    animalIcon: <JaguarIcon />
   },
   {
     id: 4,
@@ -41,7 +45,8 @@ const avatars = [
     mentor: 'Hipatia de Alejandría',
     type: 'Arte',
     theme: 'art',
-    icon: <Palette size={14} />
+    icon: <Palette size={14} />,
+    animalIcon: <HummingbirdIcon />
   },
   {
     id: 5,
@@ -49,7 +54,8 @@ const avatars = [
     mentor: 'Hedy Lamarr',
     type: 'Tecnología',
     theme: 'tech',
-    icon: <Cpu size={14} />
+    icon: <Cpu size={14} />,
+    animalIcon: <FoxIcon />
   },
 ];
 
@@ -80,9 +86,9 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
       </header>
 
       <div className="kcard__art">
-        {cloneElement(avatar.icon as ReactElement, { 
-            size: 96, 
+        {cloneElement(avatar.animalIcon as ReactElement, { 
             className: cn(
+              'w-24 h-24',
               'gradient-text bg-gradient-to-br',
               themeClasses[avatar.theme]
             )
