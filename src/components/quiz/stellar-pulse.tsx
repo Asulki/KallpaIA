@@ -3,148 +3,131 @@
 import { useEffect, useRef } from 'react';
 
 export function StellarPulseBackground() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const starsRef = useRef<HTMLCanvasElement>(null);
+  const pulseRef = useRef<HTMLCanvasElement>(null);
+  const earthRef = useRef<HTMLCanvasElement>(null);
+  const animationFrameRef = useRef<number>();
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    const starsCanvas = starsRef.current;
+    const pulseCanvas = pulseRef.current;
+    const earthCanvas = earthRef.current;
 
-    const container = containerRef.current;
-    
+    if (!starsCanvas || !pulseCanvas || !earthCanvas) return;
+
+    const sctx = starsCanvas.getContext('2d');
+    const pctx = pulseCanvas.getContext('2d');
+    const ectx = earthCanvas.getContext('2d');
+
+    if (!sctx || !pctx || !ectx) return;
+
     const PALETTE = {
-      bg: "#0B0F19",
-      colors: ["#B9A6FF","#AEE6FF","#FFB3C6","#FFE08C","#BFF3D1"],
-      glow: "rgba(255,255,255,0.12)"
+      colors: ["#B9A6FF", "#AEE6FF", "#FFB3C6", "#FFE08C", "#BFF3D1"]
     };
-    const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    
-    const cs = document.createElement("canvas");
-    const cp = document.createElement("canvas");
-    cs.ariaHidden = "true";
-    cp.ariaHidden = "true";
-    
-    container.appendChild(cs);
-    container.appendChild(cp);
 
-    Object.assign(cs.style, { position: "fixed", inset: "0", pointerEvents: "none" });
-    Object.assign(cp.style, { position: "fixed", inset: "0", pointerEvents: "none" });
+    let stars: any[] = [];
+    let t = 0;
 
-    // ===== Estrellas en movimiento =====
-    const sctx = cs.getContext("2d");
-    let stars: any[] = [], rafS: number;
+    const resizeAll = () => {
+      starsCanvas.width = window.innerWidth;
+      starsCanvas.height = window.innerHeight;
+      pulseCanvas.width = window.innerWidth;
+      pulseCanvas.height = window.innerHeight;
+      earthCanvas.width = window.innerWidth;
+      earthCanvas.height = window.innerHeight;
 
-    function resizeStars() {
-      if (!sctx) return;
-      cs.width = innerWidth;
-      cs.height = innerHeight;
-      const density = Math.floor((cs.width * cs.height) / 8000);
-      stars = Array.from({length: density}).map(() => ({
-        x: Math.random() * cs.width,
-        y: Math.random() * cs.height,
-        r: Math.random() * 1.6 + 0.3,
-        vy: Math.random() * 0.35 + 0.15,
+      const density = Math.floor((starsCanvas.width * starsCanvas.height) / 15000);
+      stars = Array.from({ length: density }).map(() => ({
+        x: Math.random() * starsCanvas.width,
+        y: Math.random() * starsCanvas.height,
+        r: Math.random() * 1.2 + 0.2,
         tw: Math.random() * Math.PI * 2
       }));
-    }
-    function animateStars() {
-      if (!sctx) return;
-      sctx.clearRect(0,0,cs.width,cs.height);
+    };
+
+    const animate = () => {
+      // === Estrellas lentas ===
+      sctx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
       for (const st of stars) {
-        st.y += st.vy; if (st.y > cs.height) st.y = -2;
-        st.tw += 0.02;
-        const a = 0.35 + 0.45 * (0.5 + 0.5 * Math.sin(st.tw));
+        st.tw += 0.005; // mucho más lento
+        const a = 0.2 + 0.3 * (0.5 + 0.5 * Math.sin(st.tw));
         sctx.beginPath();
-        sctx.arc(st.x, st.y, st.r, 0, Math.PI*2);
+        sctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
         sctx.fillStyle = `rgba(255,255,255,${a})`;
         sctx.fill();
       }
-      rafS = requestAnimationFrame(animateStars);
-    }
 
-    // ===== Pulso radial (ondas circulares) =====
-    const pctx = cp.getContext("2d");
-    let rafP: number, t = 0;
+      // === Ondas radiales suaves ===
+      pctx.clearRect(0, 0, pulseCanvas.width, pulseCanvas.height);
+      const cx = pulseCanvas.width * 0.5;
+      const cy = pulseCanvas.height * 0.55;
+      const maxR = Math.hypot(pulseCanvas.width, pulseCanvas.height) * 0.6;
 
-    function resizePulse() {
-      if (!pctx) return;
-      cp.width = innerWidth;
-      cp.height = innerHeight;
-    }
-
-    function animatePulse() {
-      if (!pctx) return;
-      pctx.clearRect(0,0,cp.width,cp.height);
-      const cx = cp.width * 0.5;
-      const cy = cp.height * 0.55;
-      const maxR = Math.hypot(cp.width, cp.height) * 0.6;
-
-      // Aura de fondo sutil
-      const aura = pctx.createRadialGradient(cx, cy, 0, cx, cy, maxR*0.6);
-      aura.addColorStop(0, "rgba(124,58,237,0.08)"); // morado leve
-      aura.addColorStop(1, "rgba(11,15,25,0)");
-      pctx.fillStyle = aura;
-      pctx.fillRect(0,0,cp.width,cp.height);
-
-      // Ondas (anillos) expandidas
-      const rings = 6;
-      for (let i=0; i<rings; i++){
-        const prog = (t*0.006 + i/rings) % 1;           // 0..1
-        const radius = 40 + prog * maxR;                // crece hacia afuera
+      const rings = 4;
+      for (let i = 0; i < rings; i++) {
+        const prog = (t * 0.002 + i / rings) % 1; // más lento (antes 0.012)
+        const radius = 60 + prog * maxR;
         const color = PALETTE.colors[i % PALETTE.colors.length];
 
-        // trazo principal
         pctx.beginPath();
-        pctx.arc(cx, cy, radius, 0, Math.PI*2);
+        pctx.arc(cx, cy, radius, 0, Math.PI * 2);
         pctx.strokeStyle = color;
-        pctx.globalAlpha = 0.35 * (1 - prog);           // se desvanece al crecer
-        pctx.lineWidth = 3 + (1 - prog) * 2;
+        pctx.globalAlpha = 0.2 * (1 - prog);
+        pctx.lineWidth = 2 + (1 - prog) * 1.5;
         pctx.stroke();
-
-        // halo difuso para glow
-        pctx.beginPath();
-        pctx.arc(cx, cy, radius, 0, Math.PI*2);
-        pctx.strokeStyle = PALETTE.glow;
-        pctx.lineWidth = 12 * (1 - prog);
-        pctx.stroke();
-
-        pctx.globalAlpha = 1;
       }
-
-      // Núcleo pulsante (brillo central)
-      const coreR = 60 + 8 * Math.sin(t*0.08);
-      const cg = pctx.createRadialGradient(cx, cy, 0, cx, cy, coreR);
-      cg.addColorStop(0, "rgba(255,255,255,0.5)");
-      cg.addColorStop(1, "rgba(255,255,255,0)");
-      pctx.fillStyle = cg;
-      pctx.beginPath();
-      pctx.arc(cx, cy, coreR, 0, Math.PI*2);
-      pctx.fill();
-
-      t += 1;
-      rafP = requestAnimationFrame(animatePulse);
-    }
-    
-    function onResize(){ resizeStars(); resizePulse(); }
-    addEventListener("resize", onResize, {passive:true});
-    onResize();
-
-    if (!prefersReduced) {
-      animateStars();
-      animatePulse();
-    } else if (pctx) {
-      const cx = cp.width * 0.5, cy = cp.height * 0.55;
-      pctx.beginPath(); pctx.arc(cx, cy, 140, 0, Math.PI*2);
-      pctx.strokeStyle = "#B9A6FF"; pctx.globalAlpha = 0.35; pctx.lineWidth = 4; pctx.stroke();
       pctx.globalAlpha = 1;
+
+      // === Planeta Tierra flotando ===
+      ectx.clearRect(0, 0, earthCanvas.width, earthCanvas.height);
+      const earthR = 70;
+      const driftX = Math.sin(t * 0.0015) * 8; // movimiento lateral leve
+      const driftY = Math.cos(t * 0.001) * 6; // movimiento vertical leve
+      const ex = cx + driftX;
+      const ey = cy + driftY;
+
+      // círculo base tierra
+      const grad = ectx.createRadialGradient(ex, ey, earthR * 0.3, ex, ey, earthR);
+      grad.addColorStop(0, "#AEE6FF"); // celeste
+      grad.addColorStop(0.6, "#4FC3F7");
+      grad.addColorStop(1, "#0B0F19");
+      ectx.fillStyle = grad;
+      ectx.beginPath();
+      ectx.arc(ex, ey, earthR, 0, Math.PI * 2);
+      ectx.fill();
+
+      // brillo atmosférico
+      ectx.strokeStyle = "rgba(255,255,255,0.4)";
+      ectx.lineWidth = 4;
+      ectx.beginPath();
+      ectx.arc(ex, ey, earthR + 2, 0, Math.PI * 2);
+      ectx.stroke();
+
+      t++;
+      animationFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    window.addEventListener("resize", resizeAll);
+    resizeAll();
+    
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        animate();
     }
+
 
     return () => {
-      window.removeEventListener("resize", onResize);
-      cancelAnimationFrame(rafS);
-      cancelAnimationFrame(rafP);
-      if (container.contains(cs)) container.removeChild(cs);
-      if (container.contains(cp)) container.removeChild(cp);
+      window.removeEventListener("resize", resizeAll);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
     };
   }, []);
 
-  return <div ref={containerRef} className="absolute inset-0 z-0" />;
+  return (
+    <>
+      <canvas ref={starsRef} id="stars" aria-hidden="true"></canvas>
+      <canvas ref={pulseRef} id="pulse" aria-hidden="true"></canvas>
+      <canvas ref={earthRef} id="earth" aria-hidden="true"></canvas>
+    </>
+  );
 }
