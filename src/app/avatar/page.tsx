@@ -36,7 +36,7 @@ const avatars = [
     mentor: 'Katherine Johnson',
     type: 'Ingeniería',
     theme: 'eng',
-    src: 'https.i.ibb.co/yQxG4Tj/jaguar-ingenieria.png',
+    src: 'https://i.ibb.co/yQxG4Tj/jaguar-ingenieria.png',
     alt: 'Jaguar — avatar de Ingeniería',
     hint: 'engineer jaguar inspired by Katherine Johnson pixel art',
   },
