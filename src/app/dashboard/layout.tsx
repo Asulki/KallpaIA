@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Bot, Bell, Home, Rocket, Library, Settings, UserCircle, Search, Star, MessageSquare } from 'lucide-react';
+import { Bot, Bell, Home, Rocket, Library, Settings, UserCircle, Search, Star, MessageSquare, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -51,6 +51,13 @@ export default function DashboardLayout({
           >
             <Star className="h-4 w-4" />
             Oportunidades
+          </Link>
+          <Link
+            href="#"
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+          >
+            <BookOpen className="h-4 w-4" />
+            Comic digitales
           </Link>
         </nav>
         <div className="mt-auto p-4">
