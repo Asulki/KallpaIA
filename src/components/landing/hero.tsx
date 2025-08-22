@@ -20,13 +20,16 @@ export function Hero() {
         />
       </div>
       <div className="relative z-20 container mx-auto px-4 flex flex-col items-center">
-        <h1 className="font-headline text-3xl md:text-4xl font-bold leading-tight">
+        <h1 className="font-headline text-5xl md:text-6xl font-bold leading-tight" style={{ textShadow: '2px 2px 8px rgba(255, 215, 64, 0.4)' }}>
           Desbloquea tu Potencial con <br /> <span className="text-primary">KallpaIA</span>
         </h1>
         <p className="mt-6 max-w-2xl text-lg md:text-xl text-gray-200" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.7)' }}>
           Explora las fronteras de la ciencia y la tecnología a través de una aventura épica. Tu viaje hacia STEAM comienza ahora.
         </p>
         <div className="mt-10 flex gap-4">
+           <Button asChild size="lg" className="font-headline text-lg rounded-full px-10 py-3">
+              <Link href="/login">Inicia tu Aventura</Link>
+          </Button>
         </div>
       </div>
     </section>
