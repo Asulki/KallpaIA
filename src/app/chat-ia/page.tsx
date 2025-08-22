@@ -1,8 +1,13 @@
 "use client";
 
 import { ChatIA } from "@/components/dashboard/chat-ia";
-import { SpaceBackground } from "@/components/space-background";
+import dynamic from 'next/dynamic';
 import './chat-ia.css';
+
+const SpaceBackground = dynamic(
+  () => import('@/components/space-background').then(mod => mod.SpaceBackground),
+  { ssr: false }
+);
 
 export default function ChatPage() {
   return (

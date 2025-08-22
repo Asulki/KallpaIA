@@ -7,7 +7,13 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import './dashboard.css';
 import { useEffect } from 'react';
-import { SpaceBackground } from '@/components/space-background';
+import dynamic from 'next/dynamic';
+
+const SpaceBackground = dynamic(
+  () => import('@/components/space-background').then(mod => mod.SpaceBackground),
+  { ssr: false }
+);
+
 
 const navItems = [
     { href: "/dashboard", icon: <Home className="icn" />, label: "Inicio" },
