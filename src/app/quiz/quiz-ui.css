@@ -1,22 +1,22 @@
 /* ===== Design Tokens ===== */
 :root {
-  /* Colores base - Soul Palette */
-  --bg: #1A162C;
-  --panel: #231F40;
-  --panel-2: #131022;
-  --text: #FFFFFF;
-  --text-soft: #C3B9E8;
+  /* Colores base - Soul Palette (Light Theme) */
+  --bg: #F5F3FF; /* Lavanda muy claro */
+  --panel: #FFFFFF;
+  --panel-2: #E9E6F8; /* Sombra/fondo sutil */
+  --text: #231F40; /* Texto oscuro del panel original */
+  --text-soft: #6A618F;
   --muted: #8C82AE;
-  --stroke: #312C57;
+  --stroke: #D9D2F3; /* Borde suave */
 
-  /* Paleta Kallpa - Adaptada a Soul */
+  /* Paleta Kallpa - Se mantiene */
   --math: #BFF3D1;
   --science: #B9A6FF;
   --eng: #FFE08C;
   --tech: #AEE6FF;
   --art: #FFB3C6;
-  --accent: #FF74D5; /* Magenta vibrante */
-  --accent-gradient: linear-gradient(90deg, #FF74D5, #AD88FF); /* Degradado Soul */
+  --accent: #AD88FF; /* Lavanda vibrante */
+  --accent-gradient: linear-gradient(90deg, #AD88FF, #8A61FF); /* Degradado Soul */
 
   /* Estados */
   --ok: #1FD18A;
@@ -32,14 +32,14 @@
   --radius-md: 16px;
   --radius-lg: 20px;
   --radius-xl: 28px;
-  --shadow-panel: 0 20px 60px rgba(0, 0, 0, .35);
+  --shadow-panel: 0 20px 60px rgba(106, 97, 143, 0.15);
   --shadow-focus: 0 0 0 3px rgba(173, 136, 255, .45); /* Foco lavanda */
 }
 
 /* ===== Estructura Base ===== */
 .quiz-page-container {
   background-color: var(--bg);
-  background-image: radial-gradient(ellipse at 70% 30%, rgba(49, 44, 87, 0.5) 0%, transparent 50%);
+  background-image: radial-gradient(ellipse at 70% 30%, rgba(200, 180, 255, 0.2) 0%, transparent 50%);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -116,7 +116,7 @@
   height: 56px;
   padding: 0 18px;
   border-radius: var(--radius-md);
-  background-color: #191430;
+  background-color: #F8F7FC;
   border: 1px solid var(--stroke);
   color: var(--text-soft);
   cursor: pointer;
@@ -127,7 +127,8 @@
 
 .option-item:hover {
   transform: scale(1.02);
-  border-color: #4A4472;
+  border-color: #B9A6FF;
+  background-color: #fff;
   color: var(--text);
 }
 
@@ -138,7 +139,8 @@
 
 .option-item.selected {
   border: 2px solid var(--accent);
-  background-color: rgba(255, 116, 213, 0.08);
+  color: var(--text);
+  background-color: rgba(173, 136, 255, 0.08);
 }
 
 .option-item .option-text {
@@ -172,14 +174,14 @@
   font-weight: 500;
   font-size: 16px;
   background: var(--accent-gradient);
-  color: #111;
+  color: #fff;
   border: none;
   cursor: pointer;
   transition: all 120ms ease-out;
 }
 
 .quiz-cta-button:hover {
-  box-shadow: 0 4px 20px rgba(255, 116, 213, .25);
+  box-shadow: 0 4px 20px rgba(173, 136, 255, .4);
   transform: translateY(-2px);
 }
 
