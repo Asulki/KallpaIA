@@ -27,9 +27,6 @@ export function Hero() {
           Explora las fronteras de la ciencia y la tecnología a través de una aventura épica. Tu viaje hacia STEAM comienza ahora.
         </p>
         <div className="mt-10 flex gap-4">
-            <Button asChild size="lg" className="font-headline bg-primary text-primary-foreground text-lg rounded-full px-8 py-3 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all">
-                <Link href="/login">Inicia tu Aventura</Link>
-            </Button>
         </div>
       </div>
     </section>
