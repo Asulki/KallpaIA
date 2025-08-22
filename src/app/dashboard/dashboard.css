@@ -72,25 +72,84 @@
 /* Layout */
 .kallpa-dashboard .kd-layout{ display:grid; grid-template-columns: 240px 1fr; gap:16px }
 
-/* Sidebar */
+/* ===== Sidebar mejorado (AISLADO) ===== */
 .kallpa-dashboard .kd-sidebar{
+  --nav-h:44px;
+  --nav-gap:6px;
   background: var(--glass);
   border:1px solid var(--border);
-  border-radius: var(--r-lg);
+  border-radius:18px;
   padding:12px;
 }
-.kallpa-dashboard .kd-sidebar nav{ display:grid; gap:6px }
-.kallpa-dashboard .kd-sidebar a{
-  color:var(--muted); text-decoration:none; padding:10px 12px; border-radius:999px;
-  transition: background var(--t-med), color var(--t-med);
+
+/* Contenedor de items */
+.kallpa-dashboard .kd-sidebar nav{
+  display:grid; gap:var(--nav-gap);
 }
+
+/* Ítems con icono + label */
+.kallpa-dashboard .kd-sidebar .nav-item,
+.kallpa-dashboard .kd-sidebar a{
+  /* si ya usas <a>, se aplica igual */
+  display:flex; align-items:center; gap:12px;
+  height:var(--nav-h); padding:0 12px;
+  border-radius:999px;
+  color:var(--muted); text-decoration:none;
+  position:relative; isolation:isolate;
+  transition: background 180ms var(--ease), color 180ms var(--ease), transform 120ms;
+}
+
+/* Icono normalizado (SVG o IMG) */
+.kallpa-dashboard .kd-sidebar .nav-icn{
+  width:18px; height:18px; display:grid; place-items:center;
+  color:currentColor; opacity:.95; flex:0 0 18px;
+}
+.kallpa-dashboard .kd-sidebar .nav-icn svg{ width:18px; height:18px; display:block }
+.kallpa-dashboard .kd-sidebar .nav-icn img{ width:18px; height:18px; object-fit:contain; filter: grayscale(10%) }
+
+/* Hover */
+.kallpa-dashboard .kd-sidebar a:hover{
+  background: rgba(255,255,255,.06);
+  color:var(--text);
+}
+
+/* Active (pill limpio, sin “nodo raro”) */
 .kallpa-dashboard .kd-sidebar a.active{
   color:#0B0F19;
   background: linear-gradient(135deg, var(--primary), #9A6BFF);
-  box-shadow: 0 10px 26px rgba(124,58,237,.35);
+  box-shadow: 0 10px 22px rgba(124,58,237,.35);
+  border:1px solid rgba(255,255,255,.12);
 }
-.kallpa-dashboard .kd-sidebar a:hover{ color:var(--text); background: rgba(255,255,255,.06) }
-.kallpa-dashboard .kd-sidebar .extra{ margin:14px 4px 0; color:var(--muted) }
+.kallpa-dashboard .kd-sidebar a.active .nav-icn{
+  color:#0B0F19;
+  filter: drop-shadow(0 0 6px rgba(0,0,0,.15));
+}
+
+/* Indicador sutil (puntito) SOLO en hover/focus, no permanente */
+.kallpa-dashboard .kd-sidebar a::before{
+  content:""; position:absolute; left:10px; top:50%; transform:translateY(-50%);
+  width:6px; height:6px; border-radius:50%; background:transparent;
+  transition: background 160ms;
+}
+.kallpa-dashboard .kd-sidebar a:hover::before{ background: var(--blue) }
+.kallpa-dashboard .kd-sidebar a.active::before{ background: transparent } /* quita el “nodo feo” */
+
+/* Focus accesible */
+.kallpa-dashboard .kd-sidebar a:focus-visible{
+  outline:2px solid var(--blue); outline-offset:2px;
+}
+
+/* “comics digitales” como etiqueta discreta */
+.kallpa-dashboard .kd-sidebar .extra{
+  margin:12px 2px 0;
+  color:var(--text);
+  font-weight:600;
+  padding:8px 10px;
+  border-radius:12px;
+  background: rgba(255,255,255,.04);
+  border:1px solid var(--border);
+}
+
 
 /* Main */
 .kallpa-dashboard .kd-main{ display:grid; gap:16px }
@@ -153,6 +212,13 @@
 @keyframes bob{ 0%,100%{ transform: translateY(0)} 50%{ transform: translateY(-4px)} }
 
 /* Responsive */
+/* Compacto en sidebars estrechos (opcional) */
+@media (max-width: 980px){
+  .kallpa-dashboard .kd-layout{ grid-template-columns: 86px 1fr }
+  .kallpa-dashboard .kd-sidebar a{ justify-content:center; gap:8px; padding:0 8px }
+  .kallpa-dashboard .kd-sidebar a span.label{ display:none } /* deja solo iconos */
+}
+
 @media (max-width: 960px){
   .kallpa-dashboard .kd-layout{ grid-template-columns: 86px 1fr }
   .kallpa-dashboard .kd-sidebar a{ border-radius:12px }
