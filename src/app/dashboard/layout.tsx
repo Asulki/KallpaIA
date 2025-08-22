@@ -58,7 +58,7 @@ export default function DashboardLayout({
         <header className="flex items-center justify-between gap-4 mb-6">
             <div className="welcome-message">
                 <h2 className="text-2xl font-bold text-white">Hola, Wawa 🔥</h2>
-                <p className="text-muted">SUBTÍTULO INFORMATIVO</p>
+                <p className="text-muted">tu mundo steam</p>
             </div>
             <div className="flex items-center gap-4">
                 <Button variant="ghost" size="icon" className="h-11 w-11 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/10">
