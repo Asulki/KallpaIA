@@ -39,10 +39,7 @@ export default function LoginForm() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      nickname: "",
-      password: "",
-    },
+    defaultValues: { nickname: "", password: "" },
     mode: "onTouched",
   });
 
@@ -53,7 +50,6 @@ export default function LoginForm() {
   };
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Aquí solo navegación + toast; backend hará verificación real
     router.push("/avatar");
     toast({
       title: "¡Inicio de sesión exitoso!",
@@ -79,13 +75,9 @@ export default function LoginForm() {
           <div className="stack-20">
             {/* Nickname */}
             <div>
-              <label htmlFor="nickname" className="label">
-                Nickname
-              </label>
+              <label htmlFor="nickname" className="label">Nickname</label>
               <div className="input-wrap">
-                <span className="input-icon-left">
-                  <User size={18} />
-                </span>
+                <span className="input-icon-left"><User size={18} /></span>
                 <input
                   id="nickname"
                   className="input"
@@ -106,9 +98,7 @@ export default function LoginForm() {
                 Contraseña
               </label>
               <div className="input-wrap">
-                <span className="input-icon-left">
-                  <Lock size={18} />
-                </span>
+                <span className="input-icon-left"><Lock size={18} /></span>
                 <input
                   id="password"
                   className="input"
@@ -116,10 +106,7 @@ export default function LoginForm() {
                   placeholder="••••••••••"
                   autoComplete="current-password"
                   {...blockPasteHandlers}
-                  // Bloquear espacios
-                  onKeyDown={(e) => {
-                    if (e.key === " ") e.preventDefault();
-                  }}
+                  onKeyDown={(e) => { if (e.key === " ") e.preventDefault(); }}
                   {...form.register("password")}
                 />
                 <button
@@ -131,20 +118,15 @@ export default function LoginForm() {
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
-              {form.formState.errors.password ? (
+              {form.formState.errors.password && (
                 <p className="error">{form.formState.errors.password.message}</p>
-              ) : (
-                <p className="hint">
-                  Mín. 10 caracteres, con mayúscula, minúscula, número y símbolo. Sin espacios.
-                </p>
               )}
+              {/* Se eliminó el hint */}
             </div>
 
             {/* Botones */}
             <div className="stack-16">
-              <button type="submit" className="btn btn-primary">
-                Entrar
-              </button>
+              <button type="submit" className="btn btn-primary">Entrar</button>
               <button
                 type="button"
                 className="btn btn-secondary"
@@ -158,9 +140,7 @@ export default function LoginForm() {
 
         <p className="form-footer">
           ¿No tienes cuenta?{" "}
-          <Link href="/register" className="link">
-            Crear cuenta
-          </Link>
+          <Link href="/register" className="link">Crear cuenta</Link>
         </p>
       </div>
     </div>
