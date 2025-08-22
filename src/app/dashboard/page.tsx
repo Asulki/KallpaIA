@@ -76,10 +76,10 @@ export default function DashboardPage() {
         </div>
 
         <div className="mt-auto flex justify-center py-4">
-            <button className="cta">
+            <a href="https://gamificacion-kallpaia-kappa.vercel.app/" className="cta" target="_blank" rel="noopener noreferrer">
                 <Gamepad2 className="h-6 w-6" />
                 Jugar Videojuegos Vocacionales
-            </button>
+            </a>
         </div>
       </div>
       <div id="chat-view" className="hidden h-full">
