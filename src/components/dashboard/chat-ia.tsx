@@ -60,7 +60,7 @@ export function ChatIA() {
 
     } catch (error: any) {
       console.error("Error fetching chat response:", error);
-      const errorMessage: ChatMessage = { role: 'assistant', content: `Error: ${error.message}` };
+      const errorMessage: ChatMessage = { role: 'assistant', content: `Lo siento, ocurrió un error. Detalle: ${error.message}` };
       setMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
