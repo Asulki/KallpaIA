@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Bot, Home, Rocket, BookOpen, MessageSquare, Star, Settings, Bell, Gamepad2 } from 'lucide-react';
+import { Bot, Home, Rocket, BookOpen, MessageSquare, Star, Settings, Bell, Gamepad2, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import './dashboard.css';
@@ -115,7 +115,11 @@ export default function DashboardLayout({
                     <div className="tooltip">Abrir chat</div>
                   </a>
                 </nav>
-                 <div className="mt-auto p-2">
+                 <div className="mt-auto p-2 space-y-2">
+                    <Link href="/" className="flex items-center gap-3 text-muted-foreground hover:text-foreground">
+                        <LogOut className="icn" />
+                        <span>Salir</span>
+                    </Link>
                     <Link href="/ajustes" className="flex items-center gap-3 text-muted-foreground hover:text-foreground" target="_blank" rel="noopener noreferrer">
                         <Settings className="icn" />
                         <span>Ajustes</span>
