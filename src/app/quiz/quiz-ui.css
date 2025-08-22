@@ -37,7 +37,7 @@
 
 /* ===== Estructura Base ===== */
 .quiz-page-container {
-  background-color: var(--bg);
+  background-image: linear-gradient(to bottom, #624E88, #8967B3, #CB80AB);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -178,7 +178,7 @@
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 16px;
-  background-color: var(--eng);
+  background-color: #FFD36B;
   color: var(--bg);
   border: none;
   cursor: pointer;
