@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
 export function StellarParticles() {
@@ -10,6 +10,14 @@ export function StellarParticles() {
     if (!mountRef.current) return;
 
     const currentMount = mountRef.current;
+    let renderer: THREE.WebGLRenderer;
+
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    } catch (e) {
+      console.error("Failed to create WebGL context for StellarParticles:", e);
+      return; // Stop execution if renderer fails to initialize
+    }
 
     // Scene
     const scene = new THREE.Scene();
@@ -18,8 +26,7 @@ export function StellarParticles() {
     const camera = new THREE.PerspectiveCamera(75, currentMount.clientWidth / currentMount.clientHeight, 0.1, 1000);
     camera.position.z = 5;
 
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    // Renderer setup
     renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
     currentMount.appendChild(renderer.domElement);
