@@ -1,0 +1,224 @@
+/* ===== Kallpa Comics Styles - Scoped ===== */
+.kallpa-comics {
+    --bg: #0B0F19;
+    --glass: rgba(26,30,46,0.92);
+    --primary: #7C3AED;
+    --secondary: #3B82F6;
+    --accent: #22C55E;
+    --text-main: #F9FAFB;
+    --text-muted: #9CA3AF;
+    --border: rgba(255,255,255,0.1);
+}
+
+.kallpa-comics .comic-container {
+    max-width: 1980px;
+    min-height: 1200px;
+    margin-inline: auto;
+    padding: 1.5rem;
+}
+
+/* Breadcrumb */
+.kallpa-comics .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+.kallpa-comics .breadcrumb-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.kallpa-comics .breadcrumb-link:hover {
+    color: var(--text-main);
+}
+.kallpa-comics .breadcrumb-separator {
+    color: var(--text-muted);
+}
+.kallpa-comics .breadcrumb-current {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+
+/* Comic Card */
+.kallpa-comics .comic-card {
+    background: var(--glass);
+    border-radius: 20px;
+    overflow: hidden;
+    max-width: 1200px;
+    margin-inline: auto;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    
+    /* Fade-in animation */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.4s 0.2s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cover Image */
+.kallpa-comics .comic-cover {
+    position: relative;
+    aspect-ratio: 16 / 9;
+}
+.kallpa-comics .comic-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Details Section */
+.kallpa-comics .comic-details {
+    padding: 2rem;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .kallpa-comics .comic-details {
+        padding: 2.5rem;
+    }
+}
+
+/* Tags */
+.kallpa-comics .comic-tags {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.kallpa-comics .tag-chip {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+}
+
+.kallpa-comics .tag-chip:hover {
+    color: var(--text-main);
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
+}
+
+/* Title & Subtitle */
+.kallpa-comics .comic-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+}
+.kallpa-comics .comic-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+    margin-bottom: 2rem;
+}
+
+
+/* Actions / Buttons */
+.kallpa-comics .comic-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+@media (min-width: 768px) {
+    .kallpa-comics .comic-actions {
+        flex-direction: row;
+    }
+}
+
+.kallpa-comics .btn-primary,
+.kallpa-comics .btn-secondary {
+    min-width: 200px;
+    font-weight: 600;
+}
+
+.kallpa-comics .btn-primary {
+    background: linear-gradient(90deg, var(--secondary), var(--primary));
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+}
+.kallpa-comics .btn-primary:hover:not(:disabled) {
+    box-shadow: 0 0 20px rgba(91, 150, 250, 0.5);
+}
+.kallpa-comics .btn-primary::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0)
+    );
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+.kallpa-comics .btn-primary:hover:not(:disabled)::after {
+    opacity: 1;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+
+.kallpa-comics .btn-secondary {
+    border-color: rgba(255,255,255,0.15);
+    background: transparent;
+}
+.kallpa-comics .btn-secondary:hover:not(:disabled) {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.25);
+}
+
+
+/* Border Glow effect */
+.kallpa-comics .comic-card {
+    position: relative;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    transition: all 0.3s ease;
+}
+
+.kallpa-comics .comic-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -1;
+    margin: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+.kallpa-comics .comic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+}
+
+.kallpa-comics .comic-card:hover::before {
+    opacity: 1;
+    filter: blur(8px);
+}
