@@ -1,33 +1,49 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { FlaskConical, Cpu, Wrench, Palette, Sigma } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { cloneElement, ReactElement } from 'react';
 
 const steamTopics = [
   {
-    icon: <FlaskConical className="w-16 h-16 mx-auto mb-4 text-primary" />,
+    icon: <FlaskConical className="w-16 h-16 mx-auto mb-4" />,
     title: 'Ciencia',
     description: 'Explora el universo, desde las partículas más pequeñas hasta las galaxias más grandes. Desvela los misterios de la vida y la materia.',
+    theme: 'science'
   },
   {
-    icon: <Cpu className="w-16 h-16 mx-auto mb-4 text-primary" />,
+    icon: <Cpu className="w-16 h-16 mx-auto mb-4" />,
     title: 'Tecnología',
     description: 'Moldea el futuro con código. Construye aplicaciones innovadoras, diseña sistemas inteligentes e impulsa la revolución digital.',
+    theme: 'tech'
   },
   {
-    icon: <Wrench className="w-16 h-16 mx-auto mb-4 text-primary" />,
+    icon: <Wrench className="w-16 h-16 mx-auto mb-4" />,
     title: 'Ingeniería',
     description: 'Diseña y crea soluciones a problemas del mundo real. Desde energía sostenible hasta robótica, construye un mundo mejor.',
+    theme: 'eng'
   },
   {
-    icon: <Palette className="w-16 h-16 mx-auto mb-4 text-primary" />,
+    icon: <Palette className="w-16 h-16 mx-auto mb-4" />,
     title: 'Arte',
     description: 'Fusiona la creatividad y la tecnología. Expresa tus ideas a través del diseño digital, el arte generativo y las experiencias interactivas.',
+    theme: 'art'
   },
   {
-    icon: <Sigma className="w-16 h-16 mx-auto mb-4 text-primary" />,
+    icon: <Sigma className="w-16 h-16 mx-auto mb-4" />,
     title: 'Matemáticas',
     description: 'Descubre el lenguaje del universo. Desbloquea patrones, resuelve problemas complejos y sienta las bases para toda innovación.',
+    theme: 'math'
   },
 ];
+
+const themeClasses: { [key: string]: string } = {
+  math: 'from-emerald-400 to-cyan-400 neon-shadow-math',
+  science: 'from-violet-400 to-purple-500 neon-shadow-science',
+  eng: 'from-amber-400 to-yellow-500 neon-shadow-eng',
+  art: 'from-pink-400 to-rose-400 neon-shadow-art',
+  tech: 'from-sky-400 to-blue-500 neon-shadow-tech',
+};
+
 
 export function About() {
   return (
@@ -45,7 +61,11 @@ export function About() {
           {steamTopics.map((topic) => (
             <Card key={topic.title} className="bg-white/5 border-white/10 rounded-2xl text-center transition-all duration-300 hover:bg-white/10 hover:border-primary hover:shadow-lg hover:shadow-primary/20 transform hover:-translate-y-2">
               <CardHeader>
-                {topic.icon}
+                <div className={cn('gradient-text bg-gradient-to-br', themeClasses[topic.theme])}>
+                  {cloneElement(topic.icon as ReactElement, {
+                    className: cn('w-16 h-16 mx-auto mb-4', themeClasses[topic.theme])
+                  })}
+                </div>
                 <CardTitle className="font-headline text-2xl text-primary">{topic.title}</CardTitle>
               </CardHeader>
               <CardContent>
