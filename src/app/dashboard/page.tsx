@@ -1,102 +1,180 @@
-
-import { Check } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { BarChart, Book, CheckCircle, Flame, MessageSquare, Target } from 'lucide-react';
 
 export default function DashboardPage() {
   return (
-    <>
+    <div className="grid gap-8">
       {/* KPIs */}
-      <section className="kd-kpis">
-        <article className="kpi">
-          <h4>Retos completados</h4>
-          <div className="val">18</div>
-          <span className="trend up">+3 esta semana</span>
-        </article>
-        <article className="kpi">
-          <h4>Racha</h4>
-          <div className="val">7 días</div>
-          <span className="trend up">+2</span>
-        </article>
-        <article className="kpi">
-          <h4>Puntos Kallpa</h4>
-          <div className="val">1,240</div>
-          <span className="trend">Objetivo: 1,500</span>
-        </article>
-        <article className="kpi">
-          <h4>Nivel</h4>
-          <div className="val">Explorer II</div>
-          <span className="trend ok">88% del nivel</span>
-        </article>
+      <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Retos Completados</CardTitle>
+            <CheckCircle className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">18</div>
+            <p className="text-xs text-green-500">+3 esta semana</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Racha de Días</CardTitle>
+            <Flame className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">7</div>
+            <p className="text-xs text-green-500">+2 días</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Puntos Kallpa</CardTitle>
+            <Target className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">1,240</div>
+            <p className="text-xs text-muted-foreground">Meta: 1,500</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Nivel Actual</CardTitle>
+            <BarChart className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">Explorer II</div>
+            <p className="text-xs text-muted-foreground">88% para el siguiente nivel</p>
+          </CardContent>
+        </Card>
       </section>
 
       {/* Charts */}
-      <section className="kd-charts">
-        <article className="card chart">
-          <header>
-            <h3>Progreso semanal</h3>
-            <button className="ghost">Ver todo</button>
-          </header>
-          <div className="chart-placeholder">[ Chart: líneas / barras ]</div>
-        </article>
-        <article className="card chart">
-          <header>
-            <h3>Habilidades (Radar)</h3>
-            <button className="ghost">Editar metas</button>
-          </header>
-          <div className="chart-placeholder">[ Chart: radar / spider ]</div>
-        </article>
+      <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+        <Card className="lg:col-span-4">
+          <CardHeader>
+            <CardTitle>Progreso Semanal</CardTitle>
+          </CardHeader>
+          <CardContent className="pl-2">
+             <div className="h-[250px] w-full flex items-center justify-center text-muted-foreground/50 border rounded-lg">
+                [Placeholder para Gráfico de Barras]
+              </div>
+          </CardContent>
+        </Card>
+        <Card className="lg:col-span-3">
+          <CardHeader>
+            <CardTitle>Radar de Habilidades</CardTitle>
+            <CardDescription>
+              Tus puntos fuertes en las áreas STEAM.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[250px] w-full flex items-center justify-center text-muted-foreground/50 border rounded-lg">
+                [Placeholder para Gráfico de Radar]
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+      
+      {/* Activity and Mentor */}
+      <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <Card>
+          <CardHeader>
+            <CardTitle>Actividad Reciente</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-4">
+            <div className="flex items-center gap-4">
+                <CheckCircle className="h-6 w-6 text-green-500" />
+                <div className="grid gap-1">
+                  <p className="text-sm font-medium leading-none">Insignia "Cripto Novata"</p>
+                  <p className="text-sm text-muted-foreground">Has completado el reto de criptografía básica.</p>
+                </div>
+            </div>
+             <div className="flex items-center gap-4">
+                <Rocket className="h-6 w-6 text-primary" />
+                <div className="grid gap-1">
+                  <p className="text-sm font-medium leading-none">Nuevo Reto: "Red Team Básico"</p>
+                  <p className="text-sm text-muted-foreground">Disponible en la sección de retos.</p>
+                </div>
+            </div>
+          </CardContent>
+        </Card>
+
+         <Card>
+          <CardHeader>
+            <CardTitle>Próximos Retos</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-4">
+             <div className="flex items-center justify-between">
+                <p>SQL Injection 101</p>
+                <span className="text-xs text-muted-foreground">Mañana</span>
+             </div>
+             <div className="flex items-center justify-between">
+                <p>CTF Mini: Contraseñas</p>
+                <span className="text-xs text-muted-foreground">Viernes</span>
+             </div>
+             <div className="flex items-center justify-between">
+                <p>Quiz de Redes</p>
+                <span className="text-xs text-muted-foreground">Lunes</span>
+             </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Mensaje de tu Mentora</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-4">
+            <div className="flex items-start gap-4">
+              <Avatar>
+                <AvatarImage src="https://placehold.co/40x40.png" />
+                <AvatarFallback>S</AvatarFallback>
+              </Avatar>
+              <div className="grid gap-1">
+                  <p className="text-sm font-medium">Sofía:</p>
+                  <p className="text-sm text-muted-foreground">"¡Buen avance! Para el próximo hito, practica 15 min de OWASP Top 10."</p>
+              </div>
+            </div>
+             <button className="w-full">
+                <MessageSquare className="mr-2 h-4 w-4" /> Abrir Chat
+             </button>
+          </CardContent>
+        </Card>
       </section>
 
-      {/* Activity + Tasks + Mentor */}
-      <section className="kd-grid-3">
-        <article className="card list">
-          <header><h3>Actividad reciente</h3></header>
-          <ul className="activity">
-            <li><span className="dot"></span> Obtuviste la insignia <b>Cripto Novata</b></li>
-            <li><span className="dot"></span> Nuevo reto: “Red Team básico”</li>
-            <li><span className="dot"></span> Mentora Sofía dejó feedback</li>
-          </ul>
-        </article>
-
-        <article className="card list">
-          <header><h3>Próximos retos</h3></header>
-          <ul className="tasks">
-            <li><input type="checkbox" /> SQL Injection 101 <small>Mañana</small></li>
-            <li><input type="checkbox" /> CTF mini: contraseñas <small>Vie</small></li>
-            <li><input type="checkbox" /> Quiz de redes <small>Lun</small></li>
-          </ul>
-          <button className="btn-secondary small">Ver calendario</button>
-        </article>
-
-        <article className="card mentor">
-          <header><h3>Mentoría</h3></header>
-          <div className="mentor-msg">
-            <p><b>Sofía:</b> ¡Buen avance! Practica 15 min de OWASP Top 10.</p>
+      {/* Resources */}
+       <section>
+          <h3 className="text-xl font-bold mb-4">Recursos Recomendados</h3>
+          <div className="grid gap-4 md:grid-cols-3">
+              <Card>
+                <CardHeader>
+                    <Book className="h-6 w-6 text-primary" />
+                    <CardTitle className="text-base pt-2">¿Qué es un CTF?</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <p className="text-sm text-muted-foreground">Un artículo introductorio para empezar en el mundo de "Capture The Flag".</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                    <Rocket className="h-6 w-6 text-primary" />
+                    <CardTitle className="text-base pt-2">Mini-Scanner de Puertos</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <p className="text-sm text-muted-foreground">Un proyecto práctico en Python para entender los fundamentos de redes y seguridad.</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                    <BarChart className="h-6 w-6 text-primary" />
+                    <CardTitle className="text-base pt-2">Criptografía Básica</CardTitle>
+                </CardHeader>
+                 <CardContent>
+                    <p className="text-sm text-muted-foreground">Un video de 5 minutos que explica los conceptos clave de la criptografía de forma sencilla.</p>
+                </CardContent>
+              </Card>
           </div>
-          <div className="mentor-actions">
-            <button className="btn-primary small">Abrir chat</button>
-            <button className="ghost small">Agendar</button>
-          </div>
-        </article>
-      </section>
+       </section>
 
-      {/* Recursos */}
-      <section className="kd-resources">
-        <article className="res-card">
-          <h4>Video: Criptografía básica</h4>
-          <p>5 min • Intro</p>
-          <button className="btn-secondary">Ver</button>
-        </article>
-        <article className="res-card">
-          <h4>Artículo: ¿Qué es un CTF?</h4>
-          <p>Lectura corta</p>
-          <button className="btn-secondary">Leer</button>
-        </article>
-        <article className="res-card">
-          <h4>Proyecto: Mini scanner puertos</h4>
-          <p>Python</p>
-          <button className="btn-secondary">Abrir</button>
-        </article>
-      </section>
-    </>
+    </div>
   );
 }
