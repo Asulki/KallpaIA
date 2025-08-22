@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Image from 'next/image';
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -11,13 +10,14 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import { Building2, Atom, School, Code2, HeartHandshake } from "lucide-react";
 
-const collaborations = [
-  { src: "https://placehold.co/800x600.png", alt: "Logo de colaborador 1", hint: "company logo" },
-  { src: "https://placehold.co/800x600.png", alt: "Logo de colaborador 2", hint: "organization logo" },
-  { src: "https://placehold.co/800x600.png", alt: "Logo de colaborador 3", hint: "tech company logo" },
-  { src: "https://placehold.co/800x600.png", alt: "Logo de colaborador 4", hint: "education logo" },
-  { src: "https://placehold.co/800x600.png", alt: "Logo de colaborador 5", hint: "science foundation logo" },
+const partnerships = [
+  { Icon: Building2, name: "Tech Corp" },
+  { Icon: Atom, name: "Science Foundation" },
+  { Icon: School, name: "Edu University" },
+  { Icon: Code2, name: "Open Source Initiative" },
+  { Icon: HeartHandshake, name: "Social Good Org" },
 ];
 
 export function PlanetCarousel() {
@@ -50,18 +50,14 @@ export function PlanetCarousel() {
         <div className="mt-16">
           <Carousel setApi={setApi} className="w-full max-w-5xl mx-auto" opts={{ loop: true }}>
             <CarouselContent>
-              {collaborations.map((collab, index) => (
+              {partnerships.map((partner, index) => (
                 <CarouselItem key={index}>
                   <Card className="bg-transparent border-0 shadow-none">
                     <CardContent className="flex aspect-video items-center justify-center p-0">
-                      <Image
-                        src={collab.src}
-                        alt={collab.alt}
-                        width={800}
-                        height={600}
-                        data-ai-hint={collab.hint}
-                        className="rounded-2xl border-2 border-white/10"
-                      />
+                      <div className="w-full h-full flex flex-col items-center justify-center bg-white/5 border-2 border-white/10 rounded-2xl">
+                        <partner.Icon className="w-24 h-24 text-primary" />
+                        <p className="mt-4 text-xl font-semibold text-gray-300">{partner.name}</p>
+                      </div>
                     </CardContent>
                   </Card>
                 </CarouselItem>
