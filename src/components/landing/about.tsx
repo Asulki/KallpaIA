@@ -1,29 +1,29 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ScienceIcon, TechIcon, EngineeringIcon, MathIcon, ArtIcon } from '@/components/landing/pixel-art-icons';
+import { FlaskConical, Cpu, Wrench, Palette, Sigma } from 'lucide-react';
 
 const steamTopics = [
   {
-    icon: <ScienceIcon className="w-16 h-16 mx-auto mb-4 text-primary" />,
+    icon: <FlaskConical className="w-16 h-16 mx-auto mb-4 text-primary" />,
     title: 'Ciencia',
     description: 'Explora el universo, desde las partículas más pequeñas hasta las galaxias más grandes. Desvela los misterios de la vida y la materia.',
   },
   {
-    icon: <TechIcon className="w-16 h-16 mx-auto mb-4 text-primary" />,
+    icon: <Cpu className="w-16 h-16 mx-auto mb-4 text-primary" />,
     title: 'Tecnología',
     description: 'Moldea el futuro con código. Construye aplicaciones innovadoras, diseña sistemas inteligentes e impulsa la revolución digital.',
   },
   {
-    icon: <EngineeringIcon className="w-16 h-16 mx-auto mb-4 text-primary" />,
+    icon: <Wrench className="w-16 h-16 mx-auto mb-4 text-primary" />,
     title: 'Ingeniería',
     description: 'Diseña y crea soluciones a problemas del mundo real. Desde energía sostenible hasta robótica, construye un mundo mejor.',
   },
   {
-    icon: <ArtIcon className="w-16 h-16 mx-auto mb-4 text-primary" />,
+    icon: <Palette className="w-16 h-16 mx-auto mb-4 text-primary" />,
     title: 'Arte',
     description: 'Fusiona la creatividad y la tecnología. Expresa tus ideas a través del diseño digital, el arte generativo y las experiencias interactivas.',
   },
   {
-    icon: <MathIcon className="w-16 h-16 mx-auto mb-4 text-primary" />,
+    icon: <Sigma className="w-16 h-16 mx-auto mb-4 text-primary" />,
     title: 'Matemáticas',
     description: 'Descubre el lenguaje del universo. Desbloquea patrones, resuelve problemas complejos y sienta las bases para toda innovación.',
   },
