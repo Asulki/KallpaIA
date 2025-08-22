@@ -15,7 +15,7 @@ export function Header() {
           <Link href="/#about" className="text-gray-300 hover:text-primary transition-colors">Nosotros</Link>
           <Link href="/#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
           <Link href="/#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
-           <Link href="/register" className="text-gray-300 hover:text-primary transition-colors">Inicia tu Aventura</Link>
+           <Link href="/login" className="text-gray-300 hover:text-primary transition-colors">Inicia tu Aventura</Link>
         </nav>
         <div className="flex items-center gap-4">
           <Sheet>
@@ -30,7 +30,7 @@ export function Header() {
                 <Link href="/#about" className="text-gray-300 hover:text-primary transition-colors">Nosotros</Link>
                 <Link href="/#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
                 <Link href="/#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
-                <Link href="/register" className="text-primary hover:text-primary/90 transition-colors mt-4">Inicia tu Aventura</Link>
+                <Link href="/login" className="text-primary hover:text-primary/90 transition-colors mt-4">Inicia tu Aventura</Link>
               </nav>
             </SheetContent>
           </Sheet>
