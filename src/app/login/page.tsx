@@ -55,7 +55,7 @@ export default function RegisterForm() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen gradient-background dashboard-theme">
+    <div className="flex items-center justify-center min-h-screen gradient-background">
       <Card className="w-full max-w-md bg-white/30 backdrop-blur-lg border-white/40 text-foreground rounded-2xl shadow-lg overflow-hidden">
         <div className="p-8">
           <div className="flex justify-center items-center gap-2 mb-4">
@@ -161,4 +161,3 @@ export default function RegisterForm() {
     </div>
   );
 }
-
