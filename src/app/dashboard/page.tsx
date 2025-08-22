@@ -2,9 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { BarChart, LineChart, Rocket, Lightbulb, ClipboardCheck, Star } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-
+import { BarChart, LineChart, Rocket, Star, Gamepad2 } from 'lucide-react';
 
 export default function DashboardPage() {
   return (
@@ -51,75 +49,28 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
-      <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
-        <Card className="xl:col-span-2">
-          <CardHeader>
-            <CardTitle>Próximos Retos</CardTitle>
-            <CardDescription>
-              Estos son los siguientes pasos en tu aventura de aprendizaje.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-             <ul className="space-y-4">
-              <li className="flex items-center gap-4">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <Rocket className="h-5 w-5" />
+
+      <div className="mt-8 grid grid-cols-1 gap-8">
+        <Card className="w-full">
+            <CardHeader>
+                <CardTitle>Planeta Activo: Ciencia</CardTitle>
+                <CardDescription>Tu aventura actual para dominar los misterios del universo.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm font-medium text-muted-foreground">HP (Puntos de Habilidad)</span>
+                    <span className="text-sm font-bold">85 / 100</span>
                 </div>
-                <div className="flex-1">
-                  <p className="font-medium">Introducción a Python</p>
-                  <p className="text-sm text-muted-foreground">Completa 3 módulos básicos.</p>
-                </div>
-                <Button variant="outline" size="sm">Empezar</Button>
-              </li>
-               <li className="flex items-center gap-4">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-yellow-500/10 text-yellow-500">
-                  <Lightbulb className="h-5 w-5" />
-                </div>
-                <div className="flex-1">
-                  <p className="font-medium">Quiz: Lógica de Programación</p>
-                  <p className="text-sm text-muted-foreground">Pon a prueba tus conocimientos.</p>
-                </div>
-                <Button variant="outline" size="sm">Resolver</Button>
-              </li>
-               <li className="flex items-center gap-4">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-500/10 text-green-500">
-                  <ClipboardCheck className="h-5 w-5" />
-                </div>
-                <div className="flex-1">
-                  <p className="font-medium">Proyecto: Tu Primer Script</p>
-                  <p className="text-sm text-muted-foreground">Aplica lo que aprendiste.</p>
-                </div>
-                <Button variant="outline" size="sm">Iniciar</Button>
-              </li>
-            </ul>
-          </CardContent>
+                <Progress value={85} aria-label="85% de habilidad completado" />
+            </CardContent>
         </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Actividad Reciente</CardTitle>
-          </CardHeader>
-          <CardContent className="grid gap-6">
-            <div className="flex items-center gap-4">
-               <Avatar className="h-10 w-10">
-                <AvatarImage src="https://placehold.co/40x40.png" alt="Avatar" />
-                <AvatarFallback>MC</AvatarFallback>
-              </Avatar>
-              <div className="grid gap-1">
-                <p className="text-sm font-medium leading-none">Mentora Curie te dejó feedback.</p>
-                <p className="text-sm text-muted-foreground">"¡Excelente trabajo en el reto de algoritmos!"</p>
-              </div>
-            </div>
-             <div className="flex items-center gap-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-500/20">
-                    <Star className="h-5 w-5 text-green-500" />
-                </div>
-                <div className="grid gap-1">
-                  <p className="text-sm font-medium leading-none">Insignia "Pensadora Lógica" obtenida</p>
-                  <p className="text-sm text-muted-foreground">Completaste el módulo de lógica.</p>
-                </div>
-            </div>
-          </CardContent>
-        </Card>
+
+        <div className="text-center">
+            <Button size="lg" className="h-12 px-10 text-lg rounded-full font-bold">
+                <Gamepad2 className="mr-2 h-6 w-6" />
+                Jugar Videojuegos Vocacionales
+            </Button>
+        </div>
       </div>
     </>
   );
