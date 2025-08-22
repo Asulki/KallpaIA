@@ -9,7 +9,7 @@
   
   /* Planetas (flat) */
   --chip-math: #9FE3C4;
-  --chip-science: #B8A8FF;
+  --chip-sci: #B8A8FF;
   --chip-eng: #FFD36B;
   --chip-art: #FFB0C8;
   --chip-tech: #97D9FF;
@@ -120,7 +120,7 @@
 
 /* Variantes por planeta (color del chip) */
 .kcard--math .kcard__chip { background: var(--chip-math); }
-.kcard--science .kcard__chip { background: var(--chip-science); }
+.kcard--sci .kcard__chip { background: var(--chip-sci); }
 .kcard--eng .kcard__chip { background: var(--chip-eng); }
 .kcard--art .kcard__chip { background: var(--chip-art); }
 .kcard--tech .kcard__chip { background: var(--chip-tech); }
