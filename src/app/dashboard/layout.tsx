@@ -1,8 +1,5 @@
-import { Home, Rocket, BarChart, BookOpen, User, Settings, Bell, Search, Sun, Moon } from 'lucide-react';
+import './dashboard.css';
 import Link from 'next/link';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 
 export default function DashboardLayout({
   children,
@@ -10,83 +7,59 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen w-full flex-col bg-background">
-      <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background/80 backdrop-blur-sm px-4 md:px-6 z-50">
-        <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-          <Link
-            href="#"
-            className="flex items-center gap-2 text-lg font-semibold md:text-base"
-          >
-            <Rocket className="h-6 w-6 text-primary" />
-            <span className="">KallpaIA</span>
-          </Link>
-          <Link
-            href="#"
-            className="text-foreground transition-colors hover:text-foreground"
-          >
-            Dashboard
-          </Link>
-        </nav>
-        <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-          <form className="ml-auto flex-1 sm:flex-initial">
-            <div className="relative">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Buscar retos, mentoras..."
-                className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-              />
-            </div>
-          </form>
-          <Button variant="outline" size="icon">
-            <Bell className="h-4 w-4" />
-          </Button>
-          <Button variant="outline" size="icon">
-            <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
-          </Button>
-          <Avatar>
-            <AvatarImage src="https://i.ibb.co/V3F7499/vicuna-bot.png" alt="User Avatar" />
-            <AvatarFallback>U</AvatarFallback>
-          </Avatar>
+    <section className="kallpa-dashboard">
+        <div className="kd-space" aria-hidden="true">
+            <svg className="kd-constellations" viewBox="0 0 1920 1080">
+                <g stroke="rgba(156,163,175,.35)" strokeWidth="1.2">
+                <polyline points="200,220 260,280 340,250 420,320" />
+                <polyline points="1200,180 1260,240 1320,220 1380,300 1460,280" />
+                </g>
+                <g fill="#fff">
+                <circle cx="200" cy="220" r="1.6"/><circle cx="260" cy="280" r="1.4"/>
+                <circle cx="340" cy="250" r="1.8"/><circle cx="420" cy="320" r="1.3"/>
+                <circle cx="1200" cy="180" r="1.5"/><circle cx="1260" cy="240" r="1.2"/>
+                <circle cx="1320" cy="220" r="1.6"/><circle cx="1380" cy="300" r="1.2"/><circle cx="1460" cy="280" r="1.4"/>
+                </g>
+            </svg>
+        </div>
+
+      <header className="kd-header">
+        <div className="kd-logo">
+          <span className="badge">🤖</span>
+          <strong>KallpaIA</strong>
+        </div>
+
+        <div className="kd-search">
+          <input type="search" placeholder="Buscar retos, recursos, mentoras…" />
+          <button aria-label="Buscar">🔍</button>
+        </div>
+
+        <div className="kd-actions">
+          <button className="icon-btn" aria-label="Notificaciones">🔔</button>
+          <button className="icon-btn" aria-label="Cambiar tema">🌓</button>
+          <div className="kd-user">
+            <img src="https://i.ibb.co/V3F7499/vicuna-bot.png" alt="Perfil" width="32" height="32" />
+            <span>Carla</span>
+          </div>
         </div>
       </header>
-      <div className="flex flex-1">
-        <aside className="hidden w-64 flex-col border-r bg-background p-4 md:flex">
-          <nav className="flex flex-col gap-2">
-            <Link href="#" className="flex items-center gap-3 rounded-lg bg-primary px-3 py-2 text-primary-foreground transition-all hover:bg-primary/90">
-              <Home className="h-4 w-4" />
-              Inicio
-            </Link>
-            <Link href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground/80">
-              <Rocket className="h-4 w-4" />
-              Retos
-            </Link>
-            <Link href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground/80">
-              <BarChart className="h-4 w-4" />
-              Progreso
-            </Link>
-            <Link href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground/80">
-              <User className="h-4 w-4" />
-              Mentoría
-            </Link>
-            <Link href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground/80">
-              <BookOpen className="h-4 w-4" />
-              Biblioteca
-            </Link>
+      
+      <div className="kd-layout">
+        <aside className="kd-sidebar">
+          <nav>
+            <Link className="active" href="#">Inicio</Link>
+            <Link href="#">Retos</Link>
+            <Link href="#">Progreso</Link>
+            <Link href="#">Mentoría</Link>
+            <Link href="#">Biblioteca</Link>
+            <Link href="#">Ajustes</Link>
           </nav>
-          <div className="mt-auto">
-            <Link href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground/80">
-              <Settings className="h-4 w-4" />
-              Ajustes
-            </Link>
-          </div>
         </aside>
-        <main className="flex-1 p-4 md:p-8">
+        
+        <main className="kd-main">
           {children}
         </main>
       </div>
-    </div>
+    </section>
   );
 }
