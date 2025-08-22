@@ -2,8 +2,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { BarChart, LineChart } from 'lucide-react';
-import { Rocket, Lightbulb, ClipboardCheck } from 'lucide-react';
+import { BarChart, LineChart, Rocket, Lightbulb, ClipboardCheck, Star } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
 
 export default function DashboardPage() {
   return (
