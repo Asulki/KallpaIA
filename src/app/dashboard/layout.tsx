@@ -40,12 +40,12 @@ export default function DashboardLayout({
                 <a className="active" href="#">
                     <span className="nav-icn">🏠</span><span className="label">Inicio</span>
                 </a>
-                <a href="#"><span className="nav-icn">🗡️</span><span className="label">Retos</span></a>
+                <a href="#"><span className="nav-icn">🎯</span><span className="label">Retos</span></a>
                 <a href="#"><span className="nav-icn">🧭</span><span className="label">Info vocacional</span></a>
                 <a href="#"><span className="nav-icn">🤖</span><span className="label">Chat IA</span></a>
                 <a href="#"><span className="nav-icn">✨</span><span className="label">Oportunidades</span></a>
             </nav>
-            <div className="extra">comics digitales</div>
+            <div className="extra">🗯️ comics digitales</div>
         </aside>
         
         <main className="kd-main">
