@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 const navItems = [
   { href: '/dashboard', icon: Home, label: 'Inicio' },
   { href: '/dashboard/challenges', icon: Swords, label: 'Retos' },
-  { href: '/dashboard/minigames', icon: Gamepad2, label: 'Minijuegos STEAM' },
+  { href: '/dashboard/minigames', icon: Gamepad2, label: 'Minijuegos' },
   { href: '/dashboard/career', icon: GraduationCap, label: 'Info vocacional' },
   { href: '/dashboard/chat', icon: MessagesSquare, label: 'Chat IA' },
   { href: '/dashboard/opportunities', icon: Sparkles, label: 'Oportunidades' },
@@ -19,7 +19,7 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden md:flex flex-col justify-between bg-card/40 border-r border-white/10 p-6">
+    <aside className="hidden md:flex flex-col justify-between bg-bg-space border-r border-white/10 p-6 w-[280px]">
       <div>
         <div className="mb-10">
           <Link href="/" className="flex items-center gap-2">
@@ -36,13 +36,13 @@ export function Sidebar() {
                 <Button
                   variant="ghost"
                   className={cn(
-                    "w-full justify-start gap-3 text-base h-12 px-4",
+                    "w-full justify-start gap-3 text-base h-12 px-4 rounded-full",
                     isActive 
-                      ? "bg-primary/20 text-primary font-bold border border-primary/50" 
-                      : "text-muted-foreground hover:bg-primary/10 hover:text-white"
+                      ? "bg-primary text-white font-bold" 
+                      : "text-text-muted hover:bg-primary/10 hover:text-white"
                   )}
                 >
-                  <item.icon className={cn("h-5 w-5", isActive && "text-primary")} />
+                  <item.icon className="h-5 w-5" />
                   {item.label}
                 </Button>
               </Link>

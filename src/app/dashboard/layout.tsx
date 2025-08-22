@@ -1,6 +1,5 @@
 import { DashboardHeader } from '@/components/dashboard/header';
 import { Sidebar } from '@/components/dashboard/sidebar';
-import { WidgetPanel } from '@/components/dashboard/widget-panel';
 
 export default function DashboardLayout({
   children,
@@ -9,7 +8,7 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="relative z-10 min-h-screen w-full bg-transparent text-foreground dashboard-theme font-body">
-      <div className="grid md:grid-cols-[240px_1fr] lg:grid-cols-[240px_1fr_320px] min-h-screen">
+      <div className="grid md:grid-cols-[280px_1fr]">
         <Sidebar />
         <div className="flex flex-col">
           <DashboardHeader />
@@ -17,7 +16,6 @@ export default function DashboardLayout({
             {children}
           </main>
         </div>
-        <WidgetPanel />
       </div>
     </div>
   );
