@@ -1,5 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { BarChart, Book, CheckCircle, Flame, MessageSquare, Target } from 'lucide-react';
+import { BarChart, Book, CheckCircle, Flame, MessageSquare, Rocket, Target } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 
 export default function DashboardPage() {
   return (
@@ -134,9 +136,9 @@ export default function DashboardPage() {
                   <p className="text-sm text-muted-foreground">"¡Buen avance! Para el próximo hito, practica 15 min de OWASP Top 10."</p>
               </div>
             </div>
-             <button className="w-full">
+             <Button>
                 <MessageSquare className="mr-2 h-4 w-4" /> Abrir Chat
-             </button>
+             </Button>
           </CardContent>
         </Card>
       </section>
