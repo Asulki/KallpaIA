@@ -7,7 +7,7 @@ import { Badge } from '../ui/badge';
 
 export function PlanetCard() {
   return (
-    <Card className="bg-glass border border-white/10 shadow-2xl shadow-primary/10 backdrop-blur-lg overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-primary/20 hover:-translate-y-1 rounded-3xl">
+    <Card className="bg-glass border border-white/10 shadow-2xl shadow-primary/10 backdrop-blur-lg overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-primary/20 hover:-translate-y-1 rounded-3xl w-full max-w-5xl">
       <CardHeader className="p-6">
         <Badge className="bg-yellow-400/10 text-edge-gold border-edge-gold/50 w-fit uppercase tracking-widest font-semibold">Planeta Activo</Badge>
         <CardTitle className="text-3xl font-bold text-text-main font-headline">Planeta Inti – Ciencia</CardTitle>
@@ -47,13 +47,6 @@ export function PlanetCard() {
           </div>
         </div>
       </CardContent>
-      <CardFooter className="bg-black/20 p-4 flex-col items-center gap-4">
-         <Button size="lg" className="w-full max-w-sm font-headline bg-primary text-primary-foreground text-lg rounded-full py-3 hover:bg-accent hover:shadow-lg hover:shadow-primary/30 transition-all">
-            <Gamepad2 className="mr-2" />
-            Videojuegos Vocacionales
-        </Button>
-        <p className="text-xs text-center text-text-muted w-full">Interactúa con tu planeta: swipea para más info o toca a tu avatar para ver stats ✨</p>
-      </CardFooter>
     </Card>
   );
 }
