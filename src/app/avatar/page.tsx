@@ -125,7 +125,7 @@ export default function AvatarSelectionPage() {
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-black p-4 text-white overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-40">
             <Image
-            src="https://i.ibb.co/d0PvKQQ6/fondo-final.png"
+            src="https://i.ibb.co/d0PvKQQ/fondo-final.png"
             alt="Pixel art de Machu Picchu"
             fill
             style={{ objectFit: 'cover' }}
