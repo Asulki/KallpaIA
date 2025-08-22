@@ -9,12 +9,6 @@ import { ai } from '@/ai/genkit';
 import OpenAI from 'openai';
 import { ChatInput, ChatInputSchema, ChatOutput, ChatOutputSchema } from '../schemas/chat-schemas';
 
-// Initialize the Poe client
-const poeClient = new OpenAI({
-  apiKey: process.env.POE_API_KEY || "YOUR_POE_API_KEY",
-  baseURL: 'https://api.poe.com/v1',
-});
-
 const chatFlow = ai.defineFlow(
   {
     name: 'chatFlow',
@@ -23,6 +17,17 @@ const chatFlow = ai.defineFlow(
   },
   async (input) => {
     const { messages, model } = input;
+    const apiKey = process.env.POE_API_KEY;
+
+    if (!apiKey) {
+        console.error("Poe API key is not configured.");
+        return { content: "La clave de la API de Poe no está configurada. Por favor, configúrala para continuar." };
+    }
+
+    const poeClient = new OpenAI({
+      apiKey: apiKey,
+      baseURL: 'https://api.poe.com/v1',
+    });
 
     try {
       const completion = await poeClient.chat.completions.create({
@@ -38,7 +43,9 @@ const chatFlow = ai.defineFlow(
 
     } catch (error: any) {
       console.error("Error calling Poe API:", error);
-      // Provide a more user-friendly error message
+      if (error.status === 401) {
+        return { content: "Error de autenticación. Verifica que la clave de la API de Poe sea correcta." };
+      }
       if (error.status === 429) {
           return { content: "Se ha alcanzado el límite de solicitudes. Por favor, inténtalo de nuevo más tarde." };
       }
