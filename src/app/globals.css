@@ -79,6 +79,27 @@
   }
 }
 
+@layer utilities {
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+  }
+  .neon-shadow-math {
+    filter: drop-shadow(0 0 12px theme('colors.emerald.500/0.6'));
+  }
+  .neon-shadow-science {
+    filter: drop-shadow(0 0 12px theme('colors.violet.500/0.6'));
+  }
+  .neon-shadow-eng {
+    filter: drop-shadow(0 0 12px theme('colors.amber.500/0.6'));
+  }
+  .neon-shadow-art {
+    filter: drop-shadow(0 0 12px theme('colors.rose.500/0.6'));
+  }
+  .neon-shadow-tech {
+    filter: drop-shadow(0 0 12px theme('colors.sky.500/0.6'));
+  }
+}
+
 
 /* ===== Space Background ===== */
 @layer base {

@@ -53,12 +53,12 @@ const avatars = [
   },
 ];
 
-const themeColors: { [key: string]: string } = {
-  math: 'text-[#9FE3C4]',
-  science: 'text-[#B8A8FF]',
-  eng: 'text-[#FFD36B]',
-  art: 'text-[#FFB0C8]',
-  tech: 'text-[#97D9FF]',
+const themeClasses: { [key: string]: string } = {
+  math: 'from-emerald-400 to-cyan-400 neon-shadow-math',
+  science: 'from-violet-400 to-purple-500 neon-shadow-science',
+  eng: 'from-amber-400 to-yellow-500 neon-shadow-eng',
+  art: 'from-pink-400 to-rose-400 neon-shadow-art',
+  tech: 'from-sky-400 to-blue-500 neon-shadow-tech',
 };
 
 
@@ -82,7 +82,10 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
       <div className="kcard__art">
         {cloneElement(avatar.icon as ReactElement, { 
             size: 96, 
-            className: cn('drop-shadow-lg', themeColors[avatar.theme]) 
+            className: cn(
+              'gradient-text bg-gradient-to-br',
+              themeClasses[avatar.theme]
+            )
         })}
       </div>
 
