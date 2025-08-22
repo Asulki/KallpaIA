@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { StellarParticles } from '@/components/landing/stellar-particles';
-import { Star, Palette, Beaker, Wrench, Sigma, Cpu } from 'lucide-react';
+import { Palette, Beaker, Wrench, Sigma, Cpu } from 'lucide-react';
 import './kallpa-cards.css';
 
 const avatars = [
