@@ -15,9 +15,11 @@ export function Header() {
           <Link href="/#about" className="text-gray-300 hover:text-primary transition-colors">Nosotros</Link>
           <Link href="/#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
           <Link href="/#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
-           <Link href="/login" className="text-gray-300 hover:text-primary transition-colors">Inicia tu Aventura</Link>
         </nav>
         <div className="flex items-center gap-4">
+           <Button asChild className="hidden md:flex font-headline text-base rounded-full px-6 py-2">
+              <Link href="/login">Inicia tu Aventura</Link>
+          </Button>
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="md:hidden bg-transparent border-primary text-primary">
