@@ -37,11 +37,11 @@ export default function DashboardLayout({
       <div className="kd-layout">
         <aside className="kd-sidebar">
             <nav>
-                <Link className="active" href="/inicio"><span className="nav-icn">🏠</span><span className="label">Inicio</span></Link>
-                <Link href="/retos"><span className="nav-icn">🎯</span><span className="label">Retos</span></Link>
-                <Link href="/info-vocacional"><span className="nav-icn">🧭</span><span className="label">Info vocacional</span></Link>
-                <Link href="/chat-ia"><span className="nav-icn">🤖</span><span className="label">Chat IA</span></Link>
-                <Link href="/oportunidades"><span className="nav-icn">✨</span><span className="label">Oportunidades</span></Link>
+                <Link className="active nav-item" href="/inicio">🏠 Inicio</Link>
+                <Link className="nav-item" href="/retos">🎯 Retos</Link>
+                <Link className="nav-item" href="/info-vocacional">🧭 Info vocacional</Link>
+                <Link className="nav-item" href="/chat-ia">🤖 Chat IA</Link>
+                <Link className="nav-item" href="/oportunidades">✨ Oportunidades</Link>
             </nav>
             <Link href="/comics-digitales" className="extra">🗯️ comics digitales</Link>
         </aside>
