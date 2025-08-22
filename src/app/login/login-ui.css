@@ -1,0 +1,172 @@
+/* ===== KallpaIA – Futurista / Tech (Azules + Violetas Neón) ===== */
+:root{
+  /* Base */
+  --bg-1:#0F2027;
+  --bg-2:#203A43;
+  --bg-3:#2C5364;
+
+  /* Accents */
+  --primary:#6C63FF;     /* violeta eléctrico */
+  --primary-2:#857DFF;   /* hover */
+  --secondary:#00D4FF;   /* cyan brillante */
+  --danger:#FF6B6B;
+
+  /* Text */
+  --text:#FFFFFF;
+  --muted:#B0BEC5;
+  --ink:#E3F2FD;
+
+  /* Surfaces */
+  --surface: rgba(255,255,255,.06);
+  --surface-2: rgba(255,255,255,.12);
+  --border: rgba(255,255,255,.18);
+  --shadow: 0 20px 60px rgba(0, 0, 0, .45), 0 2px 10px rgba(0, 0, 0, .25);
+}
+
+*{box-sizing:border-box}
+
+body {
+  color:var(--text);
+  background: radial-gradient(1200px 800px at 20% 15%, rgba(108,99,255,.18), transparent 60%),
+              linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
+  background-attachment: fixed;
+}
+
+/* --- Layout container --- */
+.app{
+  min-height:100dvh;
+  display:grid;
+  place-items:center;
+  padding:24px;
+}
+
+/* --- Card (glassmorphism suave) --- */
+.login-card{
+  width:clamp(320px, 92vw, 520px);
+  background: linear-gradient(180deg, var(--surface), rgba(255,255,255,.03));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border:1px solid var(--border);
+  border-radius:24px;
+  box-shadow: var(--shadow);
+  padding:36px 32px 28px;
+}
+
+/* --- Branding / títulos --- */
+.logo{
+  display:flex; align-items:center; gap:10px;
+  font-weight:800; font-size:28px; letter-spacing:.2px;
+  color:var(--ink);
+}
+.logo .badge{
+  width:32px; height:32px; border-radius:10px;
+  display:grid; place-items:center;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  box-shadow: 0 6px 18px rgba(0,212,255,.35), inset 0 0 20px rgba(255,255,255,.18);
+}
+
+.title{
+  margin:10px 0 22px;
+  font-size:26px; font-weight:750;
+  text-align: center;
+}
+
+/* --- Labels y mensajes --- */
+.label{
+  display:block;
+  margin:16px 0 8px;
+  color:var(--muted);
+  font-size:14px; letter-spacing:.2px;
+}
+.help, .error{
+  margin-top:8px; font-size:12px;
+}
+.help{ color:var(--muted); }
+.error{ color:var(--danger); }
+
+/* --- Inputs --- */
+.input{
+  width:100%;
+  height:48px;
+  padding:0 48px 0 44px; /* deja espacio para íconos */
+  border-radius:14px;
+  border:1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  color:var(--text);
+  outline:none;
+  transition: box-shadow .2s, border-color .2s, transform .05s;
+  font-size: 1rem;
+}
+.input::placeholder{ color:#9FB3C8; opacity:.85 }
+.input:focus{
+  border-color: color-mix(in oklab, var(--primary) 70%, white 30%);
+  box-shadow: 0 0 0 4px rgba(108,99,255,.25), 0 8px 24px rgba(108,99,255,.25);
+}
+.input:active{ transform: translateY(1px); }
+
+/* Íconos dentro del input (posición absoluta en contenedor relativo) */
+.input-wrap{ position:relative }
+.input-icon-left, .input-icon-right{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:22px; height:22px; display:grid; place-items:center;
+  color:#C8D7E1;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+.input-icon-left{ left:12px }
+.input-icon-right{ right:12px; cursor:pointer }
+
+/* --- Botones --- */
+.btn{
+  width:100%; height:50px;
+  border:none; border-radius:16px;
+  font-weight:700; letter-spacing:.3px;
+  display:inline-grid; place-items:center;
+  cursor:pointer;
+  transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
+  font-size: 1rem;
+}
+
+.btn-primary{
+  color:#0B0F1A;
+  background: linear-gradient(135deg, var(--primary), color-mix(in oklab, var(--primary) 70%, white 30%));
+  box-shadow: 0 10px 28px rgba(108,99,255,.45), 0 2px 6px rgba(0,0,0,.25);
+}
+.btn-primary:hover{
+  background: linear-gradient(135deg, var(--primary-2), var(--primary));
+  box-shadow: 0 14px 36px rgba(133,125,255,.50);
+}
+.btn-primary:active{ transform: translateY(2px) }
+
+.btn-secondary{
+  color:#06131A;
+  background: linear-gradient(135deg, var(--secondary), color-mix(in oklab, var(--secondary) 70%, white 25%));
+  box-shadow: 0 8px 22px rgba(0,212,255,.38);
+}
+.btn-secondary:hover{ filter:saturate(1.1) brightness(1.03) }
+.btn-secondary:active{ transform: translateY(2px) }
+
+/* --- Links --- */
+.link{
+  color: var(--secondary);
+  text-decoration:none; font-weight:600;
+}
+.link:hover{ text-decoration:underline }
+
+/* --- Espaciados habituales --- */
+.stack-16 > * + *{ margin-top:16px }
+.stack-20 > * + *{ margin-top:20px }
+
+.form-footer {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 24px;
+}
+
+
+/* --- Responsive --- */
+@media (max-width:480px){
+  .login-card{ padding:28px 22px 22px }
+  .title{ font-size:22px }
+}

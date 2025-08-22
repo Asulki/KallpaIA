@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,26 +7,9 @@ import { useForm } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
-
 import { BotIcon, Mail, Lock, Eye, EyeOff } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import '../login/login-ui.css';
 
 // ---------- Esquemas ----------
 const emailSchema = z.object({
@@ -55,15 +39,13 @@ export default function ForgotPasswordPage() {
   const { toast } = useToast();
   const router = useRouter();
   const params = useSearchParams();
-  const token = params.get("token"); // Si existe, mostramos el paso 2
+  const token = params.get("token");
 
-  // -------- Bloquear pegar en campos sensibles --------
   const blockPasteHandlers = {
     onPaste: (e: React.ClipboardEvent<HTMLInputElement>) => e.preventDefault(),
     onDrop: (e: React.DragEvent<HTMLInputElement>) => e.preventDefault(),
   };
 
-  // ========== PASO 1: Solicitar correo ==========
   const emailForm = useForm<z.infer<typeof emailSchema>>({
     resolver: zodResolver(emailSchema),
     defaultValues: { email: "" },
@@ -71,17 +53,15 @@ export default function ForgotPasswordPage() {
   });
 
   async function onSubmitEmail(values: z.infer<typeof emailSchema>) {
-    // Simulación, en un caso real esto llamaría a tu API.
     console.log("Solicitando reseteo para:", values.email);
     toast({
       title: "Revisa tu correo",
       description: "Te enviamos un enlace para restablecer tu contraseña.",
     });
-    // En un caso real, podrías redirigir a una página de "Verifica tu correo"
-    // router.push(`/password?token=fake-token-for-testing`); // Para pruebas
+    // For testing, we can simulate the token flow
+    // router.push(`/password?token=fake-token-for-testing`);
   }
 
-  // ========== PASO 2: Nueva contraseña ==========
   const [showPw, setShowPw] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
@@ -92,7 +72,6 @@ export default function ForgotPasswordPage() {
   });
 
   async function onSubmitReset(values: z.infer<typeof resetSchema>) {
-    // Simulación, en un caso real esto llamaría a tu API.
     console.log("Contraseña actualizada para el token:", token);
     toast({
       title: "Contraseña actualizada",
@@ -101,175 +80,128 @@ export default function ForgotPasswordPage() {
     router.push("/login");
   }
 
-  // ---------- UI ----------
   return (
-    <div className="flex items-center justify-center min-h-screen gradient-background px-4 light-theme">
-      <Card className="w-full max-w-md bg-white/30 backdrop-blur-lg border-white/40 text-foreground rounded-2xl shadow-lg overflow-hidden">
-        <div className="p-8">
-          <div className="flex justify-center items-center gap-2 mb-4">
-            <BotIcon className="w-10 h-10 text-primary" />
-            <span className="font-headline text-3xl font-bold">KallpaIA</span>
-          </div>
+    <div className="app">
+      <div className="login-card">
+         <header className="flex justify-center mb-6">
+            <div className="logo">
+                <span className="badge">
+                    <BotIcon style={{ color: 'var(--ink)'}} size={20} />
+                </span>
+                <span>KallpaIA</span>
+            </div>
+        </header>
 
           {!token ? (
             <>
-              <CardHeader className="text-center p-0 mb-6">
-                <CardTitle className="font-headline text-2xl">Recuperar contraseña</CardTitle>
-                <p className="text-sm text-muted-foreground mt-1">
+              <h1 className="title">Recuperar contraseña</h1>
+               <p className="text-center text-sm text-muted-foreground -mt-4 mb-6">
                   Ingresa tu correo y te enviaremos un enlace para restablecerla.
                 </p>
-              </CardHeader>
-
-              <CardContent className="p-0">
-                <Form {...emailForm}>
-                  <form onSubmit={emailForm.handleSubmit(onSubmitEmail)} className="space-y-4">
-                    <FormField
-                      control={emailForm.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Correo electrónico</FormLabel>
-                          <FormControl>
-                            <div className="relative">
-                              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                              <Input
-                                className="pl-10 bg-input border-border"
+              
+                <form onSubmit={emailForm.handleSubmit(onSubmitEmail)} className="space-y-4">
+                     <div>
+                        <label htmlFor="email" className="label">Correo Electrónico</label>
+                        <div className="input-wrap">
+                            <span className="input-icon-left">
+                                <Mail size={18} />
+                            </span>
+                            <input
+                                id="email"
+                                className="input"
                                 type="email"
                                 placeholder="tucorreo@ejemplo.com"
                                 autoComplete="email"
                                 inputMode="email"
                                 {...blockPasteHandlers}
-                                {...field}
-                              />
-                            </div>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                                {...emailForm.register("email")}
+                            />
+                        </div>
+                        {emailForm.formState.errors.email && <p className="error">{emailForm.formState.errors.email.message}</p>}
+                    </div>
+                  
+                  <div className="pt-2">
+                    <button type="submit" className="btn btn-primary">
+                        Enviar enlace
+                    </button>
+                  </div>
 
-                    <Button
-                      type="submit"
-                      className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all !mt-6"
-                    >
-                      Enviar enlace
-                    </Button>
-
-                    <p className="text-center text-xs text-muted-foreground !mt-4">
-                      ¿Ya la recordaste?{" "}
-                      <Link href="/login" className="underline underline-offset-2">
-                        Inicia sesión
-                      </Link>
-                    </p>
-                  </form>
-                </Form>
-              </CardContent>
+                  <p className="form-footer">
+                    ¿Ya la recordaste?{" "}
+                    <Link href="/login" className="link">
+                      Inicia sesión
+                    </Link>
+                  </p>
+                </form>
             </>
           ) : (
             <>
-              <CardHeader className="text-center p-0 mb-6">
-                <CardTitle className="font-headline text-2xl">Crea una nueva contraseña</CardTitle>
-                <p className="text-sm text-muted-foreground mt-1">
+              <h1 className="title">Crea una nueva contraseña</h1>
+                <p className="text-center text-sm text-muted-foreground -mt-4 mb-6">
                   Elige una contraseña segura para tu cuenta.
                 </p>
-              </CardHeader>
 
-              <CardContent className="p-0">
-                <Form {...resetForm}>
-                  <form onSubmit={resetForm.handleSubmit(onSubmitReset)} className="space-y-4">
-                    <FormField
-                      control={resetForm.control}
-                      name="password"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Nueva contraseña</FormLabel>
-                          <FormControl>
-                            <div className="relative">
-                              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                              <Input
-                                className="pl-10 pr-12 bg-input border-border"
-                                type={showPw ? "text" : "password"}
-                                placeholder="Mín. 10 con Aa, 0-9 y símbolo"
-                                autoComplete="new-password"
-                                {...blockPasteHandlers}
-                                {...field}
-                              />
-                              <button
-                                type="button"
-                                aria-label={showPw ? "Ocultar contraseña" : "Mostrar contraseña"}
-                                onClick={() => setShowPw((s) => !s)}
-                                className="absolute right-3 top-1/2 -translate-y-1/2"
-                              >
-                                {showPw ? (
-                                  <EyeOff className="h-5 w-5 text-muted-foreground" />
-                                ) : (
-                                  <Eye className="h-5 w-5 text-muted-foreground" />
-                                )}
-                              </button>
+                <form onSubmit={resetForm.handleSubmit(onSubmitReset)}>
+                    <div className="stack-20">
+                        <div>
+                            <label htmlFor="password" aria-label="Nueva contraseña" className="label">Nueva contraseña</label>
+                            <div className="input-wrap">
+                                <span className="input-icon-left"><Lock size={18} /></span>
+                                <input
+                                    id="password"
+                                    className="input"
+                                    type={showPw ? "text" : "password"}
+                                    placeholder="••••••••"
+                                    autoComplete="new-password"
+                                    {...blockPasteHandlers}
+                                    {...resetForm.register("password")}
+                                />
+                                <button type="button" className="input-icon-right" onClick={() => setShowPw(s => !s)}>
+                                    {showPw ? <EyeOff size={18} /> : <Eye size={18} />}
+                                </button>
                             </div>
-                          </FormControl>
-                          <FormMessage />
-                          <p className="text-xs text-muted-foreground">
-                            Debe incluir mayúsculas, minúsculas, números y un carácter especial. Sin espacios.
-                          </p>
-                        </FormItem>
-                      )}
-                    />
+                            {resetForm.formState.errors.password ? 
+                              <p className="error">{resetForm.formState.errors.password.message}</p> :
+                              <p className="help">Mín. 10 caracteres con Aa, 0-9 y símbolo.</p>
+                            }
+                        </div>
 
-                    <FormField
-                      control={resetForm.control}
-                      name="confirmPassword"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Confirmar contraseña</FormLabel>
-                          <FormControl>
-                            <div className="relative">
-                              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                              <Input
-                                className="pl-10 pr-12 bg-input border-border"
-                                type={showConfirm ? "text" : "password"}
-                                placeholder="Vuelve a escribir tu contraseña"
-                                autoComplete="new-password"
-                                {...blockPasteHandlers}
-                                {...field}
-                              />
-                              <button
-                                type="button"
-                                aria-label={showConfirm ? "Ocultar contraseña" : "Mostrar contraseña"}
-                                onClick={() => setShowConfirm((s) => !s)}
-                                className="absolute right-3 top-1/2 -translate-y-1/2"
-                              >
-                                {showConfirm ? (
-                                  <EyeOff className="h-5 w-5 text-muted-foreground" />
-                                ) : (
-                                  <Eye className="h-5 w-5 text-muted-foreground" />
-                                )}
-                              </button>
+                        <div>
+                            <label htmlFor="confirmPassword" aria-label="Confirmar contraseña" className="label">Confirmar contraseña</label>
+                            <div className="input-wrap">
+                                <span className="input-icon-left"><Lock size={18} /></span>
+                                <input
+                                    id="confirmPassword"
+                                    className="input"
+                                    type={showConfirm ? "text" : "password"}
+                                    placeholder="••••••••"
+                                    autoComplete="new-password"
+                                    {...blockPasteHandlers}
+                                    {...resetForm.register("confirmPassword")}
+                                />
+                                <button type="button" className="input-icon-right" onClick={() => setShowConfirm(s => !s)}>
+                                    {showConfirm ? <EyeOff size={18} /> : <Eye size={18} />}
+                                </button>
                             </div>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                            {resetForm.formState.errors.confirmPassword && <p className="error">{resetForm.formState.errors.confirmPassword.message}</p>}
+                        </div>
 
-                    <Button
-                      type="submit"
-                      className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all !mt-6"
-                    >
-                      Restablecer contraseña
-                    </Button>
-
-                    <p className="text-center text-xs text-muted-foreground !mt-4">
-                      ¿Recordaste tu contraseña?{" "}
-                      <Link href="/login" className="underline underline-offset-2">Inicia sesión</Link>
-                    </p>
-                  </form>
-                </Form>
-              </CardContent>
+                        <div className="pt-2">
+                            <button type="submit" className="btn btn-primary">
+                                Restablecer contraseña
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <p className="form-footer">
+                  ¿Recordaste tu contraseña?{" "}
+                  <Link href="/login" className="link">Inicia sesión</Link>
+                </p>
             </>
           )}
-        </div>
-      </Card>
+      </div>
     </div>
   );
 }
+
+    

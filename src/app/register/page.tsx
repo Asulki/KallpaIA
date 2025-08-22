@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,20 +7,7 @@ import * as z from "zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
-
 import { BotIcon, User, Mail, Lock, Eye, EyeOff, Calendar } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -28,8 +16,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import '../login/login-ui.css';
 
-// ---------- Políticas de seguridad ----------
+// ---------- Schemas ----------
 const nicknameSchema = z
   .string()
   .min(4, { message: "El apodo debe tener al menos 4 caracteres." })
@@ -88,23 +77,14 @@ const formSchema = z
     }
   });
 
-// Chequeo de unicidad (simula tu endpoint). Ajusta la URL a tu backend.
 async function checkNicknameAvailable(nickname: string): Promise<boolean> {
-  try {
-    // Simulación, en un caso real esto llamaría a tu API.
-    // const res = await fetch(`/api/check-nickname?nickname=${encodeURIComponent(nickname)}`);
-    // const data = await res.json();
-    // return !!data.available;
-    return !['wawita', 'kallpa', 'admin'].includes(nickname.toLowerCase());
-  } catch {
-    return true; // ante error de red, no bloquear
-  }
+  // Mock check
+  return !['wawita', 'kallpa', 'admin'].includes(nickname.toLowerCase());
 }
 
 export default function RegisterForm() {
   const { toast } = useToast();
   const router = useRouter();
-
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [checkingNick, setCheckingNick] = useState(false);
@@ -122,13 +102,11 @@ export default function RegisterForm() {
     mode: "onTouched",
   });
 
-  // Bloqueo de pegado para Email/ConfirmEmail y Password/ConfirmPassword
   const blockPasteHandlers = {
-    onPaste: (e: React.ClipboardEvent<HTMLInputElement>) => e.preventDefault(),
-    onDrop: (e: React.DragEvent<HTMLInputElement>) => e.preventDefault(),
+    onPaste: (e: React.ClipboardEvent) => e.preventDefault(),
+    onDrop: (e: React.DragEvent) => e.preventDefault(),
   };
 
-  // Verifica unicidad en blur
   async function validateNicknameUnique(nick: string) {
     if (!nick) return;
     setCheckingNick(true);
@@ -143,7 +121,6 @@ export default function RegisterForm() {
   }
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Verificar unicidad ANTES de enviar
     const available = await checkNicknameAvailable(values.nickname);
     if (!available) {
       form.setError("nickname", {
@@ -161,224 +138,157 @@ export default function RegisterForm() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen gradient-background px-4 py-8 light-theme">
-      <Card className="w-full max-w-md bg-white/30 backdrop-blur-lg border-white/40 text-foreground rounded-2xl shadow-lg overflow-hidden">
-        <div className="p-8">
-          <div className="flex justify-center items-center gap-2 mb-4">
-            <BotIcon className="w-10 h-10 text-primary" />
-            <span className="font-headline text-3xl font-bold">KallpaIA</span>
-          </div>
+    <div className="app">
+      <div className="login-card">
+        <header className="flex justify-center mb-6">
+            <div className="logo">
+                <span className="badge">
+                    <BotIcon style={{ color: 'var(--ink)'}} size={20} />
+                </span>
+                <span>KallpaIA</span>
+            </div>
+        </header>
 
-          <CardHeader className="text-center p-0 mb-6">
-            <CardTitle className="font-headline text-2xl">Crea tu Cuenta</CardTitle>
-            <p className="text-sm text-muted-foreground mt-1">
-              Completa tus datos para empezar.
-            </p>
-          </CardHeader>
+        <h1 className="title">Crea tu Cuenta</h1>
+        <p className="text-center text-sm text-muted-foreground -mt-4 mb-6">
+            Completa tus datos para empezar.
+        </p>
 
-          <CardContent className="p-0">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="nickname"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Nickname</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                          <Input
-                            className="pl-10 bg-input border-border"
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="stack-16">
+                <div>
+                    <label htmlFor="nickname" className="label">Nickname</label>
+                    <div className="input-wrap">
+                        <span className="input-icon-left"><User size={18} /></span>
+                        <input
+                            id="nickname"
+                            className="input"
                             placeholder="Tu apodo"
                             autoComplete="username"
-                            {...field}
-                            onBlur={async (e) => {
-                              field.onBlur();
-                              await validateNicknameUnique(e.target.value.trim());
-                            }}
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                      {checkingNick && (
-                        <p className="text-xs text-muted-foreground">Verificando disponibilidad…</p>
-                      )}
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Correo electrónico</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                          <Input
-                            className="pl-10 bg-input border-border"
+                            {...form.register("nickname", {
+                                onBlur: (e) => validateNicknameUnique(e.target.value.trim()),
+                            })}
+                        />
+                    </div>
+                    {form.formState.errors.nickname ? <p className="error">{form.formState.errors.nickname.message}</p> :
+                     checkingNick && <p className="help">Verificando disponibilidad...</p>}
+                </div>
+                
+                <div>
+                    <label htmlFor="email" className="label">Correo electrónico</label>
+                    <div className="input-wrap">
+                        <span className="input-icon-left"><Mail size={18} /></span>
+                        <input
+                            id="email"
+                            className="input"
                             type="email"
                             placeholder="tucorreo@ejemplo.com"
                             autoComplete="email"
                             inputMode="email"
+                            {...form.register("email")}
                             {...blockPasteHandlers}
-                            {...field}
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="confirmEmail"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Confirmar correo</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                          <Input
-                            className="pl-10 bg-input border-border"
+                        />
+                    </div>
+                    {form.formState.errors.email && <p className="error">{form.formState.errors.email.message}</p>}
+                </div>
+                
+                <div>
+                    <label htmlFor="confirmEmail" className="label">Confirmar correo</label>
+                    <div className="input-wrap">
+                        <span className="input-icon-left"><Mail size={18} /></span>
+                        <input
+                            id="confirmEmail"
+                            className="input"
                             type="email"
                             placeholder="Repite tu correo"
                             autoComplete="off"
                             inputMode="email"
-                            {...blockPasteHandlers}
-                            {...field}
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                            {...form.register("confirmEmail")}
+                             {...blockPasteHandlers}
+                        />
+                    </div>
+                     {form.formState.errors.confirmEmail && <p className="error">{form.formState.errors.confirmEmail.message}</p>}
+                </div>
 
-                <FormField
-                  control={form.control}
-                  name="age"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Edad</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground pointer-events-none" />
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <SelectTrigger className="pl-10 bg-input border-border">
-                              <SelectValue placeholder="Selecciona tu edad" />
+                {/* Age selector is not a standard input, so it won't use the .input class */}
+                <div>
+                    <label htmlFor="age" className="label">Edad</label>
+                     <div className="input-wrap">
+                        <span className="input-icon-left"><Calendar size={18}/></span>
+                        <Select onValueChange={(value) => form.setValue('age', value as any)} defaultValue={form.getValues('age')}>
+                            <SelectTrigger className="input !px-11" id="age">
+                                <SelectValue placeholder="Selecciona tu edad" />
                             </SelectTrigger>
                             <SelectContent>
-                              {["12", "13", "14", "15", "16", "17"].map((y) => (
-                                <SelectItem key={y} value={y}>
-                                  {y}
-                                </SelectItem>
-                              ))}
+                                {["12", "13", "14", "15", "16", "17"].map((y) => (
+                                <SelectItem key={y} value={y}>{y}</SelectItem>
+                                ))}
                             </SelectContent>
-                          </Select>
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                        </Select>
+                     </div>
+                      {form.formState.errors.age && <p className="error">{form.formState.errors.age.message}</p>}
+                </div>
 
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Contraseña</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                          <Input
-                            className="pl-10 pr-12 bg-input border-border"
+                <div>
+                    <label htmlFor="password" aria-label="Contraseña" className="label">Contraseña</label>
+                    <div className="input-wrap">
+                        <span className="input-icon-left"><Lock size={18} /></span>
+                        <input
+                            id="password"
+                            className="input"
                             type={showPassword ? "text" : "password"}
-                            placeholder="Mín. 10 con Aa, 0-9 y símbolo"
+                            placeholder="••••••••"
                             autoComplete="new-password"
-                            {...blockPasteHandlers}
-                            {...field}
-                          />
-                          <button
-                            type="button"
-                            aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
-                            onClick={() => setShowPassword((s) => !s)}
-                            className="absolute right-3 top-1/2 -translate-y-1/2"
-                          >
-                            {showPassword ? (
-                              <EyeOff className="h-5 w-5 text-muted-foreground" />
-                            ) : (
-                              <Eye className="h-5 w-5 text-muted-foreground" />
-                            )}
-                          </button>
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                      <p className="text-xs text-muted-foreground">
-                        Debe incluir mayúsculas, minúsculas, números y un carácter especial, sin espacios.
-                      </p>
-                    </FormItem>
-                  )}
-                />
+                             {...form.register("password")}
+                             {...blockPasteHandlers}
+                        />
+                        <button type="button" className="input-icon-right" onClick={() => setShowPassword(s => !s)}>
+                            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                        </button>
+                    </div>
+                     {form.formState.errors.password ? 
+                        <p className="error">{form.formState.errors.password.message}</p> :
+                        <p className="help">Mín. 10 caracteres con Aa, 0-9 y símbolo.</p>
+                     }
+                </div>
 
-                <FormField
-                  control={form.control}
-                  name="confirmPassword"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Confirmar contraseña</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                          <Input
-                            className="pl-10 pr-12 bg-input border-border"
+                <div>
+                    <label htmlFor="confirmPassword" aria-label="Confirmar contraseña" className="label">Confirmar contraseña</label>
+                    <div className="input-wrap">
+                        <span className="input-icon-left"><Lock size={18} /></span>
+                        <input
+                            id="confirmPassword"
+                            className="input"
                             type={showConfirm ? "text" : "password"}
-                            placeholder="Vuelve a escribir tu contraseña"
+                            placeholder="••••••••"
                             autoComplete="new-password"
-                            {...blockPasteHandlers}
-                            {...field}
-                          />
-                          <button
-                            type="button"
-                            aria-label={showConfirm ? "Ocultar contraseña" : "Mostrar contraseña"}
-                            onClick={() => setShowConfirm((s) => !s)}
-                            className="absolute right-3 top-1/2 -translate-y-1/2"
-                          >
-                            {showConfirm ? (
-                              <EyeOff className="h-5 w-5 text-muted-foreground" />
-                            ) : (
-                              <Eye className="h-5 w-5 text-muted-foreground" />
-                            )}
-                          </button>
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                             {...form.register("confirmPassword")}
+                             {...blockPasteHandlers}
+                        />
+                        <button type="button" className="input-icon-right" onClick={() => setShowConfirm(s => !s)}>
+                            {showConfirm ? <EyeOff size={18} /> : <Eye size={18} />}
+                        </button>
+                    </div>
+                    {form.formState.errors.confirmPassword && <p className="error">{form.formState.errors.confirmPassword.message}</p>}
+                </div>
 
-                <Button
-                  type="submit"
-                  className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all !mt-4"
-                >
-                  Crear cuenta
-                </Button>
+                <div className="pt-2">
+                    <button type="submit" className="btn btn-primary">
+                        Crear cuenta
+                    </button>
+                </div>
+            </div>
+        </form>
 
-                <p className="text-center text-xs text-muted-foreground mt-2">
-                  ¿Ya tienes cuenta?{" "}
-                  <Link href="/login" className="underline underline-offset-2">
-                    Inicia sesión
-                  </Link>
-                </p>
-              </form>
-            </Form>
-          </CardContent>
-        </div>
-      </Card>
+         <p className="form-footer">
+            ¿Ya tienes cuenta?{" "}
+            <Link href="/login" className="link">
+                Inicia sesión
+            </Link>
+        </p>
+      </div>
     </div>
   );
 }
+
+    

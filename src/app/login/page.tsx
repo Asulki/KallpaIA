@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,25 +8,14 @@ import { BotIcon, User, Lock, Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
-
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import './login-ui.css';
 
 const formSchema = z.object({
   nickname: z.string().min(2, {
     message: "El apodo debe tener al menos 2 caracteres.",
   }),
-  password: z.string(),
+  password: z.string().min(1, { message: "Ingresa tu contraseña." }),
 });
 
 export default function LoginForm() {
@@ -39,6 +29,7 @@ export default function LoginForm() {
       nickname: "",
       password: "",
     },
+    mode: "onTouched",
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -49,110 +40,82 @@ export default function LoginForm() {
     });
   }
 
-  function onPassword() {
-    router.push("/password");
-  }
-
   return (
-    <div className="flex items-center justify-center min-h-screen gradient-background light-theme">
-      <Card className="w-full max-w-md bg-white/30 backdrop-blur-lg border-white/40 text-foreground rounded-2xl shadow-lg overflow-hidden">
-        <div className="p-8">
-          <div className="flex justify-center items-center gap-2 mb-4">
-            <BotIcon className="w-10 h-10 text-primary" />
-            <span className="font-headline text-3xl font-bold">KallpaIA</span>
-          </div>
-          <CardHeader className="text-center p-0 mb-6">
-            <CardTitle className="font-headline text-2xl">Inicia Sesión</CardTitle>
-          </CardHeader>
-          <CardContent className="p-0">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="nickname"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Nickname</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                          <Input
-                            className="pl-10 bg-input border-border"
+    <div className="app">
+      <div className="login-card">
+        <header className="flex justify-center mb-6">
+            <div className="logo">
+                <span className="badge">
+                    <BotIcon style={{ color: 'var(--ink)'}} size={20} />
+                </span>
+                <span>KallpaIA</span>
+            </div>
+        </header>
+
+        <h1 className="title">Inicia Sesión</h1>
+        
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="stack-20">
+                <div>
+                    <label htmlFor="nickname" className="label">Nickname</label>
+                    <div className="input-wrap">
+                        <span className="input-icon-left">
+                            <User size={18} />
+                        </span>
+                        <input
+                            id="nickname"
+                            className="input"
                             placeholder="Tu apodo"
                             autoComplete="username"
-                            {...field}
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                            {...form.register("nickname")}
+                        />
+                    </div>
+                    {form.formState.errors.nickname && <p className="error">{form.formState.errors.nickname.message}</p>}
+                </div>
 
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Contraseña</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                          <Input
-                            className="pl-10 pr-12 bg-input border-border"
+                <div>
+                    <label htmlFor="password" aria-label="Contraseña" className="label">Contraseña</label>
+                    <div className="input-wrap">
+                         <span className="input-icon-left">
+                           <Lock size={18} />
+                        </span>
+                        <input
+                            id="password"
+                            className="input"
                             type={showPassword ? "text" : "password"}
                             placeholder="••••••••"
                             autoComplete="current-password"
-                            {...field}
-                          />
-                          <button
+                            {...form.register("password")}
+                        />
+                        <button
                             type="button"
                             aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
                             onClick={() => setShowPassword((s) => !s)}
-                            className="absolute right-3 top-1/2 -translate-y-1/2"
-                          >
-                            {showPassword ? (
-                              <EyeOff className="h-5 w-5 text-muted-foreground" />
-                            ) : (
-                              <Eye className="h-5 w-5 text-muted-foreground" />
-                            )}
-                          </button>
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <div className="space-y-3 pt-2">
-                  <Button
-                    type="submit"
-                    className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all"
-                  >
-                    Entrar
-                  </Button>
-
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="w-full font-headline text-lg rounded-full py-3"
-                    onClick={onPassword}
-                  >
-                    Olvidé mi contraseña
-                  </Button>
-
-                  <p className="text-center text-xs text-muted-foreground">
-                    ¿No tienes cuenta?{" "}
-                    <Link href="/register" className="underline underline-offset-2">
-                      Crear cuenta
-                    </Link>
-                  </p>
+                            className="input-icon-right"
+                        >
+                            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                        </button>
+                    </div>
+                     {form.formState.errors.password && <p className="error">{form.formState.errors.password.message}</p>}
                 </div>
-              </form>
-            </Form>
-          </CardContent>
-        </div>
-      </Card>
+                
+                <div className="stack-16">
+                     <button type="submit" className="btn btn-primary">
+                        Entrar
+                    </button>
+                     <button type="button" className="btn btn-secondary" onClick={() => router.push('/password')}>
+                        Olvidé mi contraseña
+                    </button>
+                </div>
+            </div>
+        </form>
+         <p className="form-footer">
+            ¿No tienes cuenta?{" "}
+            <Link href="/register" className="link">
+                Crear cuenta
+            </Link>
+        </p>
+      </div>
     </div>
   );
 }
