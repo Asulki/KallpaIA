@@ -6,6 +6,22 @@ import { BarChart, LineChart, Rocket, Star, Gamepad2 } from 'lucide-react';
 export default function DashboardPage() {
   return (
     <>
+      <div className="grid grid-cols-1 gap-8 mb-8">
+        <Card className="w-full">
+            <CardHeader>
+                <CardTitle>Planeta Activo: Ciencia</CardTitle>
+                <CardDescription>Tu aventura actual para dominar los misterios del universo.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm font-medium text-muted-foreground">HP (Puntos de Habilidad)</span>
+                    <span className="text-sm font-bold">85 / 100</span>
+                </div>
+                <Progress value={85} aria-label="85% de habilidad completado" />
+            </CardContent>
+        </Card>
+      </div>
+
       <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -50,20 +66,6 @@ export default function DashboardPage() {
       </div>
 
       <div className="mt-8 grid grid-cols-1 gap-8">
-        <Card className="w-full">
-            <CardHeader>
-                <CardTitle>Planeta Activo: Ciencia</CardTitle>
-                <CardDescription>Tu aventura actual para dominar los misterios del universo.</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium text-muted-foreground">HP (Puntos de Habilidad)</span>
-                    <span className="text-sm font-bold">85 / 100</span>
-                </div>
-                <Progress value={85} aria-label="85% de habilidad completado" />
-            </CardContent>
-        </Card>
-
         <div className="text-center">
             <Button size="lg" className="h-12 px-10 text-lg rounded-full font-bold">
                 <Gamepad2 className="mr-2 h-6 w-6" />
