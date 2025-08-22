@@ -23,7 +23,7 @@ const navItems = [
     { href: "/oportunidades", icon: <Star className="icn" />, label: "Oportunidades" },
 ];
 
-const navTargetBlank = ["/retos", "/comic-digitales", "/mentoria", "/oportunidades", "/ajustes"];
+const navTargetBlank = ["/retos", "/comic-digitales", "/mentoria", "/ajustes"];
 
 
 export default function DashboardLayout({
