@@ -19,10 +19,6 @@ const avatars = [
     src: 'https://i.ibb.co/jZ6LNhR/vicuna-matematica.png',
     alt: 'Vicuña — avatar de Matemáticas',
     hint: 'mathematician vicuña inspired by Ada Lovelace pixel art',
-    moves: [
-      { name: 'Tejido Lógico', value: 40 },
-      { name: 'Secuencia Infinita', value: 30 },
-    ],
   },
   {
     id: 2,
@@ -34,10 +30,6 @@ const avatars = [
     src: 'https://i.ibb.co/V3F7499/vicuna-bot.png', // Placeholder
     alt: 'Cóndor — avatar de Ciencia',
     hint: 'knowledge condor inspired by Marie Curie pixel art',
-    moves: [
-      { name: 'Alas de la Curie', value: 40 },
-      { name: 'Rayo Gamma', value: 25 },
-    ],
   },
   {
     id: 3,
@@ -49,10 +41,6 @@ const avatars = [
     src: 'https://i.ibb.co/V3F7499/vicuna-bot.png', // Placeholder
     alt: 'Jaguar — avatar de Ingeniería',
     hint: 'engineer jaguar inspired by Katherine Johnson pixel art',
-    moves: [
-      { name: 'Circuito Salvaje', value: 50 },
-      { name: 'Cálculo Estelar', value: 30 },
-    ],
   },
   {
     id: 4,
@@ -64,10 +52,6 @@ const avatars = [
     src: 'https://i.ibb.co/V3F7499/vicuna-bot.png', // Placeholder
     alt: 'Colibrí — avatar de Arte',
     hint: 'creative hummingbird inspired by Hypatia pixel art',
-    moves: [
-      { name: 'Vuelo Inspirador', value: 40 },
-      { name: 'Paleta Cósmica', value: 25 },
-    ],
   },
   {
     id: 5,
@@ -79,10 +63,6 @@ const avatars = [
     src: 'https://i.ibb.co/V3F7499/vicuna-bot.png', // Placeholder
     alt: 'Zorro — avatar de Tecnología',
     hint: 'tech fox inspired by Hedy Lamarr pixel art',
-    moves: [
-        { name: 'Hackeo Ágil', value: 45 },
-        { name: 'Señal Secreta', value: 35 },
-    ],
   },
 ];
 
@@ -95,8 +75,8 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onSelect(avatar.id)}}
     >
       <header className="kcard__header">
-        <span className="kcard__chip" aria-label={`Planeta ${avatar.type}`}>{avatar.icon} {avatar.type}</span>
-        <span className="kcard__hp" aria-label="Energía">100/100 <b>HP</b></span>
+        <span className="kcard__chip">{avatar.type}</span>
+        <span className="kcard__hp">100/100 <b>HP</b></span>
       </header>
 
       <div className="kcard__art">
@@ -109,15 +89,12 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
       </div>
       
       <footer className="kcard__footer">
-        <div className="kcard__moves">
-          {avatar.moves.map(move => (
-            <span key={move.name}>{move.name} ({move.value})</span>
-          ))}
-        </div>
-        <div className="kcard__actions" aria-hidden="true">
-          <button title="Pasar" className="kcard__btn">⟵</button>
-          <button title="Elegir" className="kcard__btn kcard__btn--primary">⟶</button>
-          <button title="Info" className="kcard__btn">⤴</button>
+        <div className="kcard__progress">
+            <span>●</span>
+            <span>○</span>
+            <span>○</span>
+            <span>○</span>
+            <span>○</span>
         </div>
       </footer>
     </article>
