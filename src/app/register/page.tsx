@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
@@ -44,10 +44,7 @@ export default function RegisterForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    // Primero redirige
     router.push('/avatar');
-    // Luego muestra el toast
     toast({
         title: "¡Registro exitoso!",
         description: `¡Bienvenida, ${values.nickname}! Comienza tu aventura.`,
@@ -147,8 +144,8 @@ export default function RegisterForm() {
                         )}
                     />
                      <Button type="submit" className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all !mt-6">
-                            Crear Cuenta
-                        </Button>
+                        Crear Cuenta
+                    </Button>
                     </form>
                 </Form>
               </CardContent>
