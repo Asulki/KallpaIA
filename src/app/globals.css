@@ -19,28 +19,28 @@
 
 @layer base {
   :root {
-    --background: 224 42% 6%; /* #0B0F19 */
+    --background: 0 0% 0%; /* Deep Black */
     --foreground: 220 20% 98%; /* #F9FAFB */
-    --card: 223 35% 10%;
+    --card: 0 0% 10%;
     --card-foreground: 220 20% 98%;
-    --popover: 224 42% 6%;
+    --popover: 0 0% 4%;
     --popover-foreground: 220 20% 98%;
-    --primary: 265 82% 60%; /* #7C3AED */
-    --primary-foreground: 220 20% 98%;
-    --secondary: 217 91% 60%; /* #3B82F6 */
+    --primary: 45 100% 63%; /* Vibrant Yellow #FFD740 */
+    --primary-foreground: 220 20% 5%;
+    --secondary: 278 100% 70%; /* Lighter purple for secondary elements */
     --secondary-foreground: 220 20% 98%;
-    --muted: 223 35% 15%;
+    --muted: 0 0% 15%;
     --muted-foreground: 215 14% 65%;
-    --accent: 217 91% 60%;
+    --accent: 278 100% 41%; /* Purple #9400D3 */
     --accent-foreground: 220 20% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 220 20% 30%;
-    --input: 223 35% 12%;
-    --ring: 217 91% 60%;
+    --border: 0 0% 20%;
+    --input: 0 0% 12%;
+    --ring: 45 100% 63%;
     --radius: 1.5rem;
 
-    --bg-space: 224 42% 6%;
+    --bg-space: 0 0% 0%;
   }
  
   .light-theme {
