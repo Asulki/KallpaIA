@@ -8,7 +8,7 @@
   }
   body {
     font-family: 'Space Grotesk', sans-serif;
-    background: radial-gradient(circle at 50% 85%, #0B0F19 0%, #05070D 100%);
+    @apply bg-background text-foreground;
   }
   canvas {
     position: fixed;
@@ -19,7 +19,29 @@
 
 @layer base {
   :root {
-    /* Updated Light Pastel Theme */
+    --background: 224 42% 6%; /* #0B0F19 */
+    --foreground: 220 20% 98%; /* #F9FAFB */
+    --card: 223 35% 10%;
+    --card-foreground: 220 20% 98%;
+    --popover: 224 42% 6%;
+    --popover-foreground: 220 20% 98%;
+    --primary: 265 82% 60%; /* #7C3AED */
+    --primary-foreground: 220 20% 98%;
+    --secondary: 217 91% 60%; /* #3B82F6 */
+    --secondary-foreground: 220 20% 98%;
+    --muted: 223 35% 15%;
+    --muted-foreground: 215 14% 65%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 220 20% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 20% 30%;
+    --input: 223 35% 12%;
+    --ring: 217 91% 60%;
+    --radius: 1.5rem;
+  }
+ 
+  .light-theme {
     --background: 48 100% 98%; /* Soft Linen White */
     --foreground: 250 25% 25%; /* Dark Slate Gray */
     --card: 48 100% 98%; /* Same as background for a seamless look */
@@ -37,10 +59,9 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
     --border: 250 20% 85%;
-    --input: 250 20% 96%;
+    --input: 250 20% 90%;
     --ring: 250 80% 75%; /* Soft Lavender for rings */
-    --radius: 1rem; /* Slightly reduced radius for a cleaner look */
-    --space: #0B0F19;
+    --radius: 1rem;
   }
 
  .dashboard-theme {
@@ -85,9 +106,6 @@
   * {
     @apply border-border;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
   .gradient-background {
     @apply bg-gradient-to-br from-purple-200/50 via-pink-200/50 to-blue-200/50;
   }
@@ -99,7 +117,7 @@
 /* contenedor del fondo */
 .bg-space{
   position:fixed; inset:0; z-index:0; pointer-events:none;
-  background: radial-gradient(1200px circle at 70% 85%, rgba(124,58,237,.12), transparent 60%), var(--space);
+  background: radial-gradient(1200px circle at 70% 85%, rgba(124,58,237,.12), transparent 60%), hsl(var(--background));
   overflow:hidden;
 }
 

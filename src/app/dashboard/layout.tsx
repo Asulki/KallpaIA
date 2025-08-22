@@ -1,6 +1,7 @@
 import { DashboardHeader } from '@/components/dashboard/header';
 import { Sidebar } from '@/components/dashboard/sidebar';
 import { ChatWidget } from '@/components/dashboard/chat-widget';
+import { SpaceBackground } from '@/components/space-background';
 
 export default function DashboardLayout({
   children,
@@ -9,6 +10,7 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="relative z-10 min-h-screen w-full bg-transparent text-foreground dashboard-theme font-body">
+      <SpaceBackground />
       <div className="grid md:grid-cols-[280px_1fr]">
         <Sidebar />
         <div className="flex flex-col">

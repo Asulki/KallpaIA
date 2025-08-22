@@ -103,7 +103,7 @@ export default function ForgotPasswordPage() {
 
   // ---------- UI ----------
   return (
-    <div className="flex items-center justify-center min-h-screen gradient-background px-4">
+    <div className="flex items-center justify-center min-h-screen gradient-background px-4 light-theme">
       <Card className="w-full max-w-md bg-white/30 backdrop-blur-lg border-white/40 text-foreground rounded-2xl shadow-lg overflow-hidden">
         <div className="p-8">
           <div className="flex justify-center items-center gap-2 mb-4">
@@ -133,7 +133,7 @@ export default function ForgotPasswordPage() {
                             <div className="relative">
                               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                               <Input
-                                className="pl-10 bg-white/50 border-white/50"
+                                className="pl-10 bg-input border-border"
                                 type="email"
                                 placeholder="tucorreo@ejemplo.com"
                                 autoComplete="email"
@@ -187,7 +187,7 @@ export default function ForgotPasswordPage() {
                             <div className="relative">
                               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                               <Input
-                                className="pl-10 pr-12 bg-white/50 border-white/50"
+                                className="pl-10 pr-12 bg-input border-border"
                                 type={showPw ? "text" : "password"}
                                 placeholder="Mín. 10 con Aa, 0-9 y símbolo"
                                 autoComplete="new-password"
@@ -226,7 +226,7 @@ export default function ForgotPasswordPage() {
                             <div className="relative">
                               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                               <Input
-                                className="pl-10 pr-12 bg-white/50 border-white/50"
+                                className="pl-10 pr-12 bg-input border-border"
                                 type={showConfirm ? "text" : "password"}
                                 placeholder="Vuelve a escribir tu contraseña"
                                 autoComplete="new-password"
