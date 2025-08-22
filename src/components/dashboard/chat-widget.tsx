@@ -22,7 +22,7 @@ export function ChatWidget() {
   };
 
   return (
-    <Card className="bg-card/60 border-white/10 flex-grow flex flex-col">
+    <Card className="bg-card/35 border-white/10 backdrop-blur-lg flex-grow flex flex-col">
       <CardHeader className="flex flex-row items-center gap-3 p-4 border-b border-white/10">
         <Bot className="text-primary"/>
         <CardTitle className="text-lg font-semibold text-white">Chat IA Inclusivo</CardTitle>

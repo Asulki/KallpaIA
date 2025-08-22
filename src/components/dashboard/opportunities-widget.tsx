@@ -8,7 +8,7 @@ const opportunities = [
 
 export function OpportunitiesWidget() {
   return (
-    <Card className="bg-card/60 border-white/10">
+    <Card className="bg-card/35 border-white/10 backdrop-blur-lg">
       <CardHeader className="p-4">
         <CardTitle className="text-base font-semibold text-white">Eventos y Becas</CardTitle>
       </CardHeader>

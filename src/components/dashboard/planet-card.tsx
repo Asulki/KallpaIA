@@ -6,7 +6,7 @@ import { Zap, BookOpen, BrainCircuit } from 'lucide-react';
 
 export function PlanetCard() {
   return (
-    <Card className="bg-card/60 border-2 border-yellow-400/50 shadow-2xl shadow-yellow-400/10 backdrop-blur-md overflow-hidden">
+    <Card className="bg-card/35 border border-white/10 shadow-2xl shadow-primary/10 backdrop-blur-md overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-primary/20 hover:-translate-y-1">
       <CardHeader className="p-6">
         <CardDescription className="uppercase tracking-widest text-yellow-400 font-semibold">Planeta Activo</CardDescription>
         <CardTitle className="text-3xl font-bold text-white">Planeta Inti – Ciencia</CardTitle>
