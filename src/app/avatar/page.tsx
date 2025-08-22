@@ -88,10 +88,13 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
       <div className="kcard__art">
         {cloneElement(avatar.animalIcon as ReactElement, { 
             className: cn(
-              'w-24 h-24',
+              'w-full h-auto max-h-40',
               'gradient-text bg-gradient-to-br',
-              themeClasses[avatar.theme]
-            )
+               themeClasses[avatar.theme]
+            ),
+             style: {
+              filter: `drop-shadow(0 0 12px var(--${avatar.theme}-glow-color, currentColor))`
+            }
         })}
       </div>
 
