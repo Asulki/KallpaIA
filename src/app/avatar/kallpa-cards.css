@@ -19,18 +19,27 @@
 
 /* ===== Grid responsive de cartas ===== */
 .kcards{
-  display:grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(var(--card-w), 1fr));
-  padding: 1rem;
-  max-width: 1400px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
+
+.kcards > div {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+.kcards > div::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+
 
 /* ===== Carta base ===== */
 .kcard{
   position: relative;
   cursor: pointer;
+  width: var(--card-w);
+  aspect-ratio: 2 / 3;
   border-radius: var(--card-r);
   background: radial-gradient(120% 90% at 50% 20%, #1A212C 0%, #141922 55%, #11161d 100%);
   padding: 14px 14px 12px;
@@ -41,6 +50,8 @@
     0 0 0 3px rgba(255, 255, 255, 0.1);
 
   transition: transform .25s ease, box-shadow .25s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Brillo holográfico diagonal */
@@ -86,6 +97,7 @@
 .kcard__header{
   display:flex; align-items:center; justify-content:space-between;
   gap:.5rem; margin-bottom:.35rem;
+  height: 40px;
 }
 
 .kcard__chip{
@@ -110,7 +122,7 @@
 
 /* Variantes por planeta (color del chip) */
 .kcard--math .kcard__chip{ background: var(--chip-math); }
-.kcard--science .kcard__chip{ background: var(--chip-sci); }
+.kcard--science .kcard__chip{ background: var(--chip-science); }
 .kcard--eng .kcard__chip{ background: var(--chip-eng); }
 .kcard--art .kcard__chip{ background: var(--chip-art); }
 .kcard--tech .kcard__chip{ background: var(--chip-tech); }
@@ -122,8 +134,8 @@
   display:grid; 
   place-items:center;
   margin: .35rem 0;
-  aspect-ratio: 4 / 3.5;
-  border-radius: 18px; /* Slightly rounded corners for the oval effect */
+  flex-grow: 1;
+  border-radius: 18px; 
   overflow:hidden;
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
 }
@@ -131,7 +143,6 @@
 .kcard__art img{
   width: 100%;
   height: 100%;
-  max-width: 90%; max-height: 90%; 
   object-fit: contain;
   image-rendering: pixelated;
   image-rendering: -webkit-optimize-contrast;
@@ -143,10 +154,12 @@
 /* ===== Títulos ===== */
 .kcard__title {
   text-align: center;
+  margin-top: auto;
+  margin-bottom: 0.5rem;
 }
 .kcard__name{
   font-weight: 900;
-  font-size: clamp(1.25rem, 2.6vw, 1.9rem);
+  font-size: clamp(1rem, 2.2vw, 1.4rem);
   letter-spacing: .3px;
   text-shadow: 0 1px 0 #0009;
   color: var(--text-strong);
@@ -155,13 +168,13 @@
   color: var(--text-soft);
   opacity:.9;
   font-weight:600;
-  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
   margin-top:-0.1rem;
 }
 
 /* ===== Footer (movimientos + acciones) ===== */
 .kcard__footer{ 
-    margin-top: .75rem; 
+    margin-top: auto; 
     display:grid; 
     gap:.6rem; 
 }
@@ -192,12 +205,28 @@
 }
 .kcard__btn--primary:hover{ background:#2d3b53; }
 
+
 /* ===== Responsive refinements ===== */
-@media (max-width: 720px){
-  .kcard{ padding: 12px; border-radius: 18px; }
-  .kcard__chip, .kcard__hp{ font-size:.85rem; }
-  .kcard__moves span{ font-size:.85rem; }
+@media (max-width: 1024px) {
+    :root {
+        --card-w: 200px;
+    }
 }
+
+@media (max-width: 768px) {
+    :root {
+        --card-w: 160px;
+    }
+     .kcard__chip, .kcard__hp{ font-size:.8rem; padding: 0.25rem 0.5rem;}
+     .kcard__moves span{ font-size:.8rem; }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --card-w: 140px;
+    }
+}
+
 
 /* Motion-safe */
 @media (prefers-reduced-motion: reduce){
