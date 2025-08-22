@@ -3,29 +3,11 @@
  * @fileOverview A chat flow that proxies requests to the Poe API.
  * 
  * - chat - A function that handles the chat completion process.
- * - ChatInput - The input type for the chat function.
- * - ChatOutput - The return type for the chat function.
  */
 
 import { ai } from '@/ai/genkit';
-import { z } from 'genkit';
 import OpenAI from 'openai';
-
-const ChatMessageSchema = z.object({
-  role: z.enum(['system', 'user', 'assistant']),
-  content: z.string().max(4000),
-});
-
-export const ChatInputSchema = z.object({
-  model: z.string().optional().default('KallpaWarmIA'),
-  messages: z.array(ChatMessageSchema).max(30),
-});
-export type ChatInput = z.infer<typeof ChatInputSchema>;
-
-export const ChatOutputSchema = z.object({
-  content: z.string(),
-});
-export type ChatOutput = z.infer<typeof ChatOutputSchema>;
+import { ChatInput, ChatInputSchema, ChatOutput, ChatOutputSchema } from '../schemas/chat-schemas';
 
 // Initialize the Poe client
 const poeClient = new OpenAI({

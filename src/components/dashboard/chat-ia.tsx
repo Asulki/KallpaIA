@@ -1,23 +1,19 @@
 "use client";
 
 import { useState, useRef, useEffect, FormEvent } from 'react';
-import Image from 'next/image';
 import { Bot, Send, User } from 'lucide-react';
-import { chat, ChatInput } from '@/ai/flows/chat';
+import { chat } from '@/ai/flows/chat';
+import type { ChatInput, ChatMessage } from '@/ai/schemas/chat-schemas';
 
-interface Message {
-  role: 'user' | 'assistant';
-  content: string;
-}
 
-const systemPrompt = {
+const systemPrompt: ChatMessage = {
     role: 'system' as const,
     content: 'Eres KallpaWarmIA, una IA amigable, sabia y alentadora que guía a las jóvenes en el mundo STEAM. Tu propósito es inspirar curiosidad, explicar conceptos complejos de manera sencilla y siempre mantener un tono positivo y empoderador. Eres una mentora digital. Usa emojis para hacer la conversación más cercana y divertida. Siempre responde en español.'
 };
 
 
 export function ChatIA() {
-  const [messages, setMessages] = useState<Message[]>([
+  const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
       content: '¡Hola! Soy KallpaWarmIA, tu mentora digital en el universo STEAM. ¿Qué te gustaría explorar o aprender hoy? ✨',
@@ -37,25 +33,25 @@ export function ChatIA() {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    const userMessage: Message = { role: 'user', content: input };
+    const userMessage: ChatMessage = { role: 'user', content: input };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
 
     try {
-      const chatHistory = [systemPrompt, ...messages, userMessage].map(msg => ({
+      const chatHistory: ChatMessage[] = [systemPrompt, ...messages, userMessage].map(msg => ({
           role: msg.role,
           content: msg.content
       }));
 
       const response = await chat({ messages: chatHistory });
       
-      const assistantMessage: Message = { role: 'assistant', content: response.content };
+      const assistantMessage: ChatMessage = { role: 'assistant', content: response.content };
       setMessages(prev => [...prev, assistantMessage]);
 
     } catch (error) {
       console.error("Error fetching chat response:", error);
-      const errorMessage: Message = { role: 'assistant', content: 'Ups, algo no salió bien. Por favor, intenta de nuevo. 😥' };
+      const errorMessage: ChatMessage = { role: 'assistant', content: 'Ups, algo no salió bien. Por favor, intenta de nuevo. 😥' };
       setMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
