@@ -8,6 +8,7 @@ import { Testimonials } from '@/components/landing/testimonials';
 import { Faq } from '@/components/landing/faq';
 import { Footer } from '@/components/landing/footer';
 import dynamic from 'next/dynamic';
+import { ApiTester } from '@/components/landing/ApiTester';
 
 const SpaceBackground = dynamic(
   () => import('@/components/space-background').then(mod => mod.SpaceBackground),
@@ -24,9 +25,11 @@ export default function Home() {
         <About />
         <PlanetCarousel />
         <Testimonials />
+        <ApiTester />
         <Faq />
       </main>
       <Footer />
     </div>
   );
 }
+
