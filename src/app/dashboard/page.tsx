@@ -58,7 +58,6 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">+15%</div>
-            <p className="text-xs text-muted">que la semana pasada</p>
           </CardContent>
         </Card>
         <Card className="kpi card-glass">
