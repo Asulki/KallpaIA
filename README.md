@@ -38,7 +38,8 @@ KallpaWarmIA es una plataforma educativa de vanguardia que integra la inteligenc
 - **Análisis de Rendimiento**: Evaluación personalizada del progreso del estudiante
 - **Integración con Gemini AI**: Tecnología de Google para respuestas avanzadas
 - **Posibilidad de comunicarse en quechua**
-  <img width="1862" height="804" alt="image" src="https://github.com/user-attachments/assets/b1f57ba4-ab5c-4c93-9a21-25076630944a" />
+  
+  <img width="700" height="700" alt="image" src="https://github.com/user-attachments/assets/b1f57ba4-ab5c-4c93-9a21-25076630944a" />
 
 
 
