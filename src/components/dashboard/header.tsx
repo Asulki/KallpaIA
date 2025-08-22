@@ -6,7 +6,7 @@ export function DashboardHeader() {
   return (
     <header className="flex items-center justify-between p-4 sm:p-6 lg:p-8">
       <div>
-        <h1 className="font-headline font-bold text-2xl text-text-main">Hola, Wawa 👋</h1>
+        <h1 className="font-headline font-bold text-2xl text-text-main">Hola, Wawita 👋</h1>
         <p className="text-text-muted uppercase text-xs tracking-[.25em]">Exploradora STEM</p>
       </div>
       <div className="flex items-center gap-4">

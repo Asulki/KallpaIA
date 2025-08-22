@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
-import { Zap, BookOpen, BrainCircuit } from 'lucide-react';
+import { Zap, BookOpen, BrainCircuit, Gamepad2 } from 'lucide-react';
 import { Badge } from '../ui/badge';
 
 export function PlanetCard() {
@@ -47,8 +47,12 @@ export function PlanetCard() {
           </div>
         </div>
       </CardContent>
-      <CardFooter className="bg-black/20 p-4">
-        <p className="text-xs text-center text-text-muted w-full">Interactúa con tu planeta: Swipe para más info, click en avatar para ver stats.</p>
+      <CardFooter className="bg-black/20 p-4 flex-col items-center gap-4">
+         <Button size="lg" className="w-full max-w-sm font-headline bg-primary text-primary-foreground text-lg rounded-full py-3 hover:bg-accent hover:shadow-lg hover:shadow-primary/30 transition-all">
+            <Gamepad2 className="mr-2" />
+            Videojuegos Vocacionales
+        </Button>
+        <p className="text-xs text-center text-text-muted w-full">Interactúa con tu planeta: swipea para más info o toca a tu avatar para ver stats ✨</p>
       </CardFooter>
     </Card>
   );

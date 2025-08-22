@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "../ui/button";
-import { Gamepad2, Users } from "lucide-react";
+import { BookOpen, Users, Briefcase } from "lucide-react";
 
 export function QuickAccess() {
     return (
@@ -8,14 +8,18 @@ export function QuickAccess() {
             <CardHeader className="p-4">
                 <CardTitle className="text-base font-semibold text-text-main">Accesos Rápidos</CardTitle>
             </CardHeader>
-            <CardContent className="p-4 pt-0 grid grid-cols-2 gap-4">
+            <CardContent className="p-4 pt-0 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <Button variant="outline" className="h-24 flex-col gap-2 bg-glass border-primary/30 hover:bg-primary/20">
-                    <Gamepad2 className="h-6 w-6 text-primary"/>
-                    <span className="text-text-main">Minijuegos</span>
+                    <BookOpen className="h-6 w-6 text-primary"/>
+                    <span className="text-text-main text-xs">Cómic Digital</span>
                 </Button>
                 <Button variant="outline" className="h-24 flex-col gap-2 bg-glass border-primary/30 hover:bg-primary/20">
                     <Users className="h-6 w-6 text-primary"/>
-                    <span className="text-text-main">Mentoría</span>
+                    <span className="text-text-main text-xs">Mentoría Grupal</span>
+                </Button>
+                 <Button variant="outline" className="h-24 flex-col gap-2 bg-glass border-primary/30 hover:bg-primary/20">
+                    <Briefcase className="h-6 w-6 text-primary"/>
+                    <span className="text-text-main text-xs">Explorar Carreras</span>
                 </Button>
             </CardContent>
         </Card>

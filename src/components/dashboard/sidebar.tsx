@@ -3,16 +3,16 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Bot, Home, Swords, GraduationCap, MessagesSquare, Sparkles, Gamepad2 } from 'lucide-react';
+import { Bot, Home, GraduationCap, MessagesSquare, Sparkles, BookOpen, Puzzle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
   { href: '/dashboard', icon: Home, label: 'Inicio' },
-  { href: '/dashboard/challenges', icon: Swords, label: 'Retos' },
-  { href: '/dashboard/minigames', icon: Gamepad2, label: 'Minijuegos' },
+  { href: '/dashboard/challenges', icon: Puzzle, label: 'Retos' },
   { href: '/dashboard/career', icon: GraduationCap, label: 'Info vocacional' },
   { href: '/dashboard/chat', icon: MessagesSquare, label: 'Chat IA' },
   { href: '/dashboard/opportunities', icon: Sparkles, label: 'Oportunidades' },
+  { href: '/dashboard/comic', icon: BookOpen, label: 'Cómic Digital' },
 ];
 
 export function Sidebar() {
@@ -38,7 +38,7 @@ export function Sidebar() {
                   className={cn(
                     "w-full justify-start gap-3 text-base h-12 px-4 rounded-full",
                     isActive 
-                      ? "bg-primary text-white font-bold" 
+                      ? "bg-primary text-white font-bold shadow-lg shadow-primary/30" 
                       : "text-text-muted hover:bg-primary/10 hover:text-white"
                   )}
                 >
