@@ -32,9 +32,7 @@ export function Header() {
                 <Link href="/#about" className="text-gray-300 hover:text-primary transition-colors">Nosotros</Link>
                 <Link href="/#testimonials" className="text-gray-300 hover:text-primary transition-colors">Testimonios</Link>
                 <Link href="/#faq" className="text-gray-300 hover:text-primary transition-colors">FAQ</Link>
-                 <Button asChild size="lg" className="font-headline bg-primary text-primary-foreground text-lg rounded-full px-8 py-3 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all mt-4">
-                    <Link href="/register">Inicia tu Aventura</Link>
-                  </Button>
+                <Link href="/register" className="text-primary hover:text-primary/90 transition-colors mt-4">Inicia tu Aventura</Link>
               </nav>
             </SheetContent>
           </Sheet>
