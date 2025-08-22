@@ -67,7 +67,7 @@ export default function DashboardPage() {
             <BarChart className="h-4 w-4 text-muted" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">5 días</div>
+            <div className="text-2xl font-bold">2 días</div>
             <p className="text-xs text-muted">¡Sigue así!</p>
           </CardContent>
         </Card>
