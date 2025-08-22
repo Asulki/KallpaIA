@@ -29,7 +29,7 @@ export function Sidebar() {
         </div>
         <div className="flex items-center gap-4 mb-8 p-3 rounded-lg bg-white/70">
           <Avatar>
-            <AvatarImage src="https://placehold.co/40x40.png" alt="Ruha Loirs" data-ai-hint="user avatar" />
+            <AvatarImage src="https://i.ibb.co/CbfcCvP/condor-ciencia.png" alt="Ruha Loirs" data-ai-hint="user avatar" />
             <AvatarFallback>RL</AvatarFallback>
           </Avatar>
           <div>
