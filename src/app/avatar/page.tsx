@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { StellarParticles } from '@/components/landing/stellar-particles';
-import { Signal, Star } from 'lucide-react';
+import { Signal, Star, Palette, Beaker, Wrench, Sigma, Cpu } from 'lucide-react';
 import './kallpa-cards.css';
 
 const avatars = [
@@ -19,6 +19,7 @@ const avatars = [
     src: 'https://i.ibb.co/jZ6LNhR/vicuna-matematica.png',
     alt: 'Vicuña — avatar de Matemáticas',
     hint: 'mathematician vicuña inspired by Ada Lovelace pixel art',
+    icon: <Sigma size={14} />
   },
   {
     id: 2,
@@ -29,6 +30,7 @@ const avatars = [
     src: 'https://i.ibb.co/CbfcCvP/condor-ciencia.png', 
     alt: 'Cóndor — avatar de Ciencia',
     hint: 'knowledge condor inspired by Marie Curie pixel art',
+    icon: <Beaker size={14} />
   },
   {
     id: 3,
@@ -39,6 +41,7 @@ const avatars = [
     src: 'https://i.ibb.co/yQxG4Tj/jaguar-ingenieria.png',
     alt: 'Jaguar — avatar de Ingeniería',
     hint: 'engineer jaguar inspired by Katherine Johnson pixel art',
+    icon: <Wrench size={14} />
   },
   {
     id: 4,
@@ -49,6 +52,7 @@ const avatars = [
     src: 'https://i.ibb.co/8mrL2Dk/colibri-arte.png',
     alt: 'Colibrí — avatar de Arte',
     hint: 'creative hummingbird inspired by Hypatia pixel art',
+    icon: <Palette size={14} />
   },
   {
     id: 5,
@@ -59,6 +63,7 @@ const avatars = [
     src: 'https://i.ibb.co/f22my0B/zorro-tecnologia.png',
     alt: 'Zorro — avatar de Tecnología',
     hint: 'tech fox inspired by Hedy Lamarr pixel art',
+    icon: <Cpu size={14} />
   },
 ];
 
@@ -74,7 +79,7 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
     >
       <header className="kcard__header">
         <span className="kcard__chip">
-            <Signal size={14} /> 
+            {avatar.icon}
             {avatar.type}
         </span>
         <span className="kcard__hp">100/100 <b>HP</b></span>
