@@ -30,7 +30,7 @@
 
 /* ===== Estructura Base ===== */
 .quiz-page-container {
-  background-color: var(--bg-base);
+  background: var(--bg-base);
   min-height: 100vh;
   display: flex;
   align-items: center;
