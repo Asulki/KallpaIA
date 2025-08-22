@@ -1,3 +1,4 @@
+
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
@@ -14,10 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body>
+      <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Poppins:wght@700;800&family=Inter:wght@400;500&family=Nunito+Sans:wght@700;800&display=swap" rel="stylesheet" />
+      </head>
+      <body>
         <div className="font-body antialiased">
             {children}
             <Toaster />
