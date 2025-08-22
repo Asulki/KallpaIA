@@ -140,7 +140,7 @@ export default function AvatarSelectionPage() {
         <div className="relative z-20 w-full flex flex-col items-center justify-center flex-grow">
             <div className="text-center mb-10 mt-20">
                 <h1 className="font-headline text-4xl font-bold text-primary">Elige tu Kallpa Card</h1>
-                <p className="text-lg text-gray-300 mt-2">Selecciona tu avatar STEAM. Haz scroll para ver más.</p>
+                <p className="text-lg text-gray-300 mt-2">Selecciona tu avatar STEAM.</p>
             </div>
 
             <section className="kcards w-full max-w-screen-xl">
