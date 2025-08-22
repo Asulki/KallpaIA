@@ -116,7 +116,7 @@
   height: 56px;
   padding: 0 18px;
   border-radius: var(--radius-md);
-  background-color: #F8F7FC;
+  background-color: #FFFFFF;
   border: 1px solid var(--stroke);
   color: var(--text-soft);
   cursor: pointer;
@@ -127,7 +127,7 @@
 
 .option-item:hover {
   transform: scale(1.02);
-  border-color: #B9A6FF;
+  border-color: var(--accent);
   background-color: #fff;
   color: var(--text);
 }
