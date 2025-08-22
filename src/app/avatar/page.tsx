@@ -168,7 +168,7 @@ export default function AvatarSelectionPage() {
                     onClick={handleContinue}
                     disabled={!selectedAvatar}
                     size="lg"
-                    className="font-headline text-lg rounded-full px-10 py-4"
+                    className="font-headline text-lg rounded-full px-10 py-4 bg-primary text-primary-foreground"
                 >
                     Continuar con mi Aventura
                 </Button>
