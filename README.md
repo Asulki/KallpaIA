@@ -18,7 +18,7 @@ KallpaWarmIA es una plataforma educativa de vanguardia que integra la inteligenc
 
 ## Datos de ingreso
 - **Nickname: carla
-- **contraseña: b2Kn9w5LY57eGXC*
+- **contraseña: [    b2Kn9w5LY57eGXC*     ]
 - https://9000-firebase-studio-1755809849536.cluster-ocv3ypmyqfbqysslgd7zlhmxek.cloudworkstations.dev/
 
 
