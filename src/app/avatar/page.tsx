@@ -17,7 +17,7 @@ const avatars = [
     mentor: 'Ada Lovelace',
     type: 'Matemática',
     theme: 'math',
-    src: 'https://i.ibb.co/jZ6LNhR/vicuna-matematica.png',
+    src: 'https://i.ibb.co/1ft9N3Q/300-300ada.png',
     alt: 'Vicuña — avatar de Matemáticas',
     hint: 'mathematician vicuña inspired by Ada Lovelace pixel art',
     icon: <Sigma size={14} />
