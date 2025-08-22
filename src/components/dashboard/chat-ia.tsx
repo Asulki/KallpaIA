@@ -17,7 +17,7 @@ async function chatOnce(messages: ChatMessage[], temperature = 0.7) {
     const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages, temperature }),
+        body: JSON.stringify({ messages: [systemPrompt, ...messages], temperature }),
     });
 
     const data = await response.json().catch(() => ({}));
@@ -57,8 +57,7 @@ export function ChatIA() {
     setIsLoading(true);
 
     try {
-      const chatHistory: ChatMessage[] = [systemPrompt, ...newMessages];
-      const reply = await chatOnce(chatHistory);
+      const reply = await chatOnce(newMessages);
       
       const assistantMessage: ChatMessage = { role: 'assistant', content: reply };
       setMessages(prev => [...prev, assistantMessage]);
@@ -93,8 +92,8 @@ export function ChatIA() {
                                 <Bot size={18} color="white" />
                              </div>
                         ) : (
-                             <div className="w-8 h-8 rounded-full bg-blue-500 grid place-items-center flex-shrink-0">
-                                <User size={18} color="white" />
+                             <div className="w-8 h-8 rounded-full bg-blue-500/20 grid place-items-center flex-shrink-0 user-avatar-glow">
+                                <User size={18} className="text-blue-300" />
                              </div>
                         )}
                     </div>

@@ -444,3 +444,7 @@
 #chat-view {
   height: calc(100vh - 12rem);
 }
+
+.user-avatar-glow {
+    filter: drop-shadow(0 0 8px var(--blue));
+}
