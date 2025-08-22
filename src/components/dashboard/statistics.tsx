@@ -23,9 +23,9 @@ export function Statistics() {
         <CardHeader>
           <CardTitle>Statistics</CardTitle>
           <div className="flex gap-2 bg-muted p-1 rounded-full">
-            <Button variant="ghost" size="sm" className="flex-1 rounded-full">Day</Button>
-            <Button variant="default" size="sm" className="flex-1 rounded-full shadow-md">Week</Button>
-            <Button variant="ghost" size="sm" className="flex-1 rounded-full">Month</Button>
+            <Button variant="ghost" size="sm" className="flex-1 rounded-full text-xs sm:text-sm">Day</Button>
+            <Button variant="default" size="sm" className="flex-1 rounded-full shadow-md text-xs sm:text-sm">Week</Button>
+            <Button variant="ghost" size="sm" className="flex-1 rounded-full text-xs sm:text-sm">Month</Button>
           </div>
         </CardHeader>
         <CardContent>

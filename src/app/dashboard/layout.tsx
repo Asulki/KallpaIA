@@ -9,7 +9,7 @@ export default function DashboardLayout({
     <div className="min-h-screen w-full gradient-background dashboard-theme">
       <div className="flex">
         <Sidebar />
-        <main className="flex-1 p-8">{children}</main>
+        <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
       </div>
     </div>
   );

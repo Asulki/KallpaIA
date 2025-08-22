@@ -20,7 +20,7 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-72 p-6 flex flex-col justify-between bg-white/50 backdrop-blur-xl border-r border-white/30 rounded-r-2xl">
+    <aside className="hidden md:flex w-72 p-6 flex-col justify-between bg-white/50 backdrop-blur-xl border-r border-white/30 rounded-r-2xl">
       <div>
         <div className="mb-8">
           <Link href="/" className="text-2xl font-bold text-foreground">
