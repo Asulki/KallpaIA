@@ -77,25 +77,29 @@ export function StellarPulseBackground() {
       const cy = cp.height * 0.55;
       const maxR = Math.hypot(cp.width, cp.height) * 0.6;
 
+      // Aura de fondo sutil
       const aura = pctx.createRadialGradient(cx, cy, 0, cx, cy, maxR*0.6);
-      aura.addColorStop(0, "rgba(124,58,237,0.08)");
+      aura.addColorStop(0, "rgba(124,58,237,0.08)"); // morado leve
       aura.addColorStop(1, "rgba(11,15,25,0)");
       pctx.fillStyle = aura;
       pctx.fillRect(0,0,cp.width,cp.height);
 
+      // Ondas (anillos) expandidas
       const rings = 6;
       for (let i=0; i<rings; i++){
-        const prog = (t*0.012 + i/rings) % 1;
-        const radius = 40 + prog * maxR;
+        const prog = (t*0.006 + i/rings) % 1;           // 0..1
+        const radius = 40 + prog * maxR;                // crece hacia afuera
         const color = PALETTE.colors[i % PALETTE.colors.length];
 
+        // trazo principal
         pctx.beginPath();
         pctx.arc(cx, cy, radius, 0, Math.PI*2);
         pctx.strokeStyle = color;
-        pctx.globalAlpha = 0.35 * (1 - prog);
+        pctx.globalAlpha = 0.35 * (1 - prog);           // se desvanece al crecer
         pctx.lineWidth = 3 + (1 - prog) * 2;
         pctx.stroke();
 
+        // halo difuso para glow
         pctx.beginPath();
         pctx.arc(cx, cy, radius, 0, Math.PI*2);
         pctx.strokeStyle = PALETTE.glow;
@@ -105,6 +109,7 @@ export function StellarPulseBackground() {
         pctx.globalAlpha = 1;
       }
 
+      // Núcleo pulsante (brillo central)
       const coreR = 60 + 8 * Math.sin(t*0.08);
       const cg = pctx.createRadialGradient(cx, cy, 0, cx, cy, coreR);
       cg.addColorStop(0, "rgba(255,255,255,0.5)");
