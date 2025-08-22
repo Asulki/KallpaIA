@@ -1,99 +1,103 @@
+
+'use client';
+
 import Link from 'next/link';
-import { Bot, Bell, Home, Rocket, Library, Settings, UserCircle, Search, Star, MessageSquare, BookOpen } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { Bot, Home, Rocket, Library, Settings, UserCircle, Search, Star, MessageSquare, BookOpen, Bell, Gamepad2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import './dashboard.css';
+import { useEffect } from 'react';
+
+const navItems = [
+    { href: "/dashboard", icon: <Home className="icn" />, label: "Inicio" },
+    { href: "/retos", icon: <Rocket className="icn" />, label: "Retos" },
+    { href: "/progreso", icon: <Library className="icn" />, label: "Progreso" },
+    { href: "/mentoria", icon: <MessageSquare className="icn" />, label: "Mentoría" },
+    { href: "/oportunidades", icon: <Star className="icn" />, label: "Oportunidades" },
+    { href: "/comic-digitales", icon: <BookOpen className="icn" />, label: "Comic digitales" },
+];
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    document.body.classList.add('kallpa-dashboard');
+    
+    document.querySelectorAll('.kallpa-dashboard .cta').forEach(b => {
+        const btn = b as HTMLElement;
+        const pointerDownHandler = (e: PointerEvent) => {
+            const r = btn.getBoundingClientRect();
+            btn.style.setProperty('--x', (e.clientX - r.left) + 'px');
+            btn.style.setProperty('--y', (e.clientY - r.top) + 'px');
+        };
+        btn.addEventListener('pointerdown', pointerDownHandler as EventListener);
+        
+        return () => {
+            btn.removeEventListener('pointerdown', pointerDownHandler as EventListener);
+        }
+    });
+
+    return () => {
+      document.body.classList.remove('kallpa-dashboard');
+    };
+  }, []);
+
   return (
-    <div className="flex min-h-screen w-full flex-col bg-background text-foreground">
-      <aside className="fixed inset-y-0 left-0 z-10 hidden w-60 flex-col border-r bg-card sm:flex">
-        <nav className="flex flex-col items-start gap-4 px-4 py-5">
-          <Link href="/dashboard" className="flex items-center gap-3 rounded-lg px-3 py-2 text-primary transition-all hover:text-primary-foreground">
-            <Bot className="h-6 w-6" />
-            <span className="text-lg font-bold">KallpaIA</span>
-          </Link>
-          <Link
-            href="/dashboard"
-            className="flex w-full items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-          >
-            <Home className="h-4 w-4" />
-            Inicio
-          </Link>
-          <Link
-            href="#"
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-          >
-            <Rocket className="h-4 w-4" />
-            Retos
-          </Link>
-          <Link
-            href="#"
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-          >
-            <Library className="h-4 w-4" />
-            Progreso
-          </Link>
-          <Link
-            href="#"
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-          >
-            <MessageSquare className="h-4 w-4" />
-            Mentoría
-          </Link>
-          <Link
-            href="#"
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-          >
-            <Star className="h-4 w-4" />
-            Oportunidades
-          </Link>
-          <Link
-            href="#"
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-          >
-            <BookOpen className="h-4 w-4" />
-            Comic digitales
-          </Link>
-        </nav>
-        <div className="mt-auto p-4">
-           <Link
-            href="#"
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-          >
-            <Settings className="h-4 w-4" />
-            Ajustes
-          </Link>
-        </div>
-      </aside>
-      <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-60">
-        <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-           <div className="relative flex-1 md:grow-0">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Buscar..."
-              className="w-full rounded-lg bg-muted pl-8 md:w-[200px] lg:w-[320px]"
-            />
-          </div>
-          <div className="flex-1" />
-          <Button variant="outline" size="icon" className="h-8 w-8">
-            <Bell className="h-4 w-4" />
-            <span className="sr-only">Notificaciones</span>
-          </Button>
-          <Avatar>
-            <AvatarImage src="https://placehold.co/32x32.png" alt="@wawa" />
-            <AvatarFallback>W</AvatarFallback>
-          </Avatar>
+    <>
+      <div className="bg-sky" aria-hidden="true"></div>
+      <div className="flex min-h-screen w-full flex-col p-4 md:p-6 lg:p-8">
+        <header className="flex items-center justify-between gap-4 mb-6">
+            <div className="relative flex-1 md:grow-0">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <Input
+                    type="search"
+                    placeholder="Buscar..."
+                    className="search w-full rounded-full bg-muted pl-11 md:w-[280px] lg:w-[380px]"
+                />
+            </div>
+            <div className="flex items-center gap-4">
+                <Button variant="ghost" size="icon" className="h-11 w-11 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/10">
+                    <Bell className="h-5 w-5" />
+                    <span className="sr-only">Notificaciones</span>
+                </Button>
+                <Avatar className="h-11 w-11 border-2 border-primary/50">
+                    <AvatarImage src="https://placehold.co/44x44.png" alt="@wawa" />
+                    <AvatarFallback>W</AvatarFallback>
+                </Avatar>
+            </div>
         </header>
-        <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-          {children}
-        </main>
+        <div className="grid flex-1 gap-6 lg:grid-cols-[260px_1fr]">
+            <aside className="sidebar card-glass hidden lg:flex flex-col p-3 space-y-4">
+                <div className="flex items-center gap-3 px-3">
+                    <Bot className="h-8 w-8 text-primary" />
+                    <span className="text-xl font-bold">KallpaIA</span>
+                </div>
+                <nav className="flex-1 space-y-1.5">
+                  {navItems.map((item) => (
+                    <Link key={item.label} href={item.href} className={pathname === item.href ? 'active' : ''}>
+                      {item.icon}
+                      <span>{item.label}</span>
+                    </Link>
+                  ))}
+                </nav>
+                 <div className="mt-auto p-4">
+                    <Link href="#" className="flex items-center gap-3 text-muted-foreground hover:text-foreground">
+                        <Settings className="icn" />
+                        <span>Ajustes</span>
+                    </Link>
+                </div>
+            </aside>
+            <main className="flex flex-col gap-6">
+                {children}
+            </main>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
