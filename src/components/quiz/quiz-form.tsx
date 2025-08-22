@@ -155,7 +155,7 @@ export function QuizForm() {
       <div className="quiz-panel text-center p-8">
         <h2 className="quiz-question-title">¡Tu planeta aliado es {resultPlanet}!</h2>
         <p className="text-lg mb-6 text-text-soft">Basado en tus respuestas, tienes una gran afinidad con el mundo de {resultPlanet}.</p>
-        <button onClick={() => router.push('/dashboard')} className="quiz-cta-button">Continuar a mi Aventura</button>
+        <button onClick={() => router.push('/dashboard')} className="quiz-cta-button">Seguir explorando planetas</button>
       </div>
     );
   }
