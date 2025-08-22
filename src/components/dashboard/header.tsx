@@ -1,25 +1,19 @@
-import { Input } from '@/components/ui/input';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Search, Flame, Palette, PenTool } from 'lucide-react';
 
 export function DashboardHeader() {
   return (
-    <header className="mb-8">
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-        <div className='text-center sm:text-left'>
-          <h1 className="text-4xl font-bold text-foreground">Hello Ruha</h1>
-          <p className="text-muted-foreground">Good day to learn</p>
-        </div>
-        <div className="relative w-full sm:w-64">
-          <Input placeholder="Search" className="w-full pl-10 bg-white/70 rounded-full" />
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-        </div>
+    <header className="flex items-center justify-between p-4 sm:p-6 lg:p-8 border-b border-white/10">
+      <div>
+        <h1 className="font-bold text-2xl text-white">Hola, Wawa 👋</h1>
+        <p className="text-muted-foreground uppercase text-xs tracking-widest">SUBTÍTULO INFORMATIVO</p>
       </div>
-      <div className="flex flex-wrap justify-center sm:justify-start gap-4">
-        <Button variant="outline" className="rounded-full bg-white/70 border-none"><Flame className="mr-2" /> Multimedia</Button>
-        <Button variant="outline" className="rounded-full bg-white/70 border-none"><Palette className="mr-2" /> Graphic Design</Button>
-        <Button variant="default" className="rounded-full shadow-lg"><PenTool className="mr-2" /> Content Creator</Button>
-      </div>
+      <Button variant="ghost" className="h-14 w-14 rounded-full p-0 bg-card/60 border-2 border-primary/50 ring-2 ring-primary/30 ring-offset-2 ring-offset-background">
+        <Avatar className="h-full w-full">
+          <AvatarImage src="https://i.ibb.co/CbfcCvP/condor-ciencia.png" alt="Avatar de usuario" />
+          <AvatarFallback>WA</AvatarFallback>
+        </Avatar>
+      </Button>
     </header>
   );
 }

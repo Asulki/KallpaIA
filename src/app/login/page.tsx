@@ -3,8 +3,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { BotIcon, User, Lock } from "lucide-react";
+import { BotIcon, User, Lock, Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -23,12 +25,13 @@ const formSchema = z.object({
   nickname: z.string().min(2, {
     message: "El apodo debe tener al menos 2 caracteres.",
   }),
-  password: z.string(), // agrega .min(6) si quieres validar longitud mínima
+  password: z.string(),
 });
 
 export default function RegisterForm() {
   const { toast } = useToast();
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -39,7 +42,7 @@ export default function RegisterForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Aquí iría tu lógica real de registro
+    // Mantén tu lógica existente. Ejemplo:
     router.push("/avatar");
     toast({
       title: "¡Registro exitoso!",
@@ -48,7 +51,6 @@ export default function RegisterForm() {
   }
 
   function onForgotPassword() {
-    // Redirige a tu flujo de recuperación
     router.push("/forgot-password");
   }
 
@@ -60,11 +62,9 @@ export default function RegisterForm() {
             <BotIcon className="w-10 h-10 text-primary" />
             <span className="font-headline text-3xl font-bold">KallpaIA</span>
           </div>
-
           <CardHeader className="text-center p-0 mb-6">
-            <CardTitle className="font-headline text-2xl">Crea tu Cuenta</CardTitle>
+            <CardTitle className="font-headline text-2xl">Inicia Sesión</CardTitle>
           </CardHeader>
-
           <CardContent className="p-0">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -81,6 +81,7 @@ export default function RegisterForm() {
                           <Input
                             className="pl-10 bg-white/50 border-white/50"
                             placeholder="Tu apodo"
+                            autoComplete="username"
                             {...field}
                           />
                         </div>
@@ -101,11 +102,24 @@ export default function RegisterForm() {
                         <div className="relative">
                           <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                           <Input
-                            className="pl-10 bg-white/50 border-white/50"
-                            type="password"
+                            className="pl-10 pr-12 bg-white/50 border-white/50"
+                            type={showPassword ? "text" : "password"}
                             placeholder="••••••••"
+                            autoComplete="current-password"
                             {...field}
                           />
+                          <button
+                            type="button"
+                            aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                            onClick={() => setShowPassword((s) => !s)}
+                            className="absolute right-3 top-1/2 -translate-y-1/2"
+                          >
+                            {showPassword ? (
+                              <EyeOff className="h-5 w-5 text-muted-foreground" />
+                            ) : (
+                              <Eye className="h-5 w-5 text-muted-foreground" />
+                            )}
+                          </button>
                         </div>
                       </FormControl>
                       <FormMessage />
@@ -119,7 +133,7 @@ export default function RegisterForm() {
                     type="submit"
                     className="w-full font-headline text-lg rounded-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all"
                   >
-                    Registrar
+                    Entrar
                   </Button>
 
                   <Button
@@ -130,6 +144,14 @@ export default function RegisterForm() {
                   >
                     Olvidé mi contraseña
                   </Button>
+
+                  {/* Opcional: si quieres mostrar la opción de crear cuenta sin tocar textos clave */}
+                  <p className="text-center text-xs text-muted-foreground">
+                    ¿No tienes cuenta?{" "}
+                    <Link href="/register" className="underline underline-offset-2">
+                      Crear cuenta
+                    </Link>
+                  </p>
                 </div>
               </form>
             </Form>
@@ -139,3 +161,4 @@ export default function RegisterForm() {
     </div>
   );
 }
+

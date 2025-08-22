@@ -42,49 +42,31 @@
     --radius: 2rem; /* Rounded corners */
   }
 
-  .light-theme {
-    --background: 210 40% 98%; /* Light Cool Gray */
-    --foreground: 210 40% 10%; /* Dark Blue-Gray */
-    --card: 210 40% 92%; /* Slightly darker card background */
-    --card-foreground: 210 40% 10%;
-    --popover: 210 40% 98%;
-    --popover-foreground: 210 40% 10%;
-    --primary: 250 70% 75%; /* Soft Lavender */
-    --primary-foreground: 250 70% 15%; /* Darker Lavender for text */
-    --secondary: 340 90% 85%; /* Soft Pink */
-    --secondary-foreground: 340 90% 15%;
-    --muted: 210 40% 88%;
-    --muted-foreground: 210 40% 40%;
-    --accent: 340 90% 85%; /* Soft Pink for accents */
-    --accent-foreground: 340 90% 15%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 210 40% 85%;
-    --input: 210 40% 92%;
-    --ring: 250 70% 75%; /* Soft Lavender for rings */
-  }
-
   .dashboard-theme {
-    --background: 240 50% 97%;
-    --foreground: 240 25% 25%;
-    --card: 240 50% 100%;
-    --card-foreground: 240 25% 25%;
-    --popover: 240 50% 100%;
-    --popover-foreground: 240 25% 25%;
-    --primary: 345 95% 65%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 240 25% 25%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 240 25% 90%;
-    --muted-foreground: 240 25% 55%;
-    --accent: 240 50% 90%;
-    --accent-foreground: 240 25% 15%;
+    --background: 224 42% 6%; /* #0B0F19 */
+    --foreground: 220 20% 98%; /* #F9FAFB */
+    --card: 223 35% 10%; /* rgba(26, 30, 46, 0.85) -> Approximation */
+    --card-foreground: 220 20% 98%;
+    --popover: 224 42% 6%;
+    --popover-foreground: 220 20% 98%;
+    --primary: 265 82% 60%; /* #7C3AED */
+    --primary-foreground: 220 20% 98%;
+    --secondary: 217 91% 60%; /* #3B82F6 */
+    --secondary-foreground: 220 20% 98%;
+    --muted: 223 35% 15%;
+    --muted-foreground: 225 18% 70%; /* #AAB4CC */
+    --accent: 265 82% 65%;
+    --accent-foreground: 220 20% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 25% 88%;
-    --input: 240 25% 92%;
-    --ring: 345 95% 65%;
+    --border: 220 20% 30%;
+    --input: 223 35% 12%;
+    --ring: 217 91% 60%;
     --radius: 1.5rem;
+    
+    --stem-green: 145 63% 42%; /* #22C55E */
+    --stem-yellow: 43 96% 47%; /* #EAB308 */
+    --stem-pink: 328 82% 61%; /* #EC4899 */
   }
 }
 
