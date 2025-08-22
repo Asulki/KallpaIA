@@ -1,14 +1,4 @@
-
-import { NextResponse } from "next/server";
-
-export const runtime = "nodejs";
-
-export async function GET() {
-  const poeKey = process.env.POE_API_KEY;
-
-  if (poeKey && poeKey.length > 10) {
-    return NextResponse.json({ poeKey: "present" });
-  } else {
-    return NextResponse.json({ poeKey: "missing" }, { status: 500 });
-  }
-}
+PROVIDER=gemini
+GEMINI_API_KEY="TU_API_KEY_GEMINI"
+GEMINI_MODEL=gemini-1.5-flash
+POE_API_KEY=zwX_XD30rxIaDVMqzLmxLwt4y0bE8s8rhagne2vR5_g

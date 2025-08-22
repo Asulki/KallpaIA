@@ -2,7 +2,11 @@
 
 import { useState, useRef, useEffect, FormEvent } from 'react';
 import { Bot, Send, User } from 'lucide-react';
-import type { ChatMessage } from '@/ai/schemas/chat-schemas';
+
+type ChatMessage = {
+    role: 'system' | 'user' | 'assistant';
+    content: string;
+};
 
 const systemPrompt: ChatMessage = {
     role: 'system' as const,
@@ -47,12 +51,13 @@ export function ChatIA() {
     if (!input.trim() || isLoading) return;
 
     const userMessage: ChatMessage = { role: 'user', content: input };
-    setMessages(prev => [...prev, userMessage]);
+    const newMessages: ChatMessage[] = [...messages, userMessage];
+    setMessages(newMessages);
     setInput('');
     setIsLoading(true);
 
     try {
-      const chatHistory: ChatMessage[] = [systemPrompt, ...messages, userMessage];
+      const chatHistory: ChatMessage[] = [systemPrompt, ...newMessages];
       const reply = await chatOnce(chatHistory);
       
       const assistantMessage: ChatMessage = { role: 'assistant', content: reply };
