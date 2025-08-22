@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import './dashboard.css';
 import { useEffect } from 'react';
+import { SpaceBackground } from '@/components/space-background';
 
 const navItems = [
     { href: "/dashboard", icon: <Home className="icn" />, label: "Inicio" },
@@ -52,7 +53,7 @@ export default function DashboardLayout({
 
   return (
     <>
-      <div className="bg-sky" aria-hidden="true"></div>
+      <SpaceBackground />
       <div className="flex min-h-screen w-full flex-col p-4 md:p-6 lg:p-8">
         <header className="flex items-center justify-between gap-4 mb-6">
             <div className="welcome-message">
