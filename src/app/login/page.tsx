@@ -28,7 +28,7 @@ const formSchema = z.object({
   password: z.string(),
 });
 
-export default function RegisterForm() {
+export default function LoginForm() {
   const { toast } = useToast();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
