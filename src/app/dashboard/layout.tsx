@@ -16,7 +16,6 @@ const navItems = [
     { href: "/progreso", icon: <Library className="icn" />, label: "Progreso" },
     { href: "/mentoria", icon: <MessageSquare className="icn" />, label: "Mentoría" },
     { href: "/oportunidades", icon: <Star className="icn" />, label: "Oportunidades" },
-    { href: "/comic-digitales", icon: <BookOpen className="icn" />, label: "Comic digitales" },
 ];
 
 export default function DashboardLayout({
@@ -53,13 +52,9 @@ export default function DashboardLayout({
       <div className="bg-sky" aria-hidden="true"></div>
       <div className="flex min-h-screen w-full flex-col p-4 md:p-6 lg:p-8">
         <header className="flex items-center justify-between gap-4 mb-6">
-            <div className="relative flex-1 md:grow-0">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                <Input
-                    type="search"
-                    placeholder="Buscar..."
-                    className="search w-full rounded-full bg-muted pl-11 md:w-[280px] lg:w-[380px]"
-                />
+            <div className="welcome-message">
+                <h2 className="text-2xl font-bold text-white">Bienvenida, Wawita</h2>
+                <p className="text-muted-foreground">¡Lista para tu próxima aventura STEAM!</p>
             </div>
             <div className="flex items-center gap-4">
                 <Button variant="ghost" size="icon" className="h-11 w-11 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/10">
@@ -85,7 +80,19 @@ export default function DashboardLayout({
                       <span>{item.label}</span>
                     </Link>
                   ))}
+                  <Link href="/chat-ia" className="relative group">
+                    <Bot className="icn" />
+                    <span>Chat IA</span>
+                    <span className="bot-status" aria-label="Online"></span>
+                    <span className="tooltip">Abrir chat</span>
+                  </Link>
                 </nav>
+                 <div className="mt-auto p-2">
+                    <Link href="/comic-digitales" className="flex items-center gap-3 text-muted-foreground hover:text-foreground">
+                        <BookOpen className="icn" />
+                        <span>Comic digitales</span>
+                    </Link>
+                </div>
                  <div className="mt-auto p-4">
                     <Link href="#" className="flex items-center gap-3 text-muted-foreground hover:text-foreground">
                         <Settings className="icn" />
