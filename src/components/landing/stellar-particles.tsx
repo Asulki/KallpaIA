@@ -10,7 +10,7 @@ export function StellarParticles() {
     if (!mountRef.current) return;
 
     const currentMount = mountRef.current;
-    let renderer: THREE.WebGLRenderer;
+    let renderer: THREE.WebGLRenderer | undefined;
 
     try {
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -18,6 +18,12 @@ export function StellarParticles() {
       console.error("Failed to create WebGL context for StellarParticles:", e);
       return; // Stop execution if renderer fails to initialize
     }
+
+    if (!renderer) {
+      return;
+    }
+    
+    const finalRenderer = renderer;
 
     // Scene
     const scene = new THREE.Scene();
@@ -27,9 +33,9 @@ export function StellarParticles() {
     camera.position.z = 5;
 
     // Renderer setup
-    renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    currentMount.appendChild(renderer.domElement);
+    finalRenderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
+    finalRenderer.setPixelRatio(window.devicePixelRatio);
+    currentMount.appendChild(finalRenderer.domElement);
 
     // Particles
     const particlesCount = 5000;
@@ -78,6 +84,7 @@ export function StellarParticles() {
 
     // Animation
     const clock = new THREE.Clock();
+    let animationFrameId: number;
     const animate = () => {
       const elapsedTime = clock.getElapsedTime();
 
@@ -85,8 +92,8 @@ export function StellarParticles() {
       particles.rotation.x = mouse.y * 0.2;
       particles.rotation.y += mouse.x * 0.2;
 
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
+      finalRenderer.render(scene, camera);
+      animationFrameId = requestAnimationFrame(animate);
     };
     animate();
 
@@ -95,23 +102,23 @@ export function StellarParticles() {
       if (currentMount) {
         camera.aspect = currentMount.clientWidth / currentMount.clientHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
+        finalRenderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
       }
     };
     window.addEventListener('resize', handleResize);
 
     // Cleanup
     return () => {
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
-      if (renderer.domElement.parentElement === currentMount) {
-        currentMount.removeChild(renderer.domElement);
+      if (finalRenderer?.domElement?.parentElement === currentMount) {
+        currentMount.removeChild(finalRenderer.domElement);
       }
-      // Dispose of Three.js objects
       scene.remove(particles);
       particlesGeometry.dispose();
       particlesMaterial.dispose();
-      renderer.dispose();
+      finalRenderer?.dispose();
     };
   }, []);
 
