@@ -19,7 +19,6 @@ const avatars = [
     src: 'https://i.ibb.co/jZ6LNhR/vicuna-matematica.png',
     alt: 'Vicuña — avatar de Matemáticas',
     hint: 'mathematician vicuña inspired by Ada Lovelace pixel art',
-    moves: ['Tejido Lógico (40)', 'Secuencia Infinita (30)'],
   },
   {
     id: 2,
@@ -30,7 +29,6 @@ const avatars = [
     src: 'https://i.ibb.co/CbfcCvP/condor-ciencia.png', 
     alt: 'Cóndor — avatar de Ciencia',
     hint: 'knowledge condor inspired by Marie Curie pixel art',
-    moves: ['Alas de la Curie (40)', 'Rayo Gamma (25)'],
   },
   {
     id: 3,
@@ -38,10 +36,9 @@ const avatars = [
     mentor: 'Katherine Johnson',
     type: 'Ingeniería',
     theme: 'eng',
-    src: 'https://i.ibb.co/yQxG4Tj/jaguar-ingenieria.png',
+    src: 'https.i.ibb.co/yQxG4Tj/jaguar-ingenieria.png',
     alt: 'Jaguar — avatar de Ingeniería',
     hint: 'engineer jaguar inspired by Katherine Johnson pixel art',
-    moves: ['Circuito Salvaje (50)', 'Cálculo Estelar (30)'],
   },
   {
     id: 4,
@@ -52,7 +49,6 @@ const avatars = [
     src: 'https://i.ibb.co/8mrL2Dk/colibri-arte.png',
     alt: 'Colibrí — avatar de Arte',
     hint: 'creative hummingbird inspired by Hypatia pixel art',
-    moves: ['Vuelo Inspirador (40)', 'Paleta Cósmica (25)'],
   },
   {
     id: 5,
@@ -63,7 +59,6 @@ const avatars = [
     src: 'https://i.ibb.co/f22my0B/zorro-tecnologia.png',
     alt: 'Zorro — avatar de Tecnología',
     hint: 'tech fox inspired by Hedy Lamarr pixel art',
-    moves: ['Hackeo Ágil (45)', 'Señal Secreta (35)'],
   },
 ];
 
@@ -95,12 +90,12 @@ const AvatarCard = ({ avatar, isSelected, onSelect }: { avatar: typeof avatars[0
       </div>
       
       <footer className="kcard__footer">
-        <div className="kcard__moves">
-            {avatar.moves.map(move => <span key={move}>{move}</span>)}
-        </div>
-        <div className="kcard__actions">
-            <button className="kcard__btn">⟵</button>
-            <button className="kcard__btn kcard__btn--primary">⟶</button>
+        <div className="flex justify-center items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-primary"></span>
+            <span className="w-2 h-2 rounded-full bg-white/20"></span>
+            <span className="w-2 h-2 rounded-full bg-white/20"></span>
+            <span className="w-2 h-2 rounded-full bg-white/20"></span>
+            <span className="w-2 h-2 rounded-full bg-white/20"></span>
         </div>
       </footer>
     </article>

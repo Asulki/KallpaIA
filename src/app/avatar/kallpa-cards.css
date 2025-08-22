@@ -1,24 +1,26 @@
 /* ===== Tokens / Paleta ===== */
-:root{
+:root {
   --bg: #0F1115;
   --gold: #F5D57D;
   --lila: #D7C7FF;
 
-  --chip-math:  #BFF3D1; /* Verde Menta */
-  --chip-science:   #B9A6FF; /* Morado Pastel */
-  --chip-eng:   #FFE08C; /* Amarillo Suave */
-  --chip-art:   #FFB3C6; /* Rosa Coral */
-  --chip-tech:  #AEE6FF; /* Celeste */
+  --chip-math: #BFF3D1; /* Verde Menta */
+  --chip-science: #B9A6FF; /* Morado Pastel */
+  --chip-eng: #FFE08C; /* Amarillo Suave */
+  --chip-art: #FFB3C6; /* Rosa Coral */
+  --chip-tech: #AEE6FF; /* Celeste */
+  --hp-badge-bg: #2C3240;
 
-  --text-strong:#FFFFFF;
-  --text-soft:  #D9DCE2;
+  --text-strong: #FFFFFF;
+  --text-soft: #D9DCE2;
 
-  --card-w: clamp(240px, 28vw, 320px);
-  --card-r: 22px; /* border-radius */
+  --card-w: clamp(120px, 20vw, 160px);
+  --card-h: calc(var(--card-w) * 1.5);
+  --card-r: 20px; /* border-radius */
 }
 
 /* ===== Grid responsive de cartas ===== */
-.kcards{
+.kcards {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,28 +28,25 @@
 }
 
 .kcards > div {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
 }
 .kcards > div::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
+  display: none; /* Chrome, Safari, Opera*/
 }
 
-
 /* ===== Carta base ===== */
-.kcard{
+.kcard {
   position: relative;
   cursor: pointer;
   width: var(--card-w);
-  aspect-ratio: 2 / 3;
+  height: var(--card-h);
   border-radius: var(--card-r);
-  background: radial-gradient(120% 90% at 50% 20%, #1A212C 0%, #141922 55%, #11161d 100%);
-  padding: 14px 14px 12px;
+  background: var(--bg);
+  padding: 12px;
   overflow: hidden;
   /* Marco dorado doble */
-  box-shadow:
-    0 0 0 2px var(--gold),
-    0 0 0 3px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 2px var(--gold), 0 0 0 3px rgba(255, 255, 255, 0.1);
 
   transition: transform .25s ease, box-shadow .25s ease;
   display: flex;
@@ -55,10 +54,10 @@
 }
 
 /* Brillo holográfico diagonal */
-.kcard::before{
-  content:"";
-  position:absolute; 
-  inset:-40% -20%;
+.kcard::before {
+  content: "";
+  position: absolute;
+  inset: -40% -20%;
   z-index: 1;
   background: conic-gradient(from 180deg,
     #ffffff00 0%,
@@ -68,88 +67,104 @@
     #ffffff38 70%,
     #ffffff00 100%);
   mix-blend-mode: screen;
-  opacity:.25;
+  opacity: .20;
   animation: holo 10s linear infinite;
-  pointer-events:none;
+  pointer-events: none;
 }
 
-@keyframes holo{
-  from{ transform: rotate(0deg); }
-  to  { transform: rotate(360deg); }
+@keyframes holo {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Hover / Selección */
-.kcard:hover{ 
-    transform: translateY(-4px) scale(1.02); 
-    box-shadow: 0 0 0 2px var(--gold), 0 0 0 4px var(--lila), 0 16px 40px rgba(0,0,0,.55);
+.kcard:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 0 0 2px var(--gold), 0 0 0 4px var(--lila), 0 16px 40px rgba(0, 0, 0, .55);
 }
-.kcard.kcard--selected {
-    transform: translateY(-6px) scale(1.05);
-    box-shadow: 0 0 0 3px hsl(var(--background)), 0 0 0 6px var(--gold);
-}
-.kcard > * {
-    position: relative;
-    z-index: 2;
+.kcard--selected {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 0 0 3px hsl(var(--background)), 0 0 0 6px var(--gold);
 }
 
+.kcard > * {
+  position: relative;
+  z-index: 2;
+}
 
 /* ===== Header (chip + HP) ===== */
-.kcard__header{
-  display:flex; align-items:center; justify-content:space-between;
-  gap:.5rem; margin-bottom:.35rem;
-  height: 40px;
+.kcard__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  margin-bottom: .35rem;
+  height: 36px;
 }
 
-.kcard__chip{
-  display:inline-flex; align-items:center; gap:.5rem;
-  padding:.35rem .7rem;
-  border-radius:999px;
-  font-weight:700; font-size:.9rem;
-  color:#0B0F16;
-  background:#fff;
-  box-shadow: inset 0 0 0 1px #0002, 0 2px 8px rgba(0,0,0,.2);
+.kcard__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 12px;
+  color: #0B0F16;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px #0002, 0 2px 8px rgba(0, 0, 0, .2);
 }
 
-.kcard__hp{
-  display:inline-flex; align-items:center; gap:.35rem;
-  padding:.35rem .65rem;
-  border-radius: 999px;
-  font-weight:800; font-size:.9rem;
-  color:#DCE3EE; background: #222a35;
+.kcard__hp {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 12px;
+  color: #DCE3EE;
+  background: var(--hp-badge-bg);
   box-shadow: inset 0 0 0 1px #0003;
 }
-.kcard__hp b{ font-weight:900; letter-spacing:.5px; }
+
+.kcard__hp b {
+  font-weight: 900;
+  letter-spacing: .5px;
+}
 
 /* Variantes por planeta (color del chip) */
-.kcard--math .kcard__chip{ background: var(--chip-math); }
-.kcard--science .kcard__chip{ background: var(--chip-science); }
-.kcard--eng .kcard__chip{ background: var(--chip-eng); }
-.kcard--art .kcard__chip{ background: var(--chip-art); }
-.kcard--tech .kcard__chip{ background: var(--chip-tech); }
-
+.kcard--math .kcard__chip { background: var(--chip-math); }
+.kcard--science .kcard__chip { background: var(--chip-science); }
+.kcard--eng .kcard__chip { background: var(--chip-eng); }
+.kcard--art .kcard__chip { background: var(--chip-art); }
+.kcard--tech .kcard__chip { background: var(--chip-tech); }
 
 /* ===== Arte central (óvalo con aura) ===== */
-.kcard__art{
-  position:relative; 
-  display:grid; 
-  place-items:center;
+.kcard__art {
+  position: relative;
+  display: grid;
+  place-items: center;
   margin: .35rem 0;
   flex-grow: 1;
-  border-radius: 18px; 
-  overflow:hidden;
+  border-radius: 18px;
+  overflow: hidden;
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
 }
 
-.kcard__art img{
+.kcard__art img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   image-rendering: pixelated;
   image-rendering: -webkit-optimize-contrast;
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .45));
   transition: transform .3s ease;
 }
-.kcard:hover .kcard__art img{ transform: scale(1.04); }
+
+.kcard:hover .kcard__art img {
+  transform: scale(1.04);
+}
 
 /* ===== Títulos ===== */
 .kcard__title {
@@ -157,79 +172,62 @@
   margin-top: auto;
   margin-bottom: 0.5rem;
 }
-.kcard__name{
-  font-weight: 900;
-  font-size: clamp(1rem, 2.2vw, 1.4rem);
+
+.kcard__name {
+  font-weight: 700;
+  font-size: clamp(14px, 2.2vw, 16px);
   letter-spacing: .3px;
   text-shadow: 0 1px 0 #0009;
   color: var(--text-strong);
 }
-.kcard__mentor{
-  color: var(--text-soft);
-  opacity:.9;
-  font-weight:600;
-  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
-  margin-top:-0.1rem;
+
+.kcard__mentor {
+  color: var(--lila);
+  opacity: .9;
+  font-weight: 400;
+  font-size: clamp(11px, 1.8vw, 12px);
+  margin-top: -0.1rem;
 }
 
-/* ===== Footer (movimientos + acciones) ===== */
-.kcard__footer{ 
-    margin-top: auto; 
-    display:grid; 
-    gap:.6rem; 
+/* ===== Footer ===== */
+.kcard__footer {
+  margin-top: auto;
+  height: 28px;
+  display: grid;
+  place-items: center;
 }
-.kcard__moves{
-  display:flex; flex-direction:column; gap:.35rem;
-  font-size: .9rem; color:#E8EDF6;
-}
-.kcard__moves span{
-  display:inline-flex; align-items:center; gap:.45rem;
-  padding:.4rem .6rem; border-radius: 12px;
-  background: #0f1420; box-shadow: inset 0 0 0 1px #ffffff12;
-}
-
-.kcard__actions{ display:flex; gap:.45rem; justify-content:space-around; }
-.kcard__btn{
-  border: none; cursor: pointer;
-  padding:.45rem .65rem; border-radius: 10px;
-  background:#1b2330; color:#E9F0FA; font-weight:800; font-size:1.25rem;
-  box-shadow: inset 0 0 0 1px #ffffff15;
-  transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
-  flex-grow: 1;
-  text-align: center;
-}
-.kcard__btn:hover{ transform: translateY(-2px); background:#222d3d; }
-.kcard__btn--primary{ 
-    background:#253247; 
-    box-shadow: 0 0 0 2px var(--gold) inset; 
-}
-.kcard__btn--primary:hover{ background:#2d3b53; }
-
 
 /* ===== Responsive refinements ===== */
 @media (max-width: 1024px) {
-    :root {
-        --card-w: 200px;
-    }
+  :root {
+    --card-w: clamp(140px, 20vw, 160px);
+    --card-r: 18px;
+  }
 }
 
 @media (max-width: 768px) {
-    :root {
-        --card-w: 160px;
-    }
-     .kcard__chip, .kcard__hp{ font-size:.8rem; padding: 0.25rem 0.5rem;}
-     .kcard__moves span{ font-size:.8rem; }
+  :root {
+    --card-w: clamp(120px, 25vw, 140px);
+    --card-r: 16px;
+  }
+   .kcard__chip, .kcard__hp { font-size: 11px; padding: 3px 8px; }
+   .kcard__name { font-size: 13px; }
+   .kcard__mentor { font-size: 10px; }
+   .kcard { padding: 10px; }
 }
 
 @media (max-width: 480px) {
     :root {
-        --card-w: 140px;
+        --card-w: 120px;
     }
 }
 
-
 /* Motion-safe */
-@media (prefers-reduced-motion: reduce){
-  .kcard, .kcard__art img{ transition: none !important; }
-  .kcard::before{ animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .kcard, .kcard__art img {
+    transition: none !important;
+  }
+  .kcard::before {
+    animation: none;
+  }
 }
