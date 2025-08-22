@@ -3,12 +3,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Bot, Home, Swords, GraduationCap, MessagesSquare, Sparkles } from 'lucide-react';
+import { Bot, Home, Swords, GraduationCap, MessagesSquare, Sparkles, Gamepad2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
   { href: '/dashboard', icon: Home, label: 'Inicio' },
   { href: '/dashboard/challenges', icon: Swords, label: 'Retos' },
+  { href: '/dashboard/minigames', icon: Gamepad2, label: 'Minijuegos STEAM' },
   { href: '/dashboard/career', icon: GraduationCap, label: 'Info vocacional' },
   { href: '/dashboard/chat', icon: MessagesSquare, label: 'Chat IA' },
   { href: '/dashboard/opportunities', icon: Sparkles, label: 'Oportunidades' },
