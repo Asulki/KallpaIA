@@ -1,15 +1,102 @@
-import { PlanetCard } from '@/components/dashboard/planet-card';
-import { Button } from '@/components/ui/button';
-import { Gamepad2 } from 'lucide-react';
 
-export default function Dashboard() {
+import { Check } from "lucide-react";
+
+export default function DashboardPage() {
   return (
-    <div className="flex flex-col items-center gap-8">
-      <PlanetCard />
-      <Button size="lg" className="w-full max-w-sm font-headline bg-primary text-primary-foreground text-lg rounded-full py-3 hover:bg-accent hover:shadow-lg hover:shadow-primary/30 transition-all">
-          <Gamepad2 className="mr-2" />
-          Videojuegos Vocacionales
-      </Button>
-    </div>
+    <>
+      {/* KPIs */}
+      <section className="kd-kpis">
+        <article className="kpi">
+          <h4>Retos completados</h4>
+          <div className="val">18</div>
+          <span className="trend up">+3 esta semana</span>
+        </article>
+        <article className="kpi">
+          <h4>Racha</h4>
+          <div className="val">7 días</div>
+          <span className="trend up">+2</span>
+        </article>
+        <article className="kpi">
+          <h4>Puntos Kallpa</h4>
+          <div className="val">1,240</div>
+          <span className="trend">Objetivo: 1,500</span>
+        </article>
+        <article className="kpi">
+          <h4>Nivel</h4>
+          <div className="val">Explorer II</div>
+          <span className="trend ok">88% del nivel</span>
+        </article>
+      </section>
+
+      {/* Charts */}
+      <section className="kd-charts">
+        <article className="card chart">
+          <header>
+            <h3>Progreso semanal</h3>
+            <button className="ghost">Ver todo</button>
+          </header>
+          <div className="chart-placeholder">[ Chart: líneas / barras ]</div>
+        </article>
+        <article className="card chart">
+          <header>
+            <h3>Habilidades (Radar)</h3>
+            <button className="ghost">Editar metas</button>
+          </header>
+          <div className="chart-placeholder">[ Chart: radar / spider ]</div>
+        </article>
+      </section>
+
+      {/* Activity + Tasks + Mentor */}
+      <section className="kd-grid-3">
+        <article className="card list">
+          <header><h3>Actividad reciente</h3></header>
+          <ul className="activity">
+            <li><span className="dot"></span> Obtuviste la insignia <b>Cripto Novata</b></li>
+            <li><span className="dot"></span> Nuevo reto: “Red Team básico”</li>
+            <li><span className="dot"></span> Mentora Sofía dejó feedback</li>
+          </ul>
+        </article>
+
+        <article className="card list">
+          <header><h3>Próximos retos</h3></header>
+          <ul className="tasks">
+            <li><input type="checkbox" /> SQL Injection 101 <small>Mañana</small></li>
+            <li><input type="checkbox" /> CTF mini: contraseñas <small>Vie</small></li>
+            <li><input type="checkbox" /> Quiz de redes <small>Lun</small></li>
+          </ul>
+          <button className="btn-secondary small">Ver calendario</button>
+        </article>
+
+        <article className="card mentor">
+          <header><h3>Mentoría</h3></header>
+          <div className="mentor-msg">
+            <p><b>Sofía:</b> ¡Buen avance! Practica 15 min de OWASP Top 10.</p>
+          </div>
+          <div className="mentor-actions">
+            <button className="btn-primary small">Abrir chat</button>
+            <button className="ghost small">Agendar</button>
+          </div>
+        </article>
+      </section>
+
+      {/* Recursos */}
+      <section className="kd-resources">
+        <article className="res-card">
+          <h4>Video: Criptografía básica</h4>
+          <p>5 min • Intro</p>
+          <button className="btn-secondary">Ver</button>
+        </article>
+        <article className="res-card">
+          <h4>Artículo: ¿Qué es un CTF?</h4>
+          <p>Lectura corta</p>
+          <button className="btn-secondary">Leer</button>
+        </article>
+        <article className="res-card">
+          <h4>Proyecto: Mini scanner puertos</h4>
+          <p>Python</p>
+          <button className="btn-secondary">Abrir</button>
+        </article>
+      </section>
+    </>
   );
 }

@@ -1,0 +1,168 @@
+/* ===== APLICAR SOLO EN DASHBOARD ===== */
+.kallpa-dashboard{
+  --bg-1:#0F2027; --bg-2:#203A43; --bg-3:#2C5364;
+  --primary:#6C63FF; --primary-2:#857DFF; --secondary:#00D4FF;
+  --text:#FFFFFF; --muted:#B0BEC5; --ink:#E3F2FD;
+  --surface: rgba(255,255,255,.06); --surface-2: rgba(255,255,255,.12);
+  --border: rgba(255,255,255,.18);
+  --ok:#00E676; --warn:#FFCA28; --danger:#FF6B6B;
+
+  color:var(--text);
+  background:
+    radial-gradient(1200px 800px at 15% 10%, rgba(108,99,255,.18), transparent 60%),
+    linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
+  background-attachment: fixed;
+  min-height:100dvh;
+  padding:16px;
+  font-family: ui-sans-serif, system-ui, Inter, "Segoe UI", Roboto, Arial;
+}
+
+/* Header */
+.kallpa-dashboard .kd-header{
+  display:grid; grid-template-columns: 200px 1fr auto;
+  align-items:center; gap:16px; margin-bottom:18px;
+}
+.kallpa-dashboard .kd-logo{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink)}
+.kallpa-dashboard .kd-logo .badge{
+  width:32px;height:32px;border-radius:10px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  box-shadow:0 6px 18px rgba(0,212,255,.35), inset 0 0 18px rgba(255,255,255,.15);
+}
+.kallpa-dashboard .kd-search{display:flex;gap:8px}
+.kallpa-dashboard .kd-search input{
+  width:100%;height:44px;border-radius:12px;border:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  color:var(--text); padding:0 12px; outline:none;
+}
+.kallpa-dashboard .kd-search input:focus{
+  box-shadow:0 0 0 3px rgba(108,99,255,.25);
+  border-color:color-mix(in oklab, var(--primary) 70%, white 30%);
+}
+.kallpa-dashboard .kd-search button{
+  height:44px;padding:0 12px;border-radius:12px;border:1px solid var(--border);
+  background:var(--surface); color:var(--ink); cursor:pointer;
+}
+.kallpa-dashboard .kd-actions{display:flex;align-items:center;gap:10px}
+.kallpa-dashboard .icon-btn{
+  height:40px;width:40px;border-radius:12px;border:1px solid var(--border);
+  background:var(--surface); color:var(--ink); cursor:pointer;
+}
+.kallpa-dashboard .kd-user{display:flex;align-items:center;gap:8px}
+.kallpa-dashboard .kd-user img{width:32px;height:32px;border-radius:50%}
+
+/* Layout principal */
+.kallpa-dashboard .kd-layout{
+  display:grid; grid-template-columns: 240px 1fr; gap:16px;
+}
+
+/* Sidebar */
+.kallpa-dashboard .kd-sidebar{
+  background:linear-gradient(180deg,var(--surface),rgba(255,255,255,.03));
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--border); border-radius:18px; padding:14px;
+  height:fit-content;
+}
+.kallpa-dashboard .kd-sidebar nav{display:grid;gap:6px}
+.kallpa-dashboard .kd-sidebar a{
+  color:var(--muted); text-decoration:none; padding:10px 12px; border-radius:12px;
+}
+.kallpa-dashboard .kd-sidebar a:hover{background:var(--surface-2); color:var(--text)}
+.kallpa-dashboard .kd-sidebar a.active{
+  color:#0B0F1A; background:linear-gradient(135deg,var(--primary),color-mix(in oklab, var(--primary) 70%, white 30%));
+}
+
+/* Main */
+.kallpa-dashboard .kd-main{display:grid;gap:16px; align-content: start;}
+
+/* KPIs */
+.kallpa-dashboard .kd-kpis{
+  display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:16px;
+}
+.kallpa-dashboard .kpi{
+  background:linear-gradient(180deg,var(--surface),rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:18px; padding:16px;
+}
+.kallpa-dashboard .kpi h4{margin:0 0 6px;color:var(--muted);font-weight:600}
+.kallpa-dashboard .kpi .val{font-size:28px;font-weight:800;color:var(--ink)}
+.kallpa-dashboard .kpi .trend{font-size:12px;color:var(--muted)}
+.kallpa-dashboard .kpi .trend.up{color:var(--ok)}
+.kallpa-dashboard .kpi .trend.ok{color:var(--secondary)}
+
+/* Charts */
+.kallpa-dashboard .kd-charts{
+  display:grid; grid-template-columns: 1.3fr 1fr; gap:16px;
+}
+.kallpa-dashboard .card{
+  background:linear-gradient(180deg,var(--surface),rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:18px; padding:14px;
+}
+.kallpa-dashboard .card header{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:8px
+}
+.kallpa-dashboard .ghost{
+  background:transparent;border:1px solid var(--border);color:var(--ink);
+  padding:6px 10px;border-radius:10px;cursor:pointer;
+}
+.kallpa-dashboard .chart-placeholder{
+  height:220px; border-radius:12px; border:1px dashed var(--border);
+  display:grid; place-items:center; color:var(--muted);
+}
+
+/* Grid 3 columnas (actividad, tareas, mentor) */
+.kallpa-dashboard .kd-grid-3{
+  display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px;
+}
+.kallpa-dashboard .list ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.kallpa-dashboard .activity .dot{
+  display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:var(--secondary);margin-right:6px
+}
+.kallpa-dashboard .tasks li{
+  display:flex;align-items:center;justify-content:space-between;gap:8px
+}
+.kallpa-dashboard .tasks small{color:var(--muted)}
+.kallpa-dashboard .mentor .mentor-actions{display:flex;gap:8px;margin-top:10px}
+
+/* Recursos */
+.kallpa-dashboard .kd-resources{
+  display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:16px;
+}
+.kallpa-dashboard .res-card{
+  background:linear-gradient(180deg,var(--surface),rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:16px; padding:14px;
+  display:grid; align-content:start; gap:8px;
+}
+
+/* Botones */
+.kallpa-dashboard .btn-primary{
+  height:44px;border:none;border-radius:14px;cursor:pointer;
+  color:#0B0F1A;
+  background:linear-gradient(135deg,var(--primary), color-mix(in oklab, var(--primary) 70%, white 30%));
+  box-shadow:0 10px 28px rgba(108,99,255,.45);
+}
+.kallpa-dashboard .btn-secondary{
+  height:44px;border:none;border-radius:14px;cursor:pointer;color:#06131A;
+  background:linear-gradient(135deg,var(--secondary), color-mix(in oklab, var(--secondary) 70%, white 25%));
+  box-shadow:0 8px 22px rgba(0,212,255,.38);
+}
+.kallpa-dashboard .btn-primary.small, .kallpa-dashboard .btn-secondary.small,
+.kallpa-dashboard .ghost.small{height:36px; font-size:14px; padding:0 12px}
+
+/* Footer */
+.kallpa-dashboard .kd-footer{display:flex;justify-content:center;color:var(--muted);padding:8px 0}
+
+/* Responsive */
+@media (max-width:1100px){
+  .kallpa-dashboard .kd-layout{grid-template-columns: 72px 1fr}
+  .kallpa-dashboard .kd-sidebar nav a{font-size:0; padding:10px}
+}
+@media (max-width:900px){
+  .kallpa-dashboard .kd-kpis{grid-template-columns: repeat(2,1fr)}
+  .kallpa-dashboard .kd-charts{grid-template-columns:1fr}
+  .kallpa-dashboard .kd-grid-3{grid-template-columns:1fr}
+  .kallpa-dashboard .kd-resources{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .kallpa-dashboard .kd-header{grid-template-columns:1fr; gap:10px}
+  .kallpa-dashboard .kd-resources{grid-template-columns:1fr}
+}

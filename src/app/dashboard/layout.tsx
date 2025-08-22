@@ -1,7 +1,4 @@
-import { DashboardHeader } from '@/components/dashboard/header';
-import { Sidebar } from '@/components/dashboard/sidebar';
-import { ChatWidget } from '@/components/dashboard/chat-widget';
-import { SpaceBackground } from '@/components/space-background';
+import './dashboard.css';
 
 export default function DashboardLayout({
   children,
@@ -9,18 +6,52 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative z-10 min-h-screen w-full bg-transparent text-foreground dashboard-theme font-body">
-      <SpaceBackground />
-      <div className="grid md:grid-cols-[280px_1fr]">
-        <Sidebar />
-        <div className="flex flex-col">
-          <DashboardHeader />
-          <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
-            {children}
-          </main>
+    <section className="kallpa-dashboard">
+      {/* Header */}
+      <header className="kd-header">
+        <div className="kd-logo">
+          <span className="badge">🤖</span>
+          <strong>KallpaIA</strong>
         </div>
+
+        <div className="kd-search">
+          <input type="search" placeholder="Buscar retos, recursos, mentoras…" />
+          <button aria-label="Buscar">🔍</button>
+        </div>
+
+        <div className="kd-actions">
+          <button className="icon-btn" aria-label="Notificaciones">🔔</button>
+          <button className="icon-btn" aria-label="Cambiar tema">🌓</button>
+          <div className="kd-user">
+            <img src="https://placehold.co/32x32.png" alt="Perfil" />
+            <span>Carla</span>
+          </div>
+        </div>
+      </header>
+
+      {/* Layout */}
+      <div className="kd-layout">
+        {/* Sidebar */}
+        <aside className="kd-sidebar">
+          <nav>
+            <a className="active" href="#">Inicio</a>
+            <a href="#">Retos</a>
+            <a href="#">Progreso</a>
+            <a href="#">Mentoría</a>
+            <a href="#">Biblioteca</a>
+            <a href="#">Ajustes</a>
+          </nav>
+        </aside>
+
+        {/* Main */}
+        <main className="kd-main">
+          {children}
+          {/* Footer */}
+          <footer className="kd-footer">
+            <small>© 2025 KallpaIA • v1.0.0</small>
+          </footer>
+        </main>
       </div>
-      <ChatWidget />
-    </div>
+    </section>
   );
 }
