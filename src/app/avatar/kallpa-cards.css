@@ -177,23 +177,6 @@
   place-items: center;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 1024px) {
-  :root {
-    --card-w: 140px;
-    --card-r: 18px;
-  }
-}
-
-@media (max-width: 768px) {
-  :root {
-    --card-w: 120px;
-    --card-r: 16px;
-  }
-   .kcard { padding: 10px; }
-}
-
-
 /* Motion-safe */
 @media (prefers-reduced-motion: reduce) {
   .kcard, .kcard__art img, .kcard::before {

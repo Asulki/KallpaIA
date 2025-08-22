@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { useState, cloneElement, ReactElement } from 'react';
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { StellarParticles } from '@/components/landing/stellar-particles';
 import { Palette, Beaker, Wrench, Sigma, Cpu, FlaskConical } from 'lucide-react';
@@ -138,9 +138,9 @@ export default function AvatarSelectionPage() {
               </div>
 
               <section className="kcards w-full max-w-screen-xl">
-                  <div className="flex gap-5 overflow-x-auto p-4 snap-x snap-mandatory">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 justify-center">
                       {avatars.map((avatar) => (
-                          <div key={avatar.id} className="snap-center shrink-0">
+                          <div key={avatar.id} className="flex justify-center">
                               <AvatarCard
                                   avatar={avatar}
                                   isSelected={selectedAvatar === avatar.id}
