@@ -1,8 +1,10 @@
 import { QuizForm } from "@/components/quiz/quiz-form";
+import './quiz-ui.css';
 
 export default function QuizPage() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#F0F4F8]">
+    <div className="quiz-page-container">
+      <div className="quiz-bg-particles"></div>
       <QuizForm />
     </div>
   );

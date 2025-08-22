@@ -1,11 +1,8 @@
 "use client";
 
 import { useState } from 'react';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Card, CardContent } from '@/components/ui/card';
 import { useRouter } from 'next/navigation';
+import { CheckCircle2 } from 'lucide-react';
 
 type Planet = 'Ciencia' | 'Tecnología' | 'Ingeniería' | 'Matemáticas' | 'Arte';
 
@@ -122,11 +119,21 @@ export function QuizForm() {
     Matemáticas: 0,
     Arte: 0,
   });
+  const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
   const router = useRouter();
 
-  const handleAnswer = (planet: Planet) => {
+  const handleSelectOption = (index: number, planet: Planet) => {
+    setSelectedOption(index);
+  };
+  
+  const handleContinue = () => {
+    if (selectedOption === null) return;
+    
+    const planet = quizQuestions[currentQuestion].options[selectedOption].planet as Planet;
     setScores(prev => ({ ...prev, [planet]: prev[planet] + 1 }));
+
+    setSelectedOption(null); // Reset for next question
 
     if (currentQuestion < quizQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
@@ -135,65 +142,72 @@ export function QuizForm() {
     }
   };
 
+
   const getResult = () => {
     const finalScores = Object.entries(scores);
     finalScores.sort((a, b) => b[1] - a[1]);
-
-    const topScore = finalScores[0][1];
-    const tiedPlanets = finalScores.filter(score => score[1] === topScore).map(score => score[0]);
-
-    if (tiedPlanets.length > 1) {
-      return tiedPlanets[Math.floor(Math.random() * tiedPlanets.length)];
-    }
     return finalScores[0][0];
   };
 
   if (showResult) {
     const resultPlanet = getResult();
     return (
-      <div className="text-center p-8 bg-white rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold mb-4">¡Tu planeta es {resultPlanet}!</h2>
-        <p className="text-lg mb-6">Basado en tus respuestas, tienes una gran afinidad con el mundo de {resultPlanet}.</p>
-        <Button onClick={() => router.push('/dashboard')}>Continuar a mi Aventura</Button>
+      <div className="quiz-panel text-center p-8">
+        <h2 className="quiz-question-title">¡Tu planeta aliado es {resultPlanet}!</h2>
+        <p className="text-lg mb-6 text-text-soft">Basado en tus respuestas, tienes una gran afinidad con el mundo de {resultPlanet}.</p>
+        <button onClick={() => router.push('/dashboard')} className="quiz-cta-button">Continuar a mi Aventura</button>
       </div>
     );
   }
 
-  const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+  const progressPercentage = ((currentQuestion + 1) / quizQuestions.length) * 100;
+  const currentQData = quizQuestions[currentQuestion];
 
   return (
-    <Card className="w-full max-w-2xl p-6 md:p-8 bg-white/80 backdrop-blur-lg border-none shadow-xl rounded-2xl">
-      <CardContent className="p-0">
-        <div className="flex items-center gap-4 mb-6">
-          <Image src="https://placehold.co/80x80.png" alt="Pixel art computer" width={60} height={60} data-ai-hint="pixel art computer" />
-          <div className="bg-white p-4 rounded-lg shadow-inner text-lg w-full">
-            <p>{quizQuestions[currentQuestion].question}</p>
-          </div>
+    <div className="quiz-panel">
+      <header className="quiz-header">
+        <div className="quiz-progress-info">
+          <span>Pregunta {currentQuestion + 1} de {quizQuestions.length}</span>
         </div>
-        
-        <div className="mb-6">
-          <Progress value={progress} className="h-4 rounded-full" />
-          <p className="text-center mt-2 text-sm text-gray-600">Pregunta {currentQuestion + 1} de {quizQuestions.length}</p>
+        <div className="progress-track">
+          <div className="progress-fill" style={{ width: `${progressPercentage}%` }}></div>
         </div>
+      </header>
 
-        <div className="flex items-center justify-center">
-            <div className="mr-8">
-                <Image src="https://placehold.co/120x120.png" alt="Pixel art character" width={100} height={100} data-ai-hint="pixel art character" />
-            </div>
-            <div className="grid grid-cols-1 gap-4 w-full">
-            {quizQuestions[currentQuestion].options.map(option => (
-                <Button
-                key={option.text}
-                onClick={() => handleAnswer(option.planet as Planet)}
-                variant="outline"
-                className="justify-start text-left h-auto py-3 px-4 rounded-lg bg-white hover:bg-blue-100 border border-blue-200 shadow-sm"
+      <main>
+        <h2 className="quiz-question-title">{currentQData.question}</h2>
+        <div className="quiz-options-list" role="radiogroup">
+          {currentQData.options.map((option, index) => {
+            const [icon, ...textParts] = option.text.split(' ');
+            const text = textParts.join(' ');
+            return (
+                <div
+                    key={index}
+                    className={`option-item ${selectedOption === index ? 'selected' : ''}`}
+                    onClick={() => handleSelectOption(index, option.planet as Planet)}
+                    tabIndex={0}
+                    role="radio"
+                    aria-checked={selectedOption === index}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleSelectOption(index, option.planet as Planet) }}
                 >
-                {option.text}
-                </Button>
-            ))}
-            </div>
+                    <span className="option-icon">{icon}</span>
+                    <span className="option-text">{text}</span>
+                    <CheckCircle2 className="check-icon" size={20} />
+                </div>
+            )
+          })}
         </div>
-      </CardContent>
-    </Card>
+      </main>
+
+      <footer className="quiz-footer">
+        <button 
+          className="quiz-cta-button" 
+          onClick={handleContinue} 
+          disabled={selectedOption === null}
+        >
+          Continuar
+        </button>
+      </footer>
+    </div>
   );
 }
