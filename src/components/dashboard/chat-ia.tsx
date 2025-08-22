@@ -28,7 +28,6 @@ export function ChatIA() {
   const transcriptRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Scroll to the bottom of the transcript when messages change
     if (transcriptRef.current) {
       transcriptRef.current.scrollTop = transcriptRef.current.scrollHeight;
     }
@@ -64,7 +63,7 @@ export function ChatIA() {
   };
 
   return (
-    <div className="chat-ia-container">
+    <div className="chat-ia-container card-glass">
         <header className="chat-ia-header">
             <div className="bot-avatar">
                 <Bot size={24} color="white" />
@@ -80,9 +79,13 @@ export function ChatIA() {
                 <div key={index} className={`chat-bubble ${msg.role}`}>
                     <div className="avatar">
                         {msg.role === 'assistant' ? (
-                             <Image src="https://i.ibb.co/V3F7499/vicuna-bot.png" alt="KallpaWarmIA" width={32} height={32} />
+                             <div className="w-8 h-8 rounded-full bg-primary grid place-items-center flex-shrink-0">
+                                <Bot size={18} color="white" />
+                             </div>
                         ) : (
-                             <Image src="https://i.ibb.co/b2wBv43/user-avatar-placeholder.png" alt="Usuario" width={32} height={32} />
+                             <div className="w-8 h-8 rounded-full bg-blue-500 grid place-items-center flex-shrink-0">
+                                <User size={18} color="white" />
+                             </div>
                         )}
                     </div>
                     <div className="chat-bubble-content">

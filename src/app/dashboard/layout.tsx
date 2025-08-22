@@ -6,7 +6,7 @@ import { Bot, Home, Rocket, BookOpen, MessageSquare, Star, Settings, Bell, Gamep
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import './dashboard.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 
 const SpaceBackground = dynamic(
@@ -23,7 +23,7 @@ const navItems = [
     { href: "/oportunidades", icon: <Star className="icn" />, label: "Oportunidades" },
 ];
 
-const navTargetBlank = ["/retos", "/comic-digitales", "/mentoria", "/oportunidades", "/chat-ia", "/ajustes"];
+const navTargetBlank = ["/retos", "/comic-digitales", "/mentoria", "/oportunidades", "/ajustes"];
 
 
 export default function DashboardLayout({
@@ -32,6 +32,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   useEffect(() => {
     document.body.classList.add('kallpa-dashboard');
@@ -95,12 +96,24 @@ export default function DashboardLayout({
                       <span>{item.label}</span>
                     </Link>
                   ))}
-                  <Link href="/chat-ia" className="relative group" target="_blank" rel="noopener noreferrer">
+                  <a 
+                    href="#" 
+                    className="relative group flex items-center gap-3 px-3" 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const chatView = document.getElementById('chat-view');
+                      const defaultView = document.getElementById('default-view');
+                      if (chatView && defaultView) {
+                        chatView.classList.toggle('hidden');
+                        defaultView.classList.toggle('hidden');
+                      }
+                    }}
+                  >
                     <Bot className="icn" />
                     <span>Chat IA</span>
                     <span className="bot-status" aria-label="Online"></span>
                     <div className="tooltip">Abrir chat</div>
-                  </Link>
+                  </a>
                 </nav>
                  <div className="mt-auto p-2">
                     <Link href="/ajustes" className="flex items-center gap-3 text-muted-foreground hover:text-foreground" target="_blank" rel="noopener noreferrer">
