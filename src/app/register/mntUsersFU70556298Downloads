@@ -1,19 +1,21 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { useForm } from "react-hook-form";
+import * as z from "zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
 import { BotIcon, User, Mail, Lock, Eye, EyeOff, Calendar } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import "../login/login-ui.css";
 
 // Firebase
 import { auth, db } from "@/lib/firebase";
-import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, signOut } from "firebase/auth";
 import { doc, runTransaction, serverTimestamp } from "firebase/firestore";
 
 // ---------- Schemas ----------
@@ -28,7 +30,7 @@ const passwordSchema = z
   .min(10, { message: "Mínimo 10 caracteres." })
   .regex(/[a-z]/, { message: "Incluye al menos una letra minúscula." })
   .regex(/[A-Z]/, { message: "Incluye al menos una letra mayúscula." })
-  .regex(/\d/,   { message: "Incluye al menos un número." })
+  .regex(/\d/, { message: "Incluye al menos un número." })
   .regex(/[^A-Za-z0-9]/, { message: "Incluye al menos un carácter especial." })
   .refine((v) => !/\s/.test(v), { message: "La contraseña no puede contener espacios." });
 
@@ -37,45 +39,43 @@ const formSchema = z
     nickname: nicknameSchema,
     email: z.string().email({ message: "Correo electrónico inválido." }),
     confirmEmail: z.string().email({ message: "Correo electrónico inválido." }),
-    age: z.string().refine((v) => {
-      if (!v) return true; // sigue siendo opcional
-      const n = Number(v);
-      return Number.isInteger(n) && n >= 5 && n <= 90;
-    }, { message: "Ingresa una edad real (5–90)." }).optional(),
+    age: z
+      .string()
+      .refine((v) => {
+        if (!v) return true; // opcional
+        const n = Number(v);
+        return Number.isInteger(n) && n >= 5 && n <= 90;
+      }, { message: "Ingresa una edad real." })
+      .optional(),
     password: passwordSchema,
     confirmPassword: z.string(),
-    terms: z.literal(true, {
-      errorMap: () => ({
-        message:
-          "Debes aceptar los Términos y Condiciones y autorizas el uso de tu correo para enviarte información, configuraciones y comunicaciones relacionadas con KallpaIA.",
-      }),
-    }),
   })
-  .refine((d) => d.email === d.confirmEmail, { message: "Los correos no coinciden.", path: ["confirmEmail"] })
-  .superRefine((d, ctx) => {
-    const local = d.email.split("@")[0]?.toLowerCase?.() ?? "";
-    const pw = d.password.toLowerCase();
-    if (pw.includes(d.nickname.toLowerCase())) {
+  .refine((data) => data.email === data.confirmEmail, {
+    message: "Los correos no coinciden.",
+    path: ["confirmEmail"],
+  })
+  .superRefine((data, ctx) => {
+    const local = data.email.split("@")[0]?.toLowerCase?.() ?? "";
+    const pw = data.password.toLowerCase();
+    if (pw.includes(data.nickname.toLowerCase())) {
       ctx.addIssue({ path: ["password"], code: z.ZodIssueCode.custom, message: "La contraseña no debe contener tu apodo." });
     }
     if (local && pw.includes(local)) {
       ctx.addIssue({ path: ["password"], code: z.ZodIssueCode.custom, message: "La contraseña no debe contener tu correo." });
     }
-    if (d.password !== d.confirmPassword) {
+    if (data.password !== data.confirmPassword) {
       ctx.addIssue({ path: ["confirmPassword"], code: z.ZodIssueCode.custom, message: "Las contraseñas no coinciden." });
     }
   });
 
 // ---------- Utils ----------
-const toLowerNick = (n: string) => n.trim().toLowerCase();
-async function checkNicknameAvailable(_n: string) { return true; } // la colisión real se controla en la transacción
+function toLowerNick(n: string) { return n.trim().toLowerCase(); }
 
-export default function RegisterForm() {
+export default function RegisterPage() {
   const { toast } = useToast();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [checkingNick, setCheckingNick] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -87,7 +87,6 @@ export default function RegisterForm() {
       age: undefined,
       password: "",
       confirmPassword: "",
-      terms: false,
     },
     mode: "onTouched",
   });
@@ -102,34 +101,28 @@ export default function RegisterForm() {
     if (!val) return;
     if (!/^[A-Za-z0-9_]{4,20}$/.test(val)) {
       form.setError("nickname", { type: "manual", message: "Formato inválido (4–20, letras/números/_)." });
-      return;
+    } else {
+      form.clearErrors("nickname");
     }
-    setCheckingNick(true);
-    try {
-      const ok = await checkNicknameAvailable(val);
-      if (!ok) form.setError("nickname", { type: "manual", message: "Ese apodo ya está en uso." });
-      else form.clearErrors("nickname");
-    } finally { setCheckingNick(false); }
   }
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
     try {
-      const available = await checkNicknameAvailable(values.nickname);
-      if (!available) {
-        form.setError("nickname", { type: "manual", message: "Ese apodo ya está en uso. Elige otro." });
-        return;
-      }
-
+      // 1) Crear usuario en Auth
       const cred = await createUserWithEmailAndPassword(auth, values.email.trim(), values.password);
       const uid = cred.user.uid;
       const nicknameLower = toLowerNick(values.nickname);
 
+      // 2) Transacción: asegurar apodo único + crear perfil
       await runTransaction(db, async (tx) => {
         const nickRef = doc(db, "nicknames", nicknameLower);
         const nickSnap = await tx.get(nickRef);
-        if (nickSnap.exists()) throw new Error("Ese apodo ya está en uso.");
-        tx.set(nickRef, { uid });
+        if (nickSnap.exists()) {
+          throw new Error("nickname_taken");
+        }
+        // Guardamos emailLogin para poder resolver por nickname en login/password
+        tx.set(nickRef, { uid, emailLogin: cred.user.email });
 
         const userRef = doc(db, "users", uid);
         tx.set(userRef, {
@@ -141,22 +134,37 @@ export default function RegisterForm() {
         });
       });
 
-      await sendEmailVerification(cred.user);
-      toast({ title: "¡Registro exitoso!", description: "Te enviamos un correo para verificar tu cuenta." });
+      // 3) Enviar verificación
+      await sendEmailVerification(cred.user, {
+        url: `${window.location.origin}/login?verify=1`,
+        handleCodeInApp: false,
+      });
+
+      // 4) Cerrar sesión (obliga a verificar antes de entrar)
+      await signOut(auth);
+
+      // 5) Éxito + redirección
+      toast({
+        title: "¡Cuenta creada!",
+        description: "Revisa tu correo y confirma tu cuenta para ingresar.",
+      });
       router.push("/login?verify=1");
     } catch (err: any) {
-      const code = String(err?.code || "");
-      let msg = err?.message || "No se pudo registrar.";
-      if (code.includes("auth/email-already-in-use")) msg = "Ese correo ya está en uso.";
-      else if (code.includes("auth/weak-password"))   msg = "Tu contraseña es muy débil.";
-      else if (msg.includes("apodo ya está en uso"))  msg = "Ese apodo ya existe. Prueba otro.";
+      let msg = "No se pudo registrar.";
+      if (err?.message === "nickname_taken") {
+        msg = "Ese apodo ya está en uso. Elige otro.";
+      } else if (String(err?.code).includes("auth/email-already-in-use")) {
+        msg = "Ese correo ya está en uso.";
+      } else if (String(err?.code).includes("auth/weak-password")) {
+        msg = "Tu contraseña es muy débil.";
+      }
       toast({ title: "Error", description: msg, variant: "destructive" });
-      console.error("[REGISTER][ERROR]", err);
     } finally {
       setLoading(false);
     }
   }
 
+  // ⬇️ A partir de aquí estamos DENTRO del componente: el parser espera JSX
   return (
     <div className="app">
       <div className="login-card">
@@ -174,8 +182,9 @@ export default function RegisterForm() {
           Completa tus datos para empezar.
         </p>
 
-        <form onSubmit={form.handleSubmit(onSubmit)} noValidate autoComplete="off">
+        <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
           <div className="stack-16">
+
             {/* Nickname */}
             <div>
               <label htmlFor="nickname" className="label">Nickname</label>
@@ -185,13 +194,13 @@ export default function RegisterForm() {
                   id="nickname"
                   className="input"
                   placeholder="Tu apodo"
-                  autoComplete="off" autoCorrect="off" autoCapitalize="none" inputMode="text"
-                  {...form.register("nickname", { onBlur: (e) => validateNicknameUnique(e.target.value.trim()) })}
+                  autoComplete="username"
+                  {...form.register("nickname", {
+                    onBlur: (e) => validateNicknameUnique(e.target.value.trim()),
+                  })}
                 />
               </div>
-              {form.formState.errors.nickname
-                ? <p className="error">{form.formState.errors.nickname.message}</p>
-                : checkingNick && <p className="help">Verificando disponibilidad...</p>}
+              {form.formState.errors.nickname && <p className="error">{form.formState.errors.nickname.message}</p>}
             </div>
 
             {/* Email */}
@@ -204,8 +213,10 @@ export default function RegisterForm() {
                   className="input"
                   type="email"
                   placeholder="tucorreo@ejemplo.com"
-                  autoComplete="off" autoCorrect="off" autoCapitalize="none" inputMode="email"
-                  {...form.register("email")} {...blockPasteHandlers}
+                  autoComplete="email"
+                  inputMode="email"
+                  {...form.register("email")}
+                  {...blockPasteHandlers}
                 />
               </div>
               {form.formState.errors.email && <p className="error">{form.formState.errors.email.message}</p>}
@@ -221,66 +232,28 @@ export default function RegisterForm() {
                   className="input"
                   type="email"
                   placeholder="Repite tu correo"
-                  autoComplete="off" autoCorrect="off" autoCapitalize="none" inputMode="email"
-                  {...form.register("confirmEmail")} {...blockPasteHandlers}
+                  autoComplete="off"
+                  inputMode="email"
+                  {...form.register("confirmEmail")}
+                  {...blockPasteHandlers}
                 />
               </div>
               {form.formState.errors.confirmEmail && <p className="error">{form.formState.errors.confirmEmail.message}</p>}
             </div>
 
-            {/* Password */}
+            {/* Age (opcional) */}
             <div>
-              <label htmlFor="password" className="label">Contraseña</label>
-              <div className="input-wrap">
-                <span className="input-icon-left"><Lock size={18} /></span>
-                <input
-                  id="password"
-                  className="input"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
-                  autoComplete="new-password"
-                  {...form.register("password")} {...blockPasteHandlers}
-                />
-                <button type="button" className="input-icon-right" onClick={() => setShowPassword(s => !s)}>
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
-              {form.formState.errors.password
-                ? <p className="error">{form.formState.errors.password.message}</p>
-                : <p className="help">Mín. 10 caracteres con Aa, 0-9 y símbolo.</p>}
-            </div>
-
-            {/* Confirm Password */}
-            <div>
-              <label htmlFor="confirmPassword" className="label">Confirmar contraseña</label>
-              <div className="input-wrap">
-                <span className="input-icon-left"><Lock size={18} /></span>
-                <input
-                  id="confirmPassword"
-                  className="input"
-                  type={showConfirm ? "text" : "password"}
-                  placeholder="••••••••"
-                  autoComplete="new-password"
-                  {...form.register("confirmPassword")} {...blockPasteHandlers}
-                />
-                <button type="button" className="input-icon-right" onClick={() => setShowConfirm(s => !s)}>
-                  {showConfirm ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
-              {form.formState.errors.confirmPassword && <p className="error">{form.formState.errors.confirmPassword.message}</p>}
-            </div>
-
-            {/* Edad */}
-            <div>
-              <label htmlFor="age" className="label">Edad</label>
+              <label htmlFor="age" className="label">
+                Edad <span className="text-gray-400 text-sm">(opcional)</span>
+              </label>
               <div className="input-wrap">
                 <span className="input-icon-left"><Calendar size={18} /></span>
                 <Select
-                  value={form.getValues("age")}
                   onValueChange={(value) => form.setValue("age", value as any, { shouldValidate: true })}
+                  defaultValue={form.getValues("age")}
                 >
                   <SelectTrigger className="input !px-11" id="age">
-                    <SelectValue placeholder="Selecciona tu edad" />
+                    <SelectValue placeholder="Selecciona tu edad (opcional)" />
                   </SelectTrigger>
                   <SelectContent>
                     {Array.from({ length: 90 - 5 + 1 }, (_, i) => (i + 5).toString()).map((y) => (
@@ -292,14 +265,50 @@ export default function RegisterForm() {
               {form.formState.errors.age && <p className="error">{form.formState.errors.age.message}</p>}
             </div>
 
-            {/* Términos obligatorios (texto inline, sin redirecciones) */}
-            <div className="flex items-start gap-2 text-sm">
-              <input id="terms" type="checkbox" className="mt-1" {...form.register("terms")} />
-              <label htmlFor="terms">
-                Acepto los Términos y Condiciones y autorizo el uso de mi correo para enviarme información, configuraciones y comunicaciones relacionadas con KallpaIA.
-              </label>
+            {/* Password */}
+            <div>
+              <label htmlFor="password" aria-label="Contraseña" className="label">Contraseña</label>
+              <div className="input-wrap">
+                <span className="input-icon-left"><Lock size={18} /></span>
+                <input
+                  id="password"
+                  className="input"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                  autoComplete="new-password"
+                  {...form.register("password")}
+                  {...blockPasteHandlers}
+                />
+                <button type="button" className="input-icon-right" onClick={() => setShowPassword(s => !s)}>
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+              {form.formState.errors.password
+                ? <p className="error">{form.formState.errors.password.message}</p>
+                : <p className="help">Mín. 10 caracteres con Aa, 0-9 y símbolo.</p>
+              }
             </div>
-            {form.formState.errors.terms && <p className="error">{form.formState.errors.terms.message as string}</p>}
+
+            {/* Confirm Password */}
+            <div>
+              <label htmlFor="confirmPassword" aria-label="Confirmar contraseña" className="label">Confirmar contraseña</label>
+              <div className="input-wrap">
+                <span className="input-icon-left"><Lock size={18} /></span>
+                <input
+                  id="confirmPassword"
+                  className="input"
+                  type={showConfirm ? "text" : "password"}
+                  placeholder="••••••••"
+                  autoComplete="new-password"
+                  {...form.register("confirmPassword")}
+                  {...blockPasteHandlers}
+                />
+                <button type="button" className="input-icon-right" onClick={() => setShowConfirm(s => !s)}>
+                  {showConfirm ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+              {form.formState.errors.confirmPassword && <p className="error">{form.formState.errors.confirmPassword.message}</p>}
+            </div>
 
             <div className="pt-2">
               <button type="submit" className="btn btn-primary" disabled={loading}>
@@ -310,7 +319,8 @@ export default function RegisterForm() {
         </form>
 
         <p className="form-footer">
-          ¿Ya tienes cuenta? <Link href="/login" className="link">Inicia sesión</Link>
+          ¿Ya tienes cuenta?{" "}
+          <Link href="/login" className="link">Inicia sesión</Link>
         </p>
       </div>
     </div>
